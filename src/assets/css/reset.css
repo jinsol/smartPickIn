@@ -1,8 +1,19 @@
 @charset "utf-8";
+
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  letter-spacing: -1.4px;
+  font-family: "Pretendard-Regular";
 }
 
 a {
@@ -27,6 +38,5 @@ button {
 }
 
 :root {
-  line-height: 1.5;
-  /* 예시 */
+  --default-font-family: "Pretendard-Regular";
 }
