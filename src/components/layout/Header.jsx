@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
+import cn from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import Nav from '@/components/layout/Nav'
 
@@ -11,7 +12,6 @@ const HeaderBlock = styled.div`
   display:flex;
   background:#fff;
   opacity:0.5s;
-  blur(15px);
 
   
 
@@ -35,11 +35,11 @@ const HeaderBlock = styled.div`
     }
     ul {
       display: flex; justify-content:space-between;
-      opacity:1;
+     
       transition: all 0.5s ease;
 
       &.open{
-        opacity:0;
+        display:none
       }
       
       li { margin: 10px 10px; font-size: 1em; color:#222222; font-weight:bold; 
@@ -114,7 +114,7 @@ const Header = () => {
     return (
         <HeaderBlock>
             <nav id="header__nav">
-            <h1 className='logo'><Link to="/">image</Link></h1>
+            <h1 className='logo'><Link to="/"><img src="" alt="" /></Link></h1>
                 <ul className={isOpen ? 'open' : ''}>
                     <li>
                         <NavLink to="/">소개</NavLink>
@@ -142,7 +142,7 @@ const Header = () => {
                   <a href="#">로그인</a>
                   <a href="#">회원가입</a>
                   </div>
-                  <div className={`menu-wrap ${isOpen ? 'open' : ''}`}  onClick={toggleMenu}  >
+                  <div className={cn("menu-wrap", isOpen && "open")}  onClick={toggleMenu}  >
                   <span className='line'></span>
                   <span className='line'></span>
                   <span className='line'></span>
