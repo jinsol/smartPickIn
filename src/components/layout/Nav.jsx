@@ -34,7 +34,7 @@ const Nav = ({isOpen}) => {
         <h1>네비게이션메뉴</h1>
         <ul>
           <li><NavLink to='/'>1</NavLink></li>
-          <li><NavLink to='/'>2`</NavLink></li>
+          <li><NavLink to='/'>2</NavLink></li>
           <li><NavLink to='/'>3</NavLink></li>
           <li><NavLink to='/'>4</NavLink></li>
           <li><NavLink to='/'>5</NavLink></li>
