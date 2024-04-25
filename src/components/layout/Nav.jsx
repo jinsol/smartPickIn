@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
+
 
 const NavBlock = styled.div`
 position: fixed;
@@ -9,15 +11,13 @@ width: 100%;
 height: 100%;
 background: rgba(255, 255, 255, 0.3); /* 반투명한 배경색 */
 backdrop-filter: blur(1px);
-display: flex;
+display: none;
 justify-content: center;
 align-items: center;
-opacity:0;
 transition: all 0.5s ease;
 
 &.on{
-    opacity:1;
-
+  display:flex;
 }
 
 .nav__menu {
@@ -33,11 +33,11 @@ const Nav = ({isOpen}) => {
              <div className="nav__menu">
         <h1>네비게이션메뉴</h1>
         <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
+          <li><NavLink to='/'>1</NavLink></li>
+          <li><NavLink to='/'>2</NavLink></li>
+          <li><NavLink to='/'>3</NavLink></li>
+          <li><NavLink to='/'>4</NavLink></li>
+          <li><NavLink to='/'>5</NavLink></li>
         </ul>
       </div>
       <div className="box"></div>
