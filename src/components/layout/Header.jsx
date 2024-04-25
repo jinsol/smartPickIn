@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import React, {useState} from 'react';
 import styled from 'styled-components'
 import cn from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import Nav from '@/components/layout/Nav'
 
+=======
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link, NavLink } from "react-router-dom";
+import Nav from "@/components/layout/Nav";
+>>>>>>> e4acade1b5ae1ac967c4071b82d3fcdfe1d2270c
 
 const HeaderBlock = styled.div`
   text-align: center;
@@ -98,18 +105,16 @@ const HeaderBlock = styled.div`
       transform: rotate(-45deg) translateX(10%);
     }
   }
-`
-
-
+`;
 
 const Header = () => {
-
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu =()=>{
-    setIsOpen(!isOpen)
-  }
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
+<<<<<<< HEAD
   
     return (
         <HeaderBlock>
@@ -154,6 +159,53 @@ const Header = () => {
         </HeaderBlock>
         
     );
+=======
+  return (
+    <HeaderBlock>
+      <nav id="header__nav">
+        <h1 className="logo">
+          <Link to="/">image</Link>
+        </h1>
+        <ul className={isOpen ? "open" : ""}>
+          <li>
+            <NavLink to="/">소개</NavLink>
+          </li>
+          <li>
+            <NavLink to="/">서비스주문</NavLink>
+          </li>
+          <li>
+            <NavLink to="/">순위확인</NavLink>
+          </li>
+          <li>
+            <NavLink to="/">고객센터</NavLink>
+          </li>
+          <li>
+            <NavLink to="/">문의하기</NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/test">test view</NavLink>
+          </li>
+        </ul>
+        <div className="info">
+          <div className="infotext">
+            <a href="#">로그인</a>
+            <a href="#">회원가입</a>
+          </div>
+          <div
+            className={`menu-wrap ${isOpen ? "open" : ""}`}
+            onClick={toggleMenu}
+          >
+            <span className="line"></span>
+            <span className="line"></span>
+            <span className="line"></span>
+          </div>
+        </div>
+        <Nav isOpen={isOpen} />
+      </nav>
+    </HeaderBlock>
+  );
+>>>>>>> e4acade1b5ae1ac967c4071b82d3fcdfe1d2270c
 };
 
 export default Header;
