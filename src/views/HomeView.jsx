@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import HomeSection01 from "@/components/home/HomeSection01";
 import HomeSection02 from "@/components/home/HomeSection02";
 import HomeSection03 from "@/components/home/HomeSection03";

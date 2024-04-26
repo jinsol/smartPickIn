@@ -1,70 +1,135 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import gsap from "gsap";
+import HomeSection04Slide from "@/components/home/HomeSection04Slide";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const SectionBlock = styled.section`
-  height: 100vh;
-  background-color: whitesmoke;
+  min-height: 100vh;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
   display: grid;
   place-content: center;
-  ul {
-    width: 1450px;
+  @media (max-width: 1450px) {
+    padding: 0 2%;
+  }
+  @media (max-width: 1100px) {
+    justify-content: start;
+  }
+`;
+
+const UnorderedListBox = styled.ul`
+  width: 1450px;
+  display: block;
+  transition: all 0.3s;
+
+  @media (max-width: 1450px) {
+    width: 100%;
+    overflow: hidden;
+  }
+  @media (max-width: 1100px) {
+    background-color: blue;
+  }
+  @media (max-width: 768px) {
     background-color: pink;
-    span {
-      display: block;
-    }
-    .TitleBox {
-      font-size: clamp(34px, 56px, 56px);
-    }
-    .section4_bottom {
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-      ul {
-        background-color: gray;
-        min-height: 300px;
-        display: flex;
-        flex-direction: column;
-        padding: 5%;
+  }
+`;
+
+const TitleBox = styled.h3`
+  span {
+    font-size: clamp(34px, 48px, 56px);
+    display: block;
+    .IconAni {
+      display: inline-flex;
+      gap: 2px;
+      align-items: center;
+      transition: transform 0.5s ease-in-out; /* 이미지 변환 애니메이션 설정 */
+      opacity: 1;
+
+      img {
+        &:first-child {
+          transform: translateY(8px);
+        }
+        &:nth-child(2) {
+          transform: translateY(-10px);
+        }
+        &:last-child {
+          transform: translateY(4px);
+        }
       }
     }
   }
 `;
 
+const SubTitleBox = styled.p`
+  span {
+    display: block;
+    font-size: clamp(16px, 36px, 20px);
+  }
+`;
+
 const HomeSection04 = () => {
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".section04",
+        start: "100% 100%",
+        end: "100% 100%",
+        scrub: true,
+        // markers: true,
+      },
+    });
+
+    tl.fromTo(
+      ".IconAni",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 1, ease: "none" },
+      5
+    );
+  }, []);
+
+  useEffect(() => {
+    const animateIcons = () => {
+      gsap.utils.toArray(".IconAni img").forEach((img) => {
+        gsap.to(img, {
+          yoyo: true,
+          repeat: -1,
+          y: 10,
+          duration: 1,
+          ease: "power1.inOut",
+        });
+      });
+    };
+
+    animateIcons();
+    return () => {
+      gsap.killTweensOf(".IconAni img");
+    };
+  }, []);
+
   return (
-    <SectionBlock>
-      <ul>
+    <SectionBlock className="section04">
+      <UnorderedListBox>
         <li>
-          <h3 className="TitleBox">
-            <span>순위상승</span>
+          <TitleBox>
+            <span>
+              순위상승
+              <i className="IconAni">
+                <img src="/assets/image/rank_up.png" alt="rank_up" />
+                <img src="/assets/image/rank_up.png" alt="rank_up" />
+                <img src="/assets/image/rank_up.png" alt="rank_up" />
+              </i>
+            </span>
             <span>어떻게 해야할지 모르겠다면?</span>
-          </h3>
-          <p>
+          </TitleBox>
+          <SubTitleBox>
             <span>처음 진행하시나요?</span>
             <span>순위를 올릴 수 있는 방법은 뭐가 있을까요?</span>
-          </p>
+          </SubTitleBox>
         </li>
-        <li className="section4_bottom">
-          <ul>
-            <li>SITE</li>
-            <li>사이트 순위상승</li>
-            <li>스타트 패키지</li>
-            <li>→</li>
-          </ul>
-          <ul>
-            <li>SITE</li>
-            <li>사이트 순위상승</li>
-            <li>스타트 패키지</li>
-            <li>→</li>
-          </ul>
-          <ul>
-            <li>SITE</li>
-            <li>사이트 순위상승</li>
-            <li>스타트 패키지</li>
-            <li>→</li>
-          </ul>
-        </li>
-      </ul>
+        <HomeSection04Slide />
+      </UnorderedListBox>
     </SectionBlock>
   );
 };

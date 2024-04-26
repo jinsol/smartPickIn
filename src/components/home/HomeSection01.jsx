@@ -1,26 +1,21 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import gsap from "gsap";
-import TextPlugin from "gsap/TextPlugin";
 import HomeSection01TextAni from "@/components/home/HomeSection01TextAni";
 
 const SectionBlock = styled.section`
   height: 100vh;
-  background-color: antiquewhite;
+  background-color: rgba(255, 255, 255, 0.9);
   display: grid;
   place-content: center;
-  span {
-    display: block;
-  }
 `;
+
 const UnorderedListBox = styled.ul`
   width: 1450px;
   display: grid;
   grid-template-columns: 3fr 1fr;
-
   gap: 80px;
   transition: all 0.3s;
-
   @media (max-width: 1450px) {
     width: 100%;
   }
@@ -31,8 +26,6 @@ const UnorderedListBox = styled.ul`
   }
   @media (max-width: 768px) {
     background-color: pink;
-
-    text-align: center;
   }
 `;
 
@@ -54,26 +47,38 @@ const ListBox = styled.li`
 const TitleBox = styled.div`
   transition: all 0.3s;
   font-weight: 900;
-  * {
-    font-size: clamp(48px, 82px, 82px);
+  h2 {
+    span {
+      font-size: clamp(62px, 2.5vw, 82px);
+    }
   }
-  .test-container {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    justify-content: space-between;
-    .test {
-      flex: auto;
-
-      display: inline-block;
-
+  @media (max-width: 1100px) {
+    h2 {
       span {
-        width: 0;
-        opacity: 0;
-        height: 1px;
-        transition: all 2s;
-        background-color: gray;
+        justify-content: center;
       }
+    }
+  }
+`;
+
+const LineAniBox = styled.span`
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+  .LineAni {
+    flex: auto;
+    display: inline-block;
+    span {
+      width: 0;
+      opacity: 0;
+      height: 1px;
+      display: block;
+      transition: all 2s;
+      background-color: gray;
+    }
+    @media (max-width: 1100px) {
+      display: none;
     }
   }
 `;
@@ -93,6 +98,12 @@ const SupportBox = styled.div`
     color: white;
     background-color: black;
   }
+  @media (max-width: 1100px) {
+    justify-content: center;
+    &.right {
+      justify-content: center;
+    }
+  }
 `;
 
 const SubTitleBox = styled.div`
@@ -100,15 +111,23 @@ const SubTitleBox = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  * {
-    font-weight: 300;
-    font-size: clamp(16px, 2.5vw, 20px);
+  padding-bottom: 3%;
+  h4 {
+    span {
+      display: block;
+      font-weight: 300;
+      font-size: clamp(16px, 2.5vw, 20px);
+    }
+  }
+  @media (max-width: 1100px) {
+    justify-content: center;
+    padding-bottom: 0;
   }
 `;
 
 const HomeSection01 = () => {
   React.useEffect(() => {
-    gsap.from(".test span", {
+    gsap.from(".LineAni span", {
       opacity: 1,
       width: "100%",
       duration: 1,
@@ -126,12 +145,12 @@ const HomeSection01 = () => {
                 <HomeSection01TextAni />
                 &quot;의 비밀
               </span>
-              <span className="test-container">
+              <LineAniBox>
                 스마트픽인
-                <i className="test">
+                <i className="LineAni">
                   <span></span>
                 </i>
-              </span>
+              </LineAniBox>
             </h2>
           </TitleBox>
           <SupportBox>
