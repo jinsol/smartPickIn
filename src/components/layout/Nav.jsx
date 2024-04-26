@@ -12,7 +12,6 @@ left: 0;
 width: 100%;
 height: 100%;
 background: rgba(255, 255, 255, 0.8); /* 반투명한 배경색 */
-backdrop-filter: blur(10px);
 transition: all 0.5s ease;
 display: none;
 align-items: center;
@@ -29,6 +28,7 @@ justify-content: center;
       padding:25px 0;
       line-height: 35px;
       position:relative;
+      z-index:99999;
       
       
       a { 
@@ -88,7 +88,7 @@ justify-content: center;
 
 `
 
-const Nav = ({isOpen}) => {
+const Nav = ({isOpen, toggleMenu}) => {
   const [click, setClick] = useState(false)
   const [click1, setClick1] = useState(false)
 
@@ -103,10 +103,10 @@ const Nav = ({isOpen}) => {
         <NavBlock className={isOpen && 'on'}>
              <div className="nav__menu">
                  <ul className='depth1'>
-                     <li onClick={isOpen}>
+                     <li onClick={toggleMenu}>
                         <NavLink to="/about"><span className='strong'>01</span> 소개 <MdKeyboardDoubleArrowRight className='arrow' /></NavLink>       
                     </li>
-                    <li onClick={isOpen}>
+                    <li onClick={toggleMenu}>
                         <NavLink to="/product"><span className='strong'>02</span> 서비스주문 <MdKeyboardDoubleArrowRight className='arrow' /></NavLink>
                     </li>
                     <li onClick={depthClick}>
@@ -126,7 +126,7 @@ const Nav = ({isOpen}) => {
                         <li> <Link to="/">취소/환불규정</Link></li>
                         </ul>
                     </li>
-                    <li onClick={isOpen}>
+                    <li onClick={toggleMenu}>
                         <NavLink to ="/ask"><span className='strong'>05</span> 문의하기<MdKeyboardDoubleArrowRight className='arrow' />
                       </NavLink>
                     </li>

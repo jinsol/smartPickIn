@@ -11,7 +11,7 @@ const HeaderBlock = styled.div`
   display:flex;
   height:100px;
   width:100%;
-  
+  z-index:99999;
 
   
 
@@ -116,7 +116,7 @@ const HeaderBlock = styled.div`
       width: 28px;
       height: 16px;
       cursor: pointer;
-      z-index:99999;
+      z-index:9999999;
     }
     .menu-wrap .line{
       position: absolute;
@@ -196,14 +196,14 @@ const Header = () => {
                   <a href="#">로그인</a>
                   <a href="#">회원가입</a>
                   </div>
-                  <div className={cn("menu-wrap", isOpen && "open")}  onClick={toggleMenu}  >
+                  <div className={cn("menu-wrap", isOpen ? "open" : '')}  onClick={toggleMenu}  >
                   <span className='line'></span>
                   <span className='line'></span>
                   <span className='line'></span>
                 </div>
                 </div>
             </nav>
-            <Nav isOpen={isOpen}/>
+            <Nav isOpen={isOpen} toggleMenu={toggleMenu}/>
        
         </HeaderBlock>
         
