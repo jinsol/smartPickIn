@@ -1,24 +1,17 @@
-<<<<<<< HEAD
 import React, {useState} from 'react';
 import styled from 'styled-components'
 import cn from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import Nav from '@/components/layout/Nav'
 
-=======
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
-import Nav from "@/components/layout/Nav";
->>>>>>> e4acade1b5ae1ac967c4071b82d3fcdfe1d2270c
 
 const HeaderBlock = styled.div`
   text-align: center;
-  padding: 30px 2%;
-  position: relative;
+  position: fixed;
   display:flex;
-  background:#fff;
-  opacity:0.5s;
+  height:100px;
+  width:100%;
+  
 
   
 
@@ -35,13 +28,24 @@ const HeaderBlock = styled.div`
   .openNav { position: absolute; top: 20px; right: 80px; font-size: 30px; color: blue;
     cursor: pointer; display: none; }
   #header__nav { 
-    display:flex; flex:1; justify-content:space-between; width:92%; text-align:center;
-    .logo{font-size:25px;
+    display:flex;  justify-content:space-between; width:100%; text-align:center;   align-items:center; position: relative;
+    padding:0px 1%;
+    background: rgba(255, 255, 255, 0.5); /* 반투명한 배경색 */
+
+
+    .logo{
+        width:100px; max-height:150px;
+      img{
+        width:100%; height:auto;
+      }
       position:relative;
       z-index:9999;
     }
     ul {
-      display: flex; justify-content:space-between;
+      display: flex; justify-content:center; height:auto; 
+      @media (max-width:768px){
+        display:none;
+      }
      
       transition: all 0.5s ease;
 
@@ -49,9 +53,50 @@ const HeaderBlock = styled.div`
         display:none
       }
       
-      li { margin: 10px 10px; font-size: 1em; color:#222222; font-weight:bold; 
-        a { transition: all 0.3s ease;
+      li { font-size: 1em; color:#222222; font-weight:bold;  font-size:17px;  padding:0px 0px; white-space: nowrap;
+
+      ul{
+          width:100%; background:#1774d0; position:absolute; top:100%; left:0; display:none;  padding:0px 15px;
+          li{
+            display:block; align-items: center; color:#dadada; padding:20px 0;
+          }
+          
+        }
+        a { transition: all 0.3s ease; padding:40px 25px;
+
           &:hover, &.active { color: #1774d0;  font-weight:bold;}
+        }
+      }
+      .depthNews1{
+        transition: all 0.5s; 
+        &:hover{
+          .depthNews2{
+            display:flex; justify-content: center;
+            li{
+              transition:all 0.3s; margin:0 15px;
+              a{
+              &:hover{
+                color:#fff;
+              }
+            }
+            }
+           
+          }
+        }
+      }
+      .depthService1{
+        &:hover{
+          .depthService2{
+            display:flex; justify-content: center;
+            li{
+              transition:all 0.3s; margin:0 15px;
+              a{
+              &:hover{
+                color:#fff;
+              }
+            }
+            }
+          }
         }
       }
     }
@@ -71,6 +116,7 @@ const HeaderBlock = styled.div`
       width: 28px;
       height: 16px;
       cursor: pointer;
+      z-index:99999;
     }
     .menu-wrap .line{
       position: absolute;
@@ -114,33 +160,36 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
-<<<<<<< HEAD
   
     return (
         <HeaderBlock>
             <nav id="header__nav">
-            <h1 className='logo'><Link to="/"><img src="" alt="" /></Link></h1>
+            <h1 className='logo'><Link to="/"><img src="./assets/image/logo_blue.png" alt="" /></Link></h1>
                 <ul className={isOpen ? 'open' : ''}>
                     <li>
-                        <NavLink to="/">소개</NavLink>
+                        <NavLink to="/about">소개</NavLink>       
                     </li>
                     <li>
-                        <NavLink to="/">서비스주문</NavLink>
+                        <NavLink to="/product">서비스주문</NavLink>
+                    </li>
+                    <li className='depthNews1'>
+                        <NavLink to="/news" >소식</NavLink>
+                        <ul className='depthNews2'>
+                        <li><Link to="/">소식</Link></li>
+                        <li><Link to="/">기업소식</Link></li>
+                        </ul>
+                    </li>
+                    <li className='depthService1'>
+                        <NavLink to="/notice">고객센터</NavLink>
+                        <ul className='depthService2'>
+                         <li><Link to="/">공지사항</Link></li>
+                         <li><Link to="/">자주묻는질문</Link></li>
+                         <li><Link to="/">취소/환불규정</Link></li>
+                        </ul>
                     </li>
                     <li>
-                        <NavLink to="/">순위확인</NavLink>
+                        <NavLink to="/ask">문의하기</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/">고객센터</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/">문의하기</NavLink>
-                    </li>
-                    
-                    <li>
-                        <NavLink to="/test">test view</NavLink>
-                    </li>
-                  
                 </ul>
                 <div className="info">
                   <div className="infotext">
@@ -153,59 +202,12 @@ const Header = () => {
                   <span className='line'></span>
                 </div>
                 </div>
-              <Nav isOpen={isOpen}/>
             </nav>
+            <Nav isOpen={isOpen}/>
        
         </HeaderBlock>
         
     );
-=======
-  return (
-    <HeaderBlock>
-      <nav id="header__nav">
-        <h1 className="logo">
-          <Link to="/">image</Link>
-        </h1>
-        <ul className={isOpen ? "open" : ""}>
-          <li>
-            <NavLink to="/">소개</NavLink>
-          </li>
-          <li>
-            <NavLink to="/">서비스주문</NavLink>
-          </li>
-          <li>
-            <NavLink to="/">순위확인</NavLink>
-          </li>
-          <li>
-            <NavLink to="/">고객센터</NavLink>
-          </li>
-          <li>
-            <NavLink to="/">문의하기</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/test">test view</NavLink>
-          </li>
-        </ul>
-        <div className="info">
-          <div className="infotext">
-            <a href="#">로그인</a>
-            <a href="#">회원가입</a>
-          </div>
-          <div
-            className={`menu-wrap ${isOpen ? "open" : ""}`}
-            onClick={toggleMenu}
-          >
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-          </div>
-        </div>
-        <Nav isOpen={isOpen} />
-      </nav>
-    </HeaderBlock>
-  );
->>>>>>> e4acade1b5ae1ac967c4071b82d3fcdfe1d2270c
 };
 
 export default Header;
