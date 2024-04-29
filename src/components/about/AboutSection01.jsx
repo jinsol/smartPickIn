@@ -7,16 +7,14 @@ import { MdKeyboardDoubleArrowRight} from "react-icons/md";
 
 
 const AboutSection01Block = styled.div`
-    height: 100vh;
-    background:#fff;
     padding-top: 250px;
     .wrap{
         display: flex;
         justify-content: center;
         align-items: center;
         padding:0px 200px;
-        max-width:1650px;
-        margin: 0 auto;
+        margin: auto;
+        margin-bottom:300px;
         @media (max-width:1100px){
             display: block;
         }
