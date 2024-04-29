@@ -3,45 +3,48 @@ import styled from "styled-components";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 // import { EffectCoverflow } from "swiper";
-import { EffectCoverflow } from "swiper/modules";
+import { EffectCoverflow, Mousewheel, FreeMode } from "swiper/modules";
 // import SwiperCore, { EffectCoverflow } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 
 const HomeSection03SlideBlock = styled.article`
   .swiper {
-    /* transform: rotate(-5deg); */
+    transform: rotate(-5deg) scale(1.05);
     .swiper-wrapper {
       display: flex;
       padding: 10vh 0;
 
       .swiper-slide {
-        width: 500px;
+        /* width: 500px; */
+        border-radius: 25px;
+        border: 1px solid white;
+        overflow: hidden;
         height: auto;
-        background-color: gray;
         transition: transform 0.5s;
         opacity: 0.5;
-        transform-style: preserve-3d;
+        cursor: grab;
         img {
-          object-fit: contain;
+          object-fit: cover;
           width: 100%;
+          height: 100%;
         }
       }
 
       .swiper-slide-prev {
         /* transform: skewY(10deg) translateX(20px); */
-        background-color: red;
+        /* background-color: red; */
         opacity: 0.9;
       }
       .swiper-slide-active {
-        background-color: green;
+        /* background-color: green; */
         /* transform: translateY(45px); */
         opacity: 1;
       }
       .swiper-slide-next {
         /* transform: skewY(-10deg) translateX(-20px); */
         opacity: 0.9;
-        background-color: blue;
+        /* background-color: blue; */
       }
     }
   }
@@ -50,6 +53,7 @@ const HomeSection03SlideBlock = styled.article`
 const HomeSection03Slide = () => {
   const options = {
     // width: 800,
+    modules: [EffectCoverflow, Mousewheel, FreeMode],
     slidesPerView: 2,
     slidesPerGroup: 1,
     spaceBetween: 30,
@@ -57,16 +61,25 @@ const HomeSection03Slide = () => {
     loop: true, // loop 속성 추가
     effect: "coverflow",
     centeredSlides: true,
-    modules: [EffectCoverflow],
     coverflowEffect: {
-      rotate: 50,
+      rotate: -10,
       stretch: 10,
-      depth: 10,
-      modifier: 1,
+      depth: 100,
+      modifier: 0.4,
       slideShadows: true,
     },
+    //자동슬라이드
+    autoplay: {
+      delay: 100,
+    },
+    //마우스휠
+    mousewheel: {
+      invert: true,
+    },
     breakpoints: {
-      1101: {},
+      1101: {
+        slidesPerView: 4,
+      },
     },
   };
 

@@ -30,6 +30,22 @@ button {
   margin: 0 auto;
 }
 
+img {
+  width: 100%;
+}
+
 :root {
-  --default-font-family: "Pretendard Variable";
+  --blue: #1774d0;
+  --blue-hover: #116ac2;
+  --yellow: #f7bd2c;
+  --yellow-hover: #f0b625;
+  --light-blue: #f2f9ff;
+  --white: #fff;
+  --black: #222;
+  --gray01: #565656;
+  --gray02: #747474;
+  --gray03: #a9a9a9;
+  --gray04: #bdbdbd;
+  --gray05: #bebebe;
+  --gray06: #efefef;
 }

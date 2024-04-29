@@ -5,7 +5,6 @@ import HomeSection01TextAni from "@/components/home/HomeSection01TextAni";
 
 const SectionBlock = styled.section`
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.9);
   display: grid;
   place-content: center;
 `;

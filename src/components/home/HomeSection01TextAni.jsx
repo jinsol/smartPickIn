@@ -13,7 +13,7 @@ const HomeSection01TextAni = () => {
     gsap.defaults({ ease: "none" });
     const tl = gsap.timeline({ repeat: 3, repeatDelay: 1, yoyo: true });
     const texts = ["기업", "", "식당", "", "카페", "", "팬션", "", "병원"];
-    texts.forEach((text, index) => {
+    texts.forEach((text) => {
       tl.to(".textAni", {
         duration: 0.5,
         text: {
@@ -29,7 +29,7 @@ const HomeSection01TextAni = () => {
     });
   }, []);
 
-  return <TextAni className="textAni"></TextAni>;
+  return <TextAni className="textAni">기업</TextAni>;
 };
 
 export default HomeSection01TextAni;

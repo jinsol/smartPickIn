@@ -25,17 +25,20 @@ const HomeSection04Slide = () => {
     {
       tag: "SITE",
       title: "사이트 순위상승",
-      list: ["스타트 패키지"],
+      list: ["#스타트 패키지"],
+      image: "/assets/image/service_site.png",
     },
     {
       tag: "PLACE",
       title: "플레이스 순위상승",
-      list: ["검색유입 패키지", "UV활성화 + 저장하기"],
+      list: ["#검색유입 패키지", "#UV활성화 + 저장하기"],
+      image: "/assets/image/service_place.png",
     },
     {
       tag: "INSTAGRAM",
       title: "인스타그램 인기게시물",
-      list: ["인스타 계정 육성 관리"],
+      list: ["#인스타 계정 육성 관리"],
+      image: "/assets/image/service_instagram.png",
     },
   ];
 
@@ -65,6 +68,7 @@ const HomeSection04Slide = () => {
                 tag={item.tag}
                 title={item.title}
                 list={item.list}
+                image={item.image}
               />
             </SwiperSlide>
           );

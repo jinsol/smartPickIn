@@ -12,8 +12,8 @@ const SectionBlock = styled.section`
   & > ul {
     width: 1450px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto 3fr;
     gap: 80px;
     /* overflow: hidden; */
     @media (max-width: 1450px) {
@@ -21,6 +21,7 @@ const SectionBlock = styled.section`
     }
     @media (max-width: 1100px) {
       background-color: blue;
+      grid-template-columns: auto;
     }
     @media (max-width: 768px) {
       background-color: yellow;
@@ -28,6 +29,8 @@ const SectionBlock = styled.section`
   }
   .TextBox {
     h2 {
+      position: sticky;
+      top: 10vh;
       span {
         display: block;
         font-size: clamp(62px, 2.5vw, 82px);
@@ -54,22 +57,26 @@ const ContentsBox = styled.li`
   perspective-origin: top;
   ul {
     position: sticky;
+    display: grid;
     top: 10vh;
-    background-color: whitesmoke;
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    background-color: var(--light-blue);
     border-radius: 20px;
-    backdrop-filter: blur(20px);
+    /* backdrop-filter: blur(20px); */
     border: 1px solid white;
     width: 100%;
     min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    padding: 5%;
     transition: all 0.5s;
+    grid-template-rows: auto auto auto 1fr;
+    gap: 2%;
+    padding: 7%;
+    opacity: 0;
+    transform: translateX(100%);
+    word-break: auto-phrase;
     li {
-      width: 40%;
     }
     .number {
-      color: red;
+      color: var(--blue);
       font-weight: 900;
     }
     .title {
@@ -86,6 +93,8 @@ const ContentsBox = styled.li`
       font-size: clamp(16px, 2.5vw, 16px);
     }
     .image {
+      position: absolute;
+      inset: auto 0 0 auto;
     }
   }
 `;
@@ -113,23 +122,24 @@ const HomeSection02 = () => {
   }, []);
 
   React.useEffect(() => {
-    gsap.fromTo(
-      ".ContentsBox ul",
-      {},
-      // rotateX: 10
-      {
-        opacity: 1,
-        rotateX: 0,
-        duration: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".ContentsBox ul",
-          start: "top bottom",
-          end: "bottom bottom",
-          scrub: true,
-        },
-      }
-    );
+    gsap.utils.toArray(".ContentsBox ul").forEach((selector) => {
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: selector,
+            start: "100% 100%",
+            end: "100% 100%",
+            scrub: 1,
+            // markers: true,
+          },
+        })
+        .fromTo(
+          selector,
+          { opacity: 0, x: 100 },
+          { opacity: 1, x: 0, ease: "none", duration: 0 },
+          0
+        );
+    });
   }, []);
 
   const contents = [

@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 const SectionBlock = styled.section`
   min-height: 100vh;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
   display: grid;
   place-content: center;
   @media (max-width: 1450px) {
@@ -23,6 +22,9 @@ const UnorderedListBox = styled.ul`
   width: 1450px;
   display: block;
   transition: all 0.3s;
+  & > li {
+    padding: 1em 0 1.8em;
+  }
 
   @media (max-width: 1450px) {
     width: 100%;
@@ -40,6 +42,12 @@ const TitleBox = styled.h3`
   span {
     font-size: clamp(34px, 48px, 56px);
     display: block;
+    &:nth-child(1) {
+      color: var(--gray02);
+    }
+    &:nth-child(2) {
+      color: var(--black);
+    }
     .IconAni {
       display: inline-flex;
       gap: 2px;
@@ -70,6 +78,27 @@ const SubTitleBox = styled.p`
 `;
 
 const HomeSection04 = () => {
+  React.useEffect(() => {
+    gsap.utils.toArray(".TextBox span").forEach((selector) => {
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: selector,
+            start: "100% 100%",
+            end: "100% 100%",
+            scrub: 1,
+            // markers: true,
+          },
+        })
+        .fromTo(
+          selector,
+          { opacity: 0, y: 100 },
+          { opacity: 1, y: 0, ease: "none", duration: 5 },
+          0
+        );
+    });
+  }, []);
+
   useEffect(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -112,7 +141,7 @@ const HomeSection04 = () => {
     <SectionBlock className="section04">
       <UnorderedListBox>
         <li>
-          <TitleBox>
+          <TitleBox className="TextBox">
             <span>
               순위상승
               <i className="IconAni">
