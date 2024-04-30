@@ -3,28 +3,13 @@ import styled from "styled-components";
 import gsap from "gsap";
 import HomeSection01TextAni from "@/components/home/HomeSection01TextAni";
 
-const SectionBlock = styled.section`
-  height: 100vh;
-  display: grid;
-  place-content: center;
-`;
-
 const UnorderedListBox = styled.ul`
-  width: 1450px;
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 80px;
-  transition: all 0.3s;
-  @media (max-width: 1450px) {
-    width: 100%;
-  }
   @media (max-width: 1100px) {
-    background-color: blue;
     grid-template-columns: auto;
     gap: 0;
-  }
-  @media (max-width: 768px) {
-    background-color: pink;
   }
 `;
 
@@ -43,18 +28,24 @@ const ListBox = styled.li`
   }
 `;
 
+const Yellow = styled.strong`
+  color: var(--yellow);
+`;
+
 const TitleBox = styled.div`
   transition: all 0.3s;
   font-weight: 900;
   h2 {
+    color: var(--black);
     span {
-      font-size: clamp(62px, 2.5vw, 82px);
+      font-size: clamp(3.5em, 2.5vw, 4em);
+      display: block;
     }
   }
   @media (max-width: 1100px) {
     h2 {
       span {
-        justify-content: center;
+        text-align: center;
       }
     }
   }
@@ -65,6 +56,7 @@ const LineAniBox = styled.span`
   gap: 30px;
   align-items: center;
   justify-content: space-between;
+  color: var(--blue);
   .LineAni {
     flex: auto;
     display: inline-block;
@@ -134,15 +126,15 @@ const HomeSection01 = () => {
   }, []);
 
   return (
-    <SectionBlock>
-      <UnorderedListBox>
+    <section className="flexCenter">
+      <UnorderedListBox className="homeRow">
         <ListBox>
           <TitleBox>
             <h2 className="box_left_title">
               <span>
-                잘되는 &quot;
+                잘되는 <Yellow>&quot;</Yellow>
                 <HomeSection01TextAni />
-                &quot;의 비밀
+                <Yellow>&quot;</Yellow>의 비밀
               </span>
               <LineAniBox>
                 스마트픽인
@@ -168,7 +160,7 @@ const HomeSection01 = () => {
           </SupportBox>
         </ListBox>
       </UnorderedListBox>
-    </SectionBlock>
+    </section>
   );
 };
 

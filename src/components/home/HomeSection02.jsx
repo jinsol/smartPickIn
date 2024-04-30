@@ -2,47 +2,29 @@ import React from "react";
 import styled from "styled-components";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TitleLine3 from "@/components/layout/TitleLine3";
 gsap.registerPlugin(ScrollTrigger);
 
 const SectionBlock = styled.section`
-  min-height: 100vh;
   padding: 10vh 0;
-  /* display: grid; */
-  place-content: center;
   & > ul {
-    width: 1450px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: auto 3fr;
     gap: 80px;
-    /* overflow: hidden; */
     @media (max-width: 1450px) {
       width: 100%;
     }
     @media (max-width: 1100px) {
-      background-color: blue;
       grid-template-columns: auto;
     }
     @media (max-width: 768px) {
-      background-color: yellow;
     }
   }
   .TextBox {
     h2 {
       position: sticky;
       top: 10vh;
-      span {
-        display: block;
-        font-size: clamp(62px, 2.5vw, 82px);
-        &:nth-child(1) {
-          color: lightgray;
-        }
-        &:nth-child(2) {
-          color: gray;
-        }
-        &:nth-child(3) {
-        }
-      }
     }
   }
 `;
@@ -176,15 +158,13 @@ const HomeSection02 = () => {
     },
   ];
 
+  const TL3C = ["내 업체에", "꼭 맞는 마케팅", "지금 시작해보세요."];
+
   return (
-    <SectionBlock className="section02">
-      <ul>
+    <SectionBlock>
+      <ul className="homeRow">
         <li className="TextBox">
-          <h2>
-            <span>내 업체에</span>
-            <span>꼭 맞는 마케팅</span>
-            <span>지금 시작해보세요.</span>
-          </h2>
+          <TitleLine3 TL3C={TL3C} />
         </li>
         <ContentsBox className="ContentsBox">
           {contents.map((item, index) => {

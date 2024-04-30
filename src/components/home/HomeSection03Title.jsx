@@ -48,7 +48,7 @@ const HomeSection03Title = () => {
     });
   }, []);
   return (
-    <HomeSection03TitleBlock>
+    <HomeSection03TitleBlock className="homeRow">
       <h2>
         <span>임시내용</span>
         <span>임시내용입니다!</span>

@@ -6,22 +6,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const SectionBlock = styled.section`
-  min-height: 100vh;
-  width: 100%;
-  display: grid;
-  place-content: center;
-  @media (max-width: 1450px) {
-    padding: 0 2%;
-  }
   @media (max-width: 1100px) {
     justify-content: start;
   }
 `;
 
 const UnorderedListBox = styled.ul`
-  width: 1450px;
+  /* width: 1400px;
+  padding: 0 2%;
   display: block;
-  transition: all 0.3s;
+  transition: all 0.3s; */
   & > li {
     padding: 1em 0 1.8em;
   }
@@ -29,12 +23,6 @@ const UnorderedListBox = styled.ul`
   @media (max-width: 1450px) {
     width: 100%;
     overflow: hidden;
-  }
-  @media (max-width: 1100px) {
-    background-color: blue;
-  }
-  @media (max-width: 768px) {
-    background-color: pink;
   }
 `;
 
@@ -138,8 +126,8 @@ const HomeSection04 = () => {
   }, []);
 
   return (
-    <SectionBlock className="section04">
-      <UnorderedListBox>
+    <section className="section04 flexCenter">
+      <UnorderedListBox className="homeRow">
         <li>
           <TitleBox className="TextBox">
             <span>
@@ -159,7 +147,7 @@ const HomeSection04 = () => {
         </li>
         <HomeSection04Slide />
       </UnorderedListBox>
-    </SectionBlock>
+    </section>
   );
 };
 

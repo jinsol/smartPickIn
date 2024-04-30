@@ -51,7 +51,6 @@ const HomeSection04Slide = () => {
     breakpoints: {
       1101: {
         slidesPerView: 3,
-        spaceBetween: 20,
         slidesPerGroup: 2,
         loop: false, // 1101px 이상에서는 loop 비활성화
       },
