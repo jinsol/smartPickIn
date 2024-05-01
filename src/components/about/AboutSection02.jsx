@@ -14,6 +14,8 @@ const AboutSection02Block = styled.div`
 
   @media (max-width:1100px){
     display: block;
+  margin: 0 50px auto;
+  margin-bottom:150px;
     text-align: center;
 }
 
@@ -27,6 +29,14 @@ const AboutSection02Block = styled.div`
             font-size: 4em;
             color:#222;
             margin-top: 45px;
+            @media (max-width:1450px){
+                font-size: 3.5em;
+            }
+            @media (max-width:768px){
+                font-size:3em;
+                text-align: center;
+            }
+           
             strong{
                 color:#1774d0;
             }
@@ -37,6 +47,13 @@ const AboutSection02Block = styled.div`
             font-size:1.2em;
             line-height: 1.5em;
             word-break: keep-all;
+            @media (max-width:768px){
+                font-size:1.1em;
+                text-align: center;
+            }
+            @media (max-width:550px){
+                font-size: 0.9em;
+            }
             strong{
               font-weight: bold;
               color:#222;
@@ -45,9 +62,10 @@ const AboutSection02Block = styled.div`
   }
   .downrold{
    
-      padding: 20px;
+      padding: 0px;
       text-align: center;
       overflow: hidden;
+
       .imagebox{
         width: 250px;
         height: auto;
@@ -73,8 +91,14 @@ const AboutSection02Block = styled.div`
         color: #1774d0;
         transition: all 0.3s ease;
         word-break: keep-all;
+        white-space: nowrap;
         @media (max-width: 768px) {
+      font-size: 1.1rem;
+      padding: 15px 50px;
+    }
+        @media (max-width: 550px) {
       font-size: 1rem;
+      padding: 15px 40px;
     }
         &:hover{
           background: #1774d0;
@@ -167,7 +191,7 @@ const AboutSection02 = () => {
                 </div>
                 <div className="downrold">
                  <figure className='imagebox'> <img src="./assets/image/about_ic02.png" alt="" /></figure>
-                  <a href="https://site-high.com/files/proposal_seo.pdf" target='_blank' className='downbutton'>SEO 제안서 열기</a>
+                  <a href="https://site-high.com/files/proposal_seo.pdf" target='_blank' className='downbutton'>파일열기</a>
                 </div>
              </div>
     </AboutSection02Block>

@@ -18,14 +18,20 @@ gsap.registerPlugin(ScrollTrigger);
 const AboutSection01Block = styled.div`
   .section3wrap {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 200px;
-    margin: auto;
-    margin-bottom: 150px;
+  justify-content: space-between;
+  margin: 0 150px auto;
+  margin-bottom:250px;
     
     @media (max-width:1100px){
-        display: block;
+      display: block;
+      margin: 0 20px auto;
+     margin-bottom:150px;
+
+    }
+    @media (max-width:768px){
+      margin: 0 10px auto;
+     margin-bottom:150px;
+
     }
 
     .chartbox{
@@ -50,7 +56,15 @@ const AboutSection01Block = styled.div`
         
       }
       @media (max-width:1100px){
-        top: 40px;
+        top: 65px;
+      left: 40px;
+    }
+    @media (max-width:768px){
+        top: 45px;
+      left: 40px;
+    }
+    @media (max-width:550px){
+        top: 20px;
       left: 40px;
     }
     img{
@@ -77,6 +91,13 @@ const AboutSection01Block = styled.div`
         font-size: 4em;
         color: #222;
         margin-top: 45px;
+        @media (max-width:1450px){
+                font-size: 3em;
+            }
+            @media (max-width:768px){
+                font-size:2.6em;
+                text-align: center;
+            }
         strong {
           color: #1774d0;
         }
@@ -86,6 +107,15 @@ const AboutSection01Block = styled.div`
         margin-top: 30px;
         font-size: 1.2em;
         line-height: 1.5em;
+        word-break: keep-all;
+        @media (max-width:1100px){
+                font-size:1.1em;
+                text-align: center;
+            }
+        @media (max-width:768px){
+                font-size:0.9em;
+                text-align: center;
+            }
         strong{
               font-weight: bold;
               color:#222;
@@ -162,6 +192,8 @@ const AboutSection03 = () => {
           duration: 2000,
           easing: "easeInOutQuart",
         },
+        responsive: true,
+        maintainAspectRatio: false,
       },
     });
   };
