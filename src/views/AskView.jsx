@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import TitleLine3 from "@/components/layout/TitleLine3";
+import AskTitle from "@/components/ask/AskTitle";
+import AskForm from "@/components/ask/AskForm";
 
 const AskViewBlock = styled.div`
   section {
@@ -12,12 +13,15 @@ const AskViewBlock = styled.div`
 
     place-content: center;
     .homeRow {
+      /* top: 200px; */
+      padding: 20vh 0;
+      position: relative;
       display: grid;
       grid-template-columns: auto 3fr;
       gap: 80px;
       width: 1450px;
       transition: all 0.3s;
-      .two {
+      .컴포넌트두번째 {
         width: 100%;
       }
     }
@@ -25,28 +29,17 @@ const AskViewBlock = styled.div`
 `;
 
 const AskView = () => {
-  const TL3C = ["내 업체에", "꼭 맞는 컨설팅이", "궁금하신가요?"];
-
   return (
     <AskViewBlock>
       <section>
         <ul className="homeRow">
           <li>
-            <TitleLine3 TL3C={TL3C} />
+            <AskTitle />
           </li>
-          <li className="two">
-            <ul>
-              <li>문의사항 안내</li>
-              <li>의뢰인 정보를 알려주세요</li>
-              <li>유입경로를 알려주세요</li>
-              <li>문의사항</li>
-              <li>상세문의</li>
-              <li>문의 접수하기</li>
-            </ul>
+          <li className="컴포넌트두번째">
+            <AskForm />
           </li>
         </ul>
-
-        {/* <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScX-EOIHIgIUDHcyW5ig3D37HHc_SpIVD2FLX7hS6RF_q2yrQ/viewform?embedded=true"></iframe> */}
       </section>
     </AskViewBlock>
   );
