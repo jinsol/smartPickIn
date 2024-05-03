@@ -22,9 +22,13 @@ const SectionBlock = styled.section`
     }
   }
   .TextBox {
-    h2 {
+    article {
       position: sticky;
       top: 10vh;
+      h2 {
+        position: sticky;
+        top: 10vh;
+      }
     }
   }
 `;

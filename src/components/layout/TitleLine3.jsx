@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const TitleLine3Block = styled.article`
-  position: sticky;
-  top: 10vh;
   h2 {
     span {
       display: block;

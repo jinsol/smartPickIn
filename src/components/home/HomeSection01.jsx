@@ -52,7 +52,7 @@ const TitleBox = styled.div`
 `;
 
 const LineAniBox = styled.span`
-  display: flex;
+  display: flex !important;
   gap: 30px;
   align-items: center;
   justify-content: space-between;
@@ -118,7 +118,7 @@ const SubTitleBox = styled.div`
 
 const HomeSection01 = () => {
   React.useEffect(() => {
-    gsap.from(".LineAni span", {
+    gsap.to(".LineAni span", {
       opacity: 1,
       width: "100%",
       duration: 1,

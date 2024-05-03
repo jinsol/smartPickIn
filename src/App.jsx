@@ -5,19 +5,20 @@ import HomeView from "@/views/HomeView";
 import AboutView from "@/views/AboutView";
 import ProductView from "@/views/ProductView";
 import NewsView from "@/views/NewsView";
-import NoticeView from "@/views/NoticeView";
-import AskView from "@/views/AskView"
+import AskView from "@/views/AskView";
+import ServiceView from "@/views/ServiceView";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomeView />} />
-        <Route path="/about" element={<AboutView/>}/>
-        <Route path="/product" element={<ProductView/>}/>
-        <Route path="/news" element={<NewsView/>}/>
-        <Route path="/notice" element={<NoticeView/>}/>
-        <Route path="/ask" element={<AskView/>}/>
+        <Route path="/about" element={<AboutView />} />
+        <Route path="/product" element={<ProductView />} />
+        <Route path="/news" element={<NewsView />} />
+
+        <Route path="/ask" element={<AskView />} />
+        <Route path="/service/" element={<ServiceView />} />
       </Route>
     </Routes>
   );

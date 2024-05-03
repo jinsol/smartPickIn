@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { IoMdAlert } from "react-icons/io";
+import { IoMdAlert, IoMdCheckmark } from "react-icons/io";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ArticleBlock = styled.article`
   h3 {
@@ -48,7 +49,6 @@ const FormLabel = styled.p`
 const InputUl = styled.ul`
   display: flex;
   // 제목은 20% 내용은 80%
-
   gap: 1em;
   border: 1px solid var(--gray06);
   background-color: var(--white);
@@ -74,20 +74,10 @@ const InputLiInput = styled.li`
 `;
 
 const InputSelect = styled.select`
-  all: unset;
   font-size: 1.2em;
+  width: 100%;
   font-weight: 800;
   color: var(--black);
-  display: flex;
-  width: 100%;
-
-  border: 1px solid var(--gray06);
-  border-radius: 20px;
-
-  background-color: var(--white);
-  padding: 25px 30px;
-
-  align-items: center;
   option {
     all: unset;
     font-weight: 500;
@@ -104,36 +94,89 @@ const CheckUl = styled.ul`
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  li {
-    flex: 1;
-    label {
-      display: flex;
-      border: 1px solid var(--gray06);
-      background-color: var(--white);
-      padding: 25px 30px;
-      border-radius: 20px;
-      align-items: center;
-    }
-    input {
-      all: unset;
-    }
-    input:checked + label {
-      color: white;
+`;
+
+const FormConWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4% 0;
+`;
+
+const CheckLi = styled.li`
+  flex: 1;
+  position: relative;
+  label {
+    display: flex;
+    align-items: center;
+  }
+  input {
+    all: unset;
+    position: absolute;
+    inset: 0;
+  }
+  input:checked + label {
+    color: white;
+    background-color: var(--blue);
+  }
+`;
+
+const FormTextarea = styled.div`
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+`;
+
+const BtnSubmit = styled.button`
+  display: block;
+  font-size: 1.4em;
+  font-weight: 800;
+  text-align: center;
+  border: 1px solid var(--blue);
+  border-radius: 50px;
+  padding: 20px;
+  color: var(--blue);
+  background-color: var(--white);
+  transition: all 0.3s;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--blue);
+    color: var(--white);
+    border: 1px solid var(--blue);
+  }
+`;
+
+const FormCheckAgree = styled.div`
+  input {
+    all: unset;
+    content: "안녕";
+    color: red;
+    background-color: var(--light-blue);
+    width: 20px;
+    height: 20px;
+    &:checked {
       background-color: var(--blue);
     }
   }
 `;
 
-const CheckLi = styled.li``;
-
-const AskForm = () => {
+const AskForm = ({
+  handleStep1Change,
+  handleStep2Change,
+  handleStep3Change,
+  handleStep4Change,
+}) => {
   const checkForm = () => {
     if (!document.querySelector("#agree_check").checked) {
       alert("개인정보처리방침에 동의하셔야 합니다.");
       return false;
+    } else {
+      return true;
     }
-    return true;
   };
+
+  const navigate = useNavigate();
 
   const onClickSubmit = (e) => {
     e.preventDefault();
@@ -142,7 +185,75 @@ const AskForm = () => {
     alert("의뢰가 접수되었습니다.");
     const form = document.querySelector("#contact-form");
     form.submit();
+    // (추가예정) 제출하고 스크립트 페이지로 이동하는 문제 해결 필요
+    navigate("/ask");
   };
+
+  const [step1, setStep1] = useState({
+    company: "",
+    phone: "",
+    email: "",
+  });
+
+  const onChangeStep1 = (e) => {
+    const { name, value } = e.target;
+    setStep1((prevStep1) => ({
+      ...prevStep1,
+      [name]: value,
+    }));
+
+    if (step1.company && step1.phone && step1.email) {
+      handleStep1Change(true);
+    } else {
+      handleStep1Change(false);
+    }
+  };
+
+  const onChangeStep2 = (e) => {
+    if (e.target.value !== "유입경로를 선택해주세요") {
+      handleStep2Change(true);
+    } else {
+      handleStep2Change(false);
+    }
+  };
+
+  const [step3, setStep3] = useState({
+    consulting: { site: "", place: "", instagram: "" },
+    url: "",
+    keyword: "",
+  });
+
+  const onChangeStep3 = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value, e.target, e.target.value, e);
+    const isCheckedSite = document.getElementById("site").checked;
+    const isCheckedPlace = document.getElementById("place").checked;
+    const isCheckedInstagram = document.getElementById("instagram").checked;
+
+    setStep3((prevStep3) => ({
+      ...prevStep3,
+      [name]: value,
+    }));
+
+    if (
+      (isCheckedSite || isCheckedPlace || isCheckedInstagram) &&
+      step3.url &&
+      step3.keyword
+    ) {
+      handleStep3Change(true);
+    }
+  };
+
+  const onChangeStep4 = (e) => {
+    if (e.target.value) {
+      console.log("내용 있어요");
+      handleStep4Change(true);
+    } else {
+      console.log("내용 없어요");
+      handleStep4Change(false);
+    }
+  };
+
   return (
     <>
       <ArticleBlock className="askInfo">
@@ -175,46 +286,51 @@ const AskForm = () => {
           <FormLabel className="form-label">
             문의하신 사항에 회신드리기 위한 기본 정보를 작성해 주세요.
           </FormLabel>
-          <div className="form-conts">
-            <div className="textarea-wrap">
-              <InputUl>
-                <InputLiLabel>
-                  <label htmlFor="company_name">기업명</label>
-                </InputLiLabel>
-                <InputLiInput>
-                  <input
-                    name="company"
-                    id="company_name"
-                    placeholder="ex) 스마트픽인"
-                  />
-                </InputLiInput>
-              </InputUl>
-              <InputUl>
-                <InputLiLabel>
-                  <label htmlFor="company_tel">연락처</label>
-                </InputLiLabel>
-                <InputLiInput>
-                  <input
-                    name="phone"
-                    id="company_tel"
-                    placeholder="ex) 010-0000-0000"
-                  />
-                </InputLiInput>
-              </InputUl>
-              <InputUl>
-                <InputLiLabel>
-                  <label htmlFor="company_mail">이메일</label>
-                </InputLiLabel>
-                <InputLiInput>
-                  <input
-                    name="email"
-                    id="company_mail"
-                    placeholder="ex) hlstorycom@daum.net"
-                  />
-                </InputLiInput>
-              </InputUl>
-            </div>
-          </div>
+
+          <FormConWrap>
+            <InputUl>
+              <InputLiLabel>
+                <label htmlFor="company_name">기업명</label>
+              </InputLiLabel>
+              <InputLiInput>
+                <input
+                  name="company"
+                  id="company_name"
+                  placeholder="ex) 스마트픽인"
+                  onChange={onChangeStep1}
+                  required
+                />
+              </InputLiInput>
+            </InputUl>
+            <InputUl>
+              <InputLiLabel>
+                <label htmlFor="company_tel">연락처</label>
+              </InputLiLabel>
+              <InputLiInput>
+                <input
+                  name="phone"
+                  id="company_tel"
+                  placeholder="ex) 010-0000-0000"
+                  onChange={onChangeStep1}
+                  required
+                />
+              </InputLiInput>
+            </InputUl>
+            <InputUl>
+              <InputLiLabel>
+                <label htmlFor="company_mail">이메일</label>
+              </InputLiLabel>
+              <InputLiInput>
+                <input
+                  name="email"
+                  id="company_mail"
+                  placeholder="ex) hlstorycom@daum.net"
+                  onChange={onChangeStep1}
+                  required
+                />
+              </InputLiInput>
+            </InputUl>
+          </FormConWrap>
         </div>
         <div className="form-group">
           <h3 className="form-tit">
@@ -225,24 +341,28 @@ const AskForm = () => {
             어떻게 스마트픽인을 알게되었나요?
           </FormLabel>
           <div className="form-conts">
-            <div className="textarea-wrap">
-              <InputSelect name="inFlow" id="inFlow">
-                <option value="유입경로를 선택해주세요" hidden>
-                  유입경로를 선택해주세요
-                </option>
-                <option value="홈페이지">홈페이지</option>
-                <option value="블로그">블로그</option>
-                <option value="카페">카페</option>
-                <option value="파워링크">파워링크</option>
-                <option value="플레이스">플레이스</option>
-                <option value="쇼핑">쇼핑</option>
-                <option value="네이버동영상">네이버동영상</option>
-                <option value="유튜브">유튜브</option>
-                <option value="오픈채팅">오픈채팅</option>
-                <option value="지인추천">지인추천</option>
-                <option value="기타">기타</option>
-              </InputSelect>
-            </div>
+            <InputSelect
+              className="inputStyle"
+              name="inFlow"
+              id="inFlow"
+              onChange={onChangeStep2}
+              required
+            >
+              <option value="유입경로를 선택해주세요" hidden>
+                유입경로를 선택해주세요
+              </option>
+              <option value="홈페이지">홈페이지</option>
+              <option value="블로그">블로그</option>
+              <option value="카페">카페</option>
+              <option value="파워링크">파워링크</option>
+              <option value="플레이스">플레이스</option>
+              <option value="쇼핑">쇼핑</option>
+              <option value="네이버동영상">네이버동영상</option>
+              <option value="유튜브">유튜브</option>
+              <option value="오픈채팅">오픈채팅</option>
+              <option value="지인추천">지인추천</option>
+              <option value="기타">기타</option>
+            </InputSelect>
           </div>
         </div>
         <div className="form-group">
@@ -251,43 +371,74 @@ const AskForm = () => {
             <FormTitle>문의사항</FormTitle>
           </h3>
           <div className="form-conts">
-            <div className="textarea-wrap">
+            <FormConWrap>
+              <h3>컨설팅 받고 싶은 분야를 1가지 이상 선택해주세요</h3>
               <CheckUl>
                 <CheckLi>
-                  <input type="checkbox" id="site" />
-                  <label htmlFor="site">사이트</label>
+                  <input
+                    type="checkbox"
+                    name="site"
+                    id="site"
+                    onChange={onChangeStep3}
+                    required
+                  />
+                  <label htmlFor="site" className="inputStyle">
+                    사이트
+                  </label>
                 </CheckLi>
-                <li>
-                  <input type="checkbox" id="place" />
-                  <label htmlFor="place">플레이스</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="instagram" />
-                  <label htmlFor="instagram">인스타그램</label>
-                </li>
+                <CheckLi>
+                  <input
+                    type="checkbox"
+                    id="place"
+                    name="place"
+                    onChange={onChangeStep3}
+                    required
+                  />
+                  <label htmlFor="place" className="inputStyle">
+                    플레이스
+                  </label>
+                </CheckLi>
+                <CheckLi>
+                  <input
+                    type="checkbox"
+                    name="instagram"
+                    id="instagram"
+                    onChange={onChangeStep3}
+                    required
+                  />
+                  <label htmlFor="instagram" className="inputStyle">
+                    인스타그램
+                  </label>
+                </CheckLi>
               </CheckUl>
+              <h3>컨설팅 받고싶은 url주소를 작성해주세요</h3>
               <InputUl>
                 <InputLiInput>
                   <input
                     type="text"
-                    name="keyword"
-                    id="keyword_name"
+                    name="url"
+                    id="url_name"
+                    className="inputStyle"
+                    onChange={onChangeStep3}
                     placeholder="ex) https://site-high.com/"
+                    required
                   />
                 </InputLiInput>
               </InputUl>
+              <h3>요청 키워드</h3>
               <InputUl>
                 <InputLiInput>
                   <input
                     type="text"
                     name="keyword"
                     id="keyword_name"
-                    placeholder="노출을 희망하는 키워드를 입력해주세요
-                    ex) 서면맛집"
+                    onChange={onChangeStep3}
+                    placeholder="노출을 희망하는 키워드를 입력해주세요 ex) 서면맛집"
+                    required
                   />
                 </InputLiInput>
               </InputUl>
-            </div>
+            </FormConWrap>
           </div>
         </div>
         <div className="form-group">
@@ -298,21 +449,27 @@ const AskForm = () => {
           <FormLabel className="form-label">
             현재 상황과 궁금하신 상황을 입력해주세요.
           </FormLabel>
-          <div className="form-conts">
-            <div className="textarea-wrap">
-              <textarea name="" id="" cols="30" rows="10"></textarea>
-            </div>
-          </div>
+          <FormTextarea className="form-conts">
+            <textarea
+              className="inputStyle"
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              onChange={onChangeStep4}
+              required
+            ></textarea>
+          </FormTextarea>
         </div>
-        <div className="form-group">
+        <FormCheckAgree className="form-group">
           <input type="checkbox" id="agree_check" />
           <label htmlFor="agree_check">
             개인정보 수집 · 이용하는데 동의합니다.
           </label>
-        </div>
-        <button type="submit" onClick={onClickSubmit}>
+        </FormCheckAgree>
+        <BtnSubmit type="submit" onClick={onClickSubmit}>
           문의 접수하기
-        </button>
+        </BtnSubmit>
       </FormBlock>
     </>
   );
