@@ -25,7 +25,6 @@ const BoardHeader = styled.ul`
 `;
 
 const BoardContent = styled.ul`
-  list-style none;
   display: flex;
   justify-content: space-between;
   li {
