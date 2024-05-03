@@ -14,6 +14,7 @@ const StepIndicatorLi = styled.li`
   gap: 2em;
   align-items: center;
   position: relative;
+  color: var(--gray05);
   &:not(:last-child)::after {
     content: "";
     width: 1px;
