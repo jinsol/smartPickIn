@@ -12,14 +12,18 @@ import { initServiceMenu } from "@/store/service"; // 액션 생성자를 가져
 const ServiceViewBlock = styled.section`
   width: 100%;
   min-height: 100vh;
-  display: flex;
-  place-items: center;
   padding: 20vh 0;
 `;
 
 const ServiceView = () => {
-  const title = ["스마트픽인에 대해", "궁금한 모든 것을 확인해보세요."];
+  const title = [
+    <span key="line1">스마트픽인에 대해</span>,
+    <span key="line2">
+      <b>궁금한 모든 것</b>을 확인해보세요.
+    </span>,
+  ];
   const menu = ["공지사항", "자주묻는질문", "취소·환불규정"];
+  const imgUrl = "/assets/image/cs_bg_icn.png";
   const activeMenu = useSelector((state) => state.service.serviceMenu);
   const dispatch = useDispatch();
 
@@ -33,10 +37,10 @@ const ServiceView = () => {
     window.location.hash = value;
   };
   return (
-    <ServiceViewBlock>
+    <ServiceViewBlock className="flexCenter">
       <div className="homeRow">
         <Breadcrumb depth1={"고객센터"} depth2={activeMenu} />
-        <PageTitle title={title} />
+        <PageTitle title={title} imgUrl={imgUrl} />
         <PageTab
           menu={menu}
           activeMenu={activeMenu}
