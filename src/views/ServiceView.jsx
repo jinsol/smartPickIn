@@ -4,11 +4,13 @@ import styled from "styled-components";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import PageTitle from "@/components/layout/PageTitle";
 import PageTab from "@/components/layout/PageTab";
+import { initServiceMenu } from "@/store/service";
+// import PageSearch from "@/components/layout/PageSearch";
+// ======================= 탭 메뉴 =======================
 import NoticeSection from "@/components/service/NoticeSection";
 import QnASection from "@/components/service/QnASection";
 import RefundSection from "@/components/service/RefundSection";
-import PageSearch from "@/components/layout/PageSearch";
-import { initServiceMenu } from "@/store/service";
+// ======================= 탭 메뉴 =======================
 
 const ServiceViewBlock = styled.section`
   width: 100%;

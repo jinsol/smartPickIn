@@ -43,9 +43,14 @@ const Breadcrumb = ({ depth1, depth2 }) => {
         <li>
           <a>{depth1}</a>
         </li>
-        <li className="rightArrow">
-          <MdChevronRight />
-        </li>
+        {
+          // 삼항조건연산문을 사용해서 depth2 데이터가 있을 경우 표시
+          depth2 ? (
+            <li className="rightArrow">
+              <MdChevronRight />
+            </li>
+          ) : null
+        }
         <li className="depth2">
           <a>{depth2}</a>
         </li>

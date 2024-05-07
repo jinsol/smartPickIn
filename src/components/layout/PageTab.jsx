@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const TabUl = styled.ul`
   display: inline-flex;
-  /* gap: 20px; */
   background-color: var(--light-blue);
   border-radius: 50px;
   position: relative;

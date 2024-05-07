@@ -13,3 +13,4 @@ const firebaseConfig = firebase.initializeApp({
 
 const oDB = firebaseConfig.database();
 export const noticeDB = oDB.ref("notice"); // 여기서 products나 carts 는 컬렉션이라고 부름!!
+export const productDB = oDB.ref("products");
