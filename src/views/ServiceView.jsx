@@ -7,7 +7,8 @@ import PageTab from "@/components/layout/PageTab";
 import NoticeSection from "@/components/service/NoticeSection";
 import QnASection from "@/components/service/QnASection";
 import RefundSection from "@/components/service/RefundSection";
-import { initServiceMenu } from "@/store/service"; // 액션 생성자를 가져옵니다.
+import PageSearch from "@/components/layout/PageSearch";
+import { initServiceMenu } from "@/store/service";
 
 const ServiceViewBlock = styled.section`
   width: 100%;
@@ -35,6 +36,7 @@ const ServiceView = () => {
   const handleMenuClick = (value) => {
     dispatch(initServiceMenu(value));
     window.location.hash = value;
+    window.scrollTo(0, 0);
   };
   return (
     <ServiceViewBlock className="flexCenter">
@@ -46,6 +48,7 @@ const ServiceView = () => {
           activeMenu={activeMenu}
           onClick={handleMenuClick}
         />
+        {/* <PageSearch /> */}
         {activeMenu === "공지사항" && <NoticeSection />}
         {activeMenu === "자주묻는질문" && <QnASection />}
         {activeMenu === "취소·환불규정" && <RefundSection />}

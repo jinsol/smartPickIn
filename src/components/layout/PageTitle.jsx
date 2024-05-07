@@ -7,6 +7,12 @@ const PageTitleWrap = styled.article`
   grid-template-columns: 3fr 1fr;
   align-items: center;
   gap: 80px;
+  @media (max-width: 1100px) {
+    grid-template-columns: auto;
+    .pageImage {
+      display: none;
+    }
+  }
 `;
 
 const PageTitleSection = styled.h2`
@@ -47,7 +53,6 @@ const PageTitle = ({ title, imgUrl }) => {
       y: 0,
       stagger: 0.2,
       ease: "easeInEase",
-      duration: 1,
     });
   }, [title]);
 
@@ -58,7 +63,7 @@ const PageTitle = ({ title, imgUrl }) => {
           return <p key={index}>{item}</p>;
         })}
       </PageTitleSection>
-      <PageImage>
+      <PageImage className="pageImage">
         <img src={imgUrl} alt="" />
       </PageImage>
     </PageTitleWrap>

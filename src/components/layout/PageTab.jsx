@@ -2,13 +2,20 @@ import React from "react";
 import styled from "styled-components";
 
 const TabUl = styled.ul`
-  display: flex;
-  gap: 20px;
+  display: inline-flex;
+  /* gap: 20px; */
+  background-color: var(--light-blue);
+  border-radius: 50px;
+  position: relative;
+  margin: 2em 0 4em;
   li {
     font-size: 1.2em;
+    padding: 0.6em 2em 0.7em;
     &.active {
-      color: var(--blue);
+      color: var(--white);
       font-weight: 800;
+      background-color: var(--blue);
+      border-radius: 50px;
     }
   }
 `;

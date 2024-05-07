@@ -2,17 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { FaAngleUp } from "react-icons/fa6";
 
-const Section = styled.section`
-  border-top: 2px solid var(--black);
-`;
+const Section = styled.section``;
 
 const AccordionHeader = styled.h3`
+  border-bottom: 1px solid var(--gray06);
   button {
     display: flex;
     width: 100%;
     align-items: center;
     cursor: pointer;
-    padding: 1em 0;
+    padding: 2em 0;
     span {
       display: inline-block;
       display: flex;
@@ -553,7 +552,7 @@ const QnASection = () => {
   ];
 
   return (
-    <Section>
+    <Section className="borderTopLine">
       {QnAList.map((item, index) => {
         return (
           <div key={index} className="accordion-item">

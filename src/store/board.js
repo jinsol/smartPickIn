@@ -9,6 +9,7 @@ const boardSlice = createSlice({
   reducers: {
     initNotice(state, action) {
       state.notice = action.payload;
+      state.notice.reverse();
     },
   },
 });
