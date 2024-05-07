@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import cn from "classnames";
 import Nav from "@/components/layout/Nav";
-import { initServiceMenu } from "@/store/service";
+import { useSelector, useDispatch } from 'react-redux';
+import { initServiceMenu} from "@/store/service";
+import {initNewsMenu} from "@/store/news";
+import { userLogout, userLogin,fetchMembers } from '@/store/member'
 
 const HeaderBlock = styled.div`
   text-align: center;
@@ -213,14 +215,43 @@ const HeaderBlock = styled.div`
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const user = useSelector(state=>state.members.user)
+  console.log(user)
+
+useEffect(()=>{
+    dispatch(fetchMembers())
+    let loging = localStorage.loging
+    if (loging) {
+      dispatch(userLogin(JSON.parse(loging)))
+    }
+  }, [dispatch])
+
+  // const handleLogout = (e)=>{
+  //   e.preventDefault()
+  //   dispatch(userLogout())
+  // }
+
+  // useEffect(()=>{
+  //   dispatch(fetchProducts())
+  //   let loging = localStorage.loging
+  //   if (loging) {
+  //     dispatch(userLogin(JSON.parse(loging)))
+  //   }
+  // }, [dispatch])
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleLogout = (e)=>{
+    e.preventDefault()
+    dispatch(userLogout())
+  }
+
   /* ================== 24.05.03 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   useEffect(() => {
     const hash = decodeURIComponent(window.location.hash.slice(1));
     dispatch(initServiceMenu(hash));
@@ -230,6 +261,11 @@ const Header = () => {
     navigate(`/service/#${value}`);
     dispatch(initServiceMenu(value));
   };
+  const newsMenuClick = (value)=>{
+    navigate(`/news/#${value}`);
+    dispatch(initNewsMenu(value))
+  }
+  
   /* ================== 24.05.03 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
 
   return (
@@ -248,13 +284,14 @@ const Header = () => {
             <NavLink to="/product">서비스주문</NavLink>
           </li>
           <li className="depthNews1">
-            <NavLink to="/news">소식</NavLink>
+          <a onClick={() => newsMenuClick("소식")}>소식</a>
             <ul className="depthNews2">
               <li>
-                <Link to="/">소식</Link>
+              <a onClick={() => newsMenuClick("소식")}>소식</a>
               </li>
               <li>
-                <Link to="/">기업소식</Link>
+              <a onClick={() => newsMenuClick("기업소식")}>기업소식</a>
+                
               </li>
             </ul>
           </li>
@@ -281,10 +318,16 @@ const Header = () => {
           </li>
         </ul>
         <div className="info">
+          { !user ?
           <div className="infotext">
-            <a href="#">로그인</a>
-            <a href="#">회원가입</a>
+            <Link to='/login'>로그인</Link>
+            <Link to='/agree'>회원가입</Link>
           </div>
+          :
+          <div className="infotext">
+            <a href='#' onClick={handleLogout}>로그아웃</a>
+            <Link to='/agree'>정보수정</Link>
+          </div>}
           <div
             className={cn("menu-wrap", isOpen ? "open" : "")}
             onClick={toggleMenu}
