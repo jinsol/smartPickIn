@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 // ======================= GSAP 애니메이션 =======================
 import gsap from "gsap";
@@ -7,15 +7,15 @@ gsap.registerPlugin(ScrollTrigger);
 // ======================= GSAP 애니메이션 =======================
 const AsideMenu = styled.aside`
   position: fixed;
-  left: 0;
-  width: 200px;
-  height: 50vh;
   top: 50%;
   transform: translateY(-50%);
+  left: 0;
+  width: 200px;
   background-color: var(--light-blue);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   overflow: hidden;
+  z-index: 1;
   ul {
     li {
       font-size: 1.4em;
@@ -33,7 +33,21 @@ const AsideMenu = styled.aside`
 `;
 
 const ProductAside = ({ changeCategory, category }) => {
-  const categoryList = ["all", "woman", "man", "underwear", "kids"];
+  const categoryList = [
+    "전체",
+    "플레이스",
+    "사이트",
+    "백링크",
+    "순위확인",
+    "인스타그램",
+  ];
+
+  useEffect(() => {
+    gsap.to(".asideMenu", {
+      backgroundColor: "red",
+    });
+  }, []);
+
   return (
     <AsideMenu className="asideMenu">
       <ul>

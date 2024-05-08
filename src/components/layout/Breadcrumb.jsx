@@ -16,7 +16,7 @@ const BreadcrumbWrap = styled.div`
       &.rightArrow {
         padding: 0 10px;
       }
-      &.depth2 {
+      &.active {
         color: var(--blue);
       }
       a {
@@ -40,20 +40,27 @@ const Breadcrumb = ({ depth1, depth2 }) => {
         <li className="rightArrow">
           <MdChevronRight />
         </li>
-        <li>
-          <a>{depth1}</a>
-        </li>
-        {
-          // 삼항조건연산문을 사용해서 depth2 데이터가 있을 경우 표시
-          depth2 ? (
+        {!depth2 ? (
+          <li className="active">
+            <a>{depth1}</a>
+          </li>
+        ) : (
+          <>
+            <li>
+              {depth1 == "서비스주문" ? (
+                <Link to="/product">{depth1}</Link>
+              ) : (
+                <a>{depth1}</a>
+              )}
+            </li>
             <li className="rightArrow">
               <MdChevronRight />
             </li>
-          ) : null
-        }
-        <li className="depth2">
-          <a>{depth2}</a>
-        </li>
+            <li className="depth2 active">
+              <a>{depth2}</a>
+            </li>
+          </>
+        )}
       </ol>
     </BreadcrumbWrap>
   );

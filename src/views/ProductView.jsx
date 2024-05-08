@@ -25,16 +25,17 @@ const ServiceView = () => {
     </span>,
   ];
   const imgUrl = "/assets/image/cs_service_icn.png";
-  const [category, setCategory] = useState("all");
+  const [category, setCategory] = useState("전체");
   const changeCategory = (value) => setCategory(value);
 
   return (
     <>
+      <ProductAside changeCategory={changeCategory} category={category} />
       <ServiceViewBlock className="flexCenter">
         <div className="homeRow">
           <Breadcrumb depth1={"서비스주문"} />
           <PageTitle title={title} imgUrl={imgUrl} />
-          <ProductAside changeCategory={changeCategory} category={category} />
+
           <ProductList category={category} />
         </div>
       </ServiceViewBlock>
