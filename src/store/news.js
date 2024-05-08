@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const newsSlice = createSlice({
-  name: "service",
+  name: "news",
   initialState: {
     newsMenu: "소식",
   },

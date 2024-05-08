@@ -5,6 +5,7 @@ import HomeView from "@/views/HomeView";
 import AboutView from "@/views/AboutView";
 import ProductView from "@/views/ProductView";
 import NewsView from "@/views/NewsView";
+import NewsDetailView from "@/views/NewsDetailView"
 import AskView from "@/views/AskView";
 import ServiceView from "@/views/ServiceView";
 import AgreeView from "@/views/AgreeView"
@@ -22,7 +23,7 @@ const App = () => {
         <Route path="/about" element={<AboutView />} />
         <Route path="/product" element={<ProductView />} />
         <Route path="/news" element={<NewsView />} />
-
+        <Route path="/newsDetail/:subject" element={<NewsDetailView />}/>
         <Route path="/ask" element={<AskView />} />
         <Route path="/service/" element={<ServiceView />} />
       </Route>
