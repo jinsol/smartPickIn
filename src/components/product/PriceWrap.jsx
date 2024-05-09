@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const ContentWrapPriceBlock = styled.div`
+const PriceWrapBlock = styled.div`
   p {
     span {
       font-size: 0.8em;
@@ -15,9 +15,9 @@ const ContentWrapPriceBlock = styled.div`
   }
 `;
 
-const ContentWrapPrice = ({ price }) => {
+const PriceWrap = ({ price }) => {
   return (
-    <ContentWrapPriceBlock>
+    <PriceWrapBlock>
       <p>
         <span>VAT 별도</span>
         {price == "옵션별 상이" ? (
@@ -30,8 +30,8 @@ const ContentWrapPrice = ({ price }) => {
           </>
         )}
       </p>
-    </ContentWrapPriceBlock>
+    </PriceWrapBlock>
   );
 };
 
-export default ContentWrapPrice;
+export default PriceWrap;

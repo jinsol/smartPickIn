@@ -24,7 +24,6 @@ export const fetchNotice = () => async (dispatch) => {
         return { key: key, ...value };
       });
       dispatch(initNotice(noticeArr));
-      console.log("잘 들어왔나?", noticeArr);
     });
   } catch (error) {
     console.error("Error fetching notice:", error);

@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import ImageWrap from "./ImageWrap";
-import ContentWrapTitle from "./TitleWrap";
-import ContentWrapPrice from "./PriceWrap";
+import TitleWrap from "./TitleWrap";
+import ContentPriceWrap from "./PriceWrap";
 import HashtagWrap from "./HashtagWrap";
 import DetailWrap from "./DetailWrap";
 import TagWrap from "./TagWrap";
@@ -154,14 +154,14 @@ const ProductList = ({ category }) => {
             >
               <ImageWrap thumbnail={item.thumbnail} />
               <ContentWrap className="ContentWrap">
-                <ContentWrapTitle title={item.title} subtitle={item.subtitle} />
+                <TitleWrap title={item.title} subtitle={item.subtitle} />
                 <TagWrap tag={item.tag} />
                 <div className="Line"></div>
                 <HashtagWrap hashtag={item.hashtag} />
                 <DetailWrap detail={item.detail} />
               </ContentWrap>
               <PriceWrap className="PriceWrap">
-                <ContentWrapPrice price={item.price} />
+                <ContentPriceWrap price={item.price} />
                 <button className="Btn">자세히 보기</button>
               </PriceWrap>
             </ProductLi>

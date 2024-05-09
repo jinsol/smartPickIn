@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CartQtyWrap from "./CartQtyWrap";
+import { useNavigate } from "react-router";
+import { cartDB } from "@/assets/firebase";
 
 const BtnWrapBlock = styled.div`
   display: flex;
@@ -34,15 +36,95 @@ const BtnWrapBlock = styled.div`
 `;
 
 const BtnWrap = ({ id }) => {
+  const navigate = useNavigate();
+  const [qty, setQty] = useState(1);
+
+  const decreaseQuantity = () => {
+    if (!(qty <= 1)) {
+      setQty(qty - 1);
+    }
+  };
+  const increaseQuantity = () => {
+    setQty(qty + 1);
+  };
+
+  const userId = JSON.parse(localStorage.loging).userId;
+  const onClickGoCart = () => {
+    const product = {
+      id,
+      qty,
+    };
+    cartDB
+      .child(userId)
+      .once("value")
+      .then((snapshot) => {
+        const cartData = snapshot.val();
+        if (cartData && cartData[id]) {
+          // 이미 해당 상품이 장바구니에 있는 경우, 수량을 업데이트
+          const existingProduct = cartData[id];
+          const updatedQty = existingProduct.qty + qty;
+          // 장바구니에 있는 상품의 수량만 업데이트
+          return cartDB.child(userId).child(id).update({ qty: updatedQty });
+        } else {
+          // 해당 상품이 장바구니에 없는 경우, 새로 추가
+          return cartDB.child(userId).child(id).set(product);
+        }
+      })
+      .then(() => {
+        console.log("Product added to cart successfully");
+      })
+      .catch((error) => {
+        console.error("Error adding product to cart: ", error);
+      });
+  };
+
+  const onClickBuyNow = () => {
+    const product = {
+      id,
+      qty,
+    };
+    cartDB
+      .child(userId)
+      .once("value")
+      .then((snapshot) => {
+        const cartData = snapshot.val();
+        if (cartData && cartData[id]) {
+          // 이미 해당 상품이 장바구니에 있는 경우, 수량을 업데이트
+          const existingProduct = cartData[id];
+          const updatedQty = existingProduct.qty + qty;
+          // 장바구니에 있는 상품의 수량만 업데이트
+          return cartDB.child(userId).child(id).update({ qty: updatedQty });
+        } else {
+          // 해당 상품이 장바구니에 없는 경우, 새로 추가
+          return cartDB.child(userId).child(id).set(product);
+        }
+      })
+      .then(() => {
+        console.log("Product added to cart successfully");
+      })
+      .catch((error) => {
+        console.error("Error adding product to cart: ", error);
+      });
+    navigate("/cart");
+  };
+
   return (
     <BtnWrapBlock>
       <div className="ContentWrapBtn_Cart">
         <div className="ContentWrapBtn_Cart_Qty">
-          <CartQtyWrap />
+          <CartQtyWrap
+            qty={qty}
+            decreaseQuantity={decreaseQuantity}
+            increaseQuantity={increaseQuantity}
+          />
         </div>
-        <button className="GoCart">장바구니</button>
+        <button className="GoCart" onClick={onClickGoCart}>
+          장바구니
+        </button>
       </div>
-      <button className="BuyNow">바로 구매하기</button>
+      <button className="BuyNow" onClick={onClickBuyNow}>
+        바로 구매하기
+      </button>
     </BtnWrapBlock>
   );
 };

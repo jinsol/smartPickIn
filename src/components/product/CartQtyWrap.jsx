@@ -12,16 +12,7 @@ const CartQtyWrapBlock = styled.div`
   }
 `;
 
-const CartQtyWrap = () => {
-  const [qty, setQty] = useState(1);
-  const decreaseQuantity = () => {
-    if (!(qty <= 1)) {
-      setQty(qty - 1);
-    }
-  };
-  const increaseQuantity = () => {
-    setQty(qty + 1);
-  };
+const CartQtyWrap = ({ qty, decreaseQuantity, increaseQuantity }) => {
   return (
     <CartQtyWrapBlock>
       <button onClick={decreaseQuantity}>-</button>

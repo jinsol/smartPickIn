@@ -13,11 +13,10 @@ const firebaseConfig = firebase.initializeApp({
 });
 
 const oDB = firebaseConfig.database();
-export const cartDB = oDB.ref("carts");
 export const memberDB = oDB.ref("members");
 export const reviewDB = oDB.ref("review");
-
 // ============ 작업중 ============
+export const cartDB = oDB.ref("carts");
 export const noticeDB = oDB.ref("notice");
 export const productDB = oDB.ref("products");
 // ============ 작업중 ============

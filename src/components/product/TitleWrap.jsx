@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const ContentWrapTitleBlock = styled.div`
+const TitleWrapBlock = styled.div`
   h4 {
     font-size: 0.9em;
     color: var(--blue);
@@ -13,13 +13,13 @@ const ContentWrapTitleBlock = styled.div`
   }
 `;
 
-const ContentWrapTitle = ({ title, subtitle }) => {
+const TitleWrap = ({ title, subtitle }) => {
   return (
-    <ContentWrapTitleBlock>
+    <TitleWrapBlock>
       <h4>{subtitle}</h4>
       <h3>{title}</h3>
-    </ContentWrapTitleBlock>
+    </TitleWrapBlock>
   );
 };
 
-export default ContentWrapTitle;
+export default TitleWrap;

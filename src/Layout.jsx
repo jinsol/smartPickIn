@@ -12,7 +12,7 @@ const Main = styled.main`
   min-height: 100vh; // 임시
 
   ${(props) =>
-    !props.isProduct &&
+    !props.isProductPage &&
     css`
       backdrop-filter: blur(60px);
     `}
@@ -26,7 +26,7 @@ const Layout = () => {
     <>
       <MouseFollower />
       <Header />
-      <Main isProduct={isProductPage}>
+      <Main isProductPage={isProductPage}>
         <Outlet />
       </Main>
       <Footer />
