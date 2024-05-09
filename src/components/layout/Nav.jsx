@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components'
 import cn from 'classnames'
 import { NavLink,Link } from 'react-router-dom'
-import { MdKeyboardDoubleArrowRight,MdOutlineKeyboardDoubleArrowDown  } from "react-icons/md";
+import { IoIosArrowRoundForward, IoIosArrowRoundDown  } from "react-icons/io";
 
 
 const NavBlock = styled.div`
@@ -104,13 +104,13 @@ const Nav = ({isOpen, toggleMenu}) => {
              <div className="nav__menu">
                  <ul className='depth1'>
                      <li onClick={toggleMenu}>
-                        <NavLink to="/about"><span className='strong'>01</span> 소개 <MdKeyboardDoubleArrowRight className='arrow' /></NavLink>       
+                        <NavLink to="/about"><span className='strong'>01</span> 소개<IoIosArrowRoundForward className='arrow' /></NavLink>       
                     </li>
                     <li onClick={toggleMenu}>
-                        <NavLink to="/product"><span className='strong'>02</span> 서비스주문 <MdKeyboardDoubleArrowRight className='arrow' /></NavLink>
+                        <NavLink to="/product"><span className='strong'>02</span> 서비스주문 <IoIosArrowRoundForward className='arrow' /></NavLink>
                     </li>
                     <li onClick={depthClick}>
-                        <a className={click && 'on'}><span className='strong'>03</span> 소식 <MdOutlineKeyboardDoubleArrowDown className='arrow' />
+                        <a className={click && 'on'}><span className='strong'>03</span> 소식 <IoIosArrowRoundDown className='arrow' />
                       </a>
                         <ul className={cn("hidden1", click && "on")}>
                         <li> <Link to="/">소식</Link></li>
@@ -118,7 +118,7 @@ const Nav = ({isOpen, toggleMenu}) => {
                         </ul>
                     </li>
                     <li onClick={depthClick1}>
-                        <a className={click1 && 'on'}><span className='strong'>04</span> 고객센터  <MdOutlineKeyboardDoubleArrowDown className='arrow' />
+                        <a className={click1 && 'on'}><span className='strong'>04</span> 고객센터  <IoIosArrowRoundDown className='arrow' />
                         </a>
                         <ul className={cn("hidden2", click1 && "open")} >
                         <li> <Link to="test">공지사항</Link></li>
@@ -127,7 +127,7 @@ const Nav = ({isOpen, toggleMenu}) => {
                         </ul>
                     </li>
                     <li onClick={toggleMenu}>
-                        <NavLink to ="/ask"><span className='strong'>05</span> 문의하기<MdKeyboardDoubleArrowRight className='arrow' />
+                        <NavLink to ="/ask"><span className='strong'>05</span> 문의하기<IoIosArrowRoundForward className='arrow' />
                       </NavLink>
                     </li>
                 </ul>

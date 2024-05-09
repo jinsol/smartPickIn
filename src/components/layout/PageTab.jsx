@@ -7,6 +7,11 @@ const TabUl = styled.ul`
   border-radius: 50px;
   position: relative;
   margin: 2em 0 4em;
+  display: inline-flex;
+  background-color: var(--light-blue);
+  border-radius: 50px;
+  position: relative;
+  margin: 2em 0 4em;
   li {
     font-size: 1.2em;
     padding: 0.6em 2em 0.7em;
@@ -15,6 +20,9 @@ const TabUl = styled.ul`
       font-weight: 800;
       background-color: var(--blue);
       border-radius: 50px;
+    }
+    button {
+      padding: 0.6em 2em 0.7em;
     }
   }
 `;
