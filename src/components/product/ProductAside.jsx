@@ -10,7 +10,7 @@ const AsideMenu = styled.aside`
   top: 50%;
   transform: translateY(-50%);
   left: 0;
-  width: 200px;
+  width: 160px;
   background-color: var(--light-blue);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -18,15 +18,18 @@ const AsideMenu = styled.aside`
   z-index: 1;
   ul {
     li {
-      font-size: 1.4em;
+      font-size: 1.2em;
       button {
         display: block;
         width: 100%;
-        padding: 20px;
+        padding: 10px 0;
+        padding-left: 20px;
       }
       &.active {
         background-color: var(--blue);
         color: var(--white);
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
       }
     }
   }
@@ -41,12 +44,6 @@ const ProductAside = ({ changeCategory, category }) => {
     "순위확인",
     "인스타그램",
   ];
-
-  useEffect(() => {
-    gsap.to(".asideMenu", {
-      backgroundColor: "red",
-    });
-  }, []);
 
   return (
     <AsideMenu className="asideMenu">

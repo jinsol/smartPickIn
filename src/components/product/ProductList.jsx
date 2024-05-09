@@ -4,29 +4,56 @@ import { fetchProducts } from "@/store/product";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
-
-import {
-  MdPlace,
-  MdManageHistory,
-  MdOutlineTrendingUp,
-  MdOutlineScience,
-  MdOutlineTraffic,
-  MdAddLink,
-} from "react-icons/md";
+import ImageWrap from "./ImageWrap";
+import ContentWrapTitle from "./TitleWrap";
+import ContentWrapPrice from "./PriceWrap";
+import HashtagWrap from "./HashtagWrap";
+import DetailWrap from "./DetailWrap";
+import TagWrap from "./TagWrap";
 
 const ArticleBlock = styled.article`
   .ProductUl {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    @media (max-width: 1100px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
   }
 `;
 
 const ProductLi = styled.li`
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
+  display: flex;
+  justify-content: space-between;
+  > div {
+    &:nth-child(1) {
+      flex-basis: 20%;
+    }
+    &:nth-child(2) {
+      flex-basis: 60%;
+    }
+    &:nth-child(3) {
+      flex-basis: 15%;
+    }
+  }
 
-  gap: 20px;
+  @media (max-width: 1100px) {
+    flex-direction: column;
+    > div {
+      &:nth-child(1) {
+        flex-basis: auto;
+      }
+      &:nth-child(2) {
+        flex-basis: auto;
+      }
+      &:nth-child(3) {
+        flex-basis: auto;
+      }
+    }
+  }
   color: var(--gray02);
   background-color: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--gray06);
@@ -40,20 +67,9 @@ const ProductLi = styled.li`
   }
 `;
 
-const ImageWrap = styled.div`
-  background-color: blue;
-  border-radius: 10px;
-  overflow: hidden;
-  img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-`;
-
 const ContentWrap = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr auto;
+  grid-template-columns: 1.5fr 2fr auto;
   grid-template-rows: 1fr auto 2fr;
   row-gap: 20px;
   position: relative;
@@ -63,55 +79,13 @@ const ContentWrap = styled.div`
     grid-column: span 3;
     height: 1px;
   }
-  .Hashtag {
+  .HashtagWrap {
     span {
       display: block;
-      &::before {
-        content: "#";
-      }
     }
   }
-  .Detail {
-    p {
-      line-height: 180%;
-      word-break: keep-all;
-    }
-  }
-`;
-
-const ContentWrapTitle = styled.div`
-  .SubTitle {
-    color: var(--blue);
-    font-size: 0.8em;
-  }
-  .Title {
-    color: var(--black);
-    font-size: 1.4em;
-  }
-`;
-
-const ContentWrapTag = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  .TagIcon {
-    display: inline-flex;
-    align-items: center;
-    flex-direction: column;
-    .TagIcon_text {
-      font-size: 0.8em;
-      line-height: 180%;
-    }
-    .TagIcon_icon {
-      display: inline-flex;
-      place-content: center;
-      place-items: center;
-
-      width: 30px;
-      height: 30px;
-      border: 1px solid var(--gray02);
-      border-radius: 50%;
-    }
+  @media (max-width: 1100px) {
+    display: block;
   }
 `;
 
@@ -119,18 +93,6 @@ const PriceWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  .VAT {
-    color: var(--gray05);
-    font-size: 0.8em;
-  }
-  .Price {
-    color: var(--black);
-
-    letter-spacing: 0;
-    b {
-      font-size: 1.4em;
-    }
-  }
   .Btn {
     background-color: var(--blue);
     width: 100%;
@@ -165,6 +127,7 @@ const ProductList = ({ category }) => {
         { opacity: 1, scale: 1, stagger: 0.1 }
       );
       setProducts(list);
+      window.scrollTo(0, 0);
     } else {
       setProducts(list.filter((item) => item.category === category));
       gsap.fromTo(
@@ -175,17 +138,9 @@ const ProductList = ({ category }) => {
         },
         { opacity: 1, scale: 1, stagger: 0.1 }
       );
+      window.scrollTo(0, 0);
     }
   }, [list, category]);
-
-  const tagIconMap = {
-    플레이스: <MdPlace />,
-    통합관리: <MdManageHistory />,
-    지수상승: <MdOutlineTrendingUp />,
-    테크니컬: <MdOutlineScience />,
-    트래픽: <MdOutlineTraffic />,
-    백링크: <MdAddLink />,
-  };
 
   return (
     <ArticleBlock>
@@ -197,55 +152,16 @@ const ProductList = ({ category }) => {
               key={index}
               onClick={() => onClickProduct(item)}
             >
-              <ImageWrap className="ImageWrap">
-                <img src={item.thumbnail} alt="" />
-              </ImageWrap>
+              <ImageWrap thumbnail={item.thumbnail} />
               <ContentWrap className="ContentWrap">
-                <ContentWrapTitle className="ContentWrap_Title">
-                  <h4 className="SubTitle">{item.subtitle}</h4>
-                  <h3 className="Title">{item.title}</h3>
-                </ContentWrapTitle>
-                <ContentWrapTag className="ContentWrap_Tag">
-                  {item.tag &&
-                    Array.isArray(item.tag) &&
-                    item.tag.map((tagItem, index) => (
-                      <div key={index} className="TagIcon">
-                        <span className="TagIcon_icon">
-                          {tagIconMap[tagItem]}
-                        </span>
-                        <span className="TagIcon_text">{tagItem}</span>
-                      </div>
-                    ))}
-                </ContentWrapTag>
+                <ContentWrapTitle title={item.title} subtitle={item.subtitle} />
+                <TagWrap tag={item.tag} />
                 <div className="Line"></div>
-                <div className="Hashtag">
-                  {item.hashtag &&
-                    Array.isArray(item.hashtag) &&
-                    item.hashtag.map((hashtagItem, index) => (
-                      <span key={index} className="Hashtag">
-                        {hashtagItem}
-                      </span>
-                    ))}
-                </div>
-                <div className="Detail">
-                  <p>{item.detail}</p>
-                </div>
+                <HashtagWrap hashtag={item.hashtag} />
+                <DetailWrap detail={item.detail} />
               </ContentWrap>
               <PriceWrap className="PriceWrap">
-                <span>
-                  <h4 className="VAT">VAT 별도</h4>
-                  <h3 className="Price">
-                    {item.price == "옵션별 상이" ? (
-                      <>
-                        <b>{item.price}</b>
-                      </>
-                    ) : (
-                      <>
-                        <b>{item.price}</b> 원
-                      </>
-                    )}
-                  </h3>
-                </span>
+                <ContentWrapPrice price={item.price} />
                 <button className="Btn">자세히 보기</button>
               </PriceWrap>
             </ProductLi>

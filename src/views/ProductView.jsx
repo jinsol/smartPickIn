@@ -30,13 +30,12 @@ const ServiceView = () => {
 
   return (
     <>
-      <ProductAside changeCategory={changeCategory} category={category} />
       <ServiceViewBlock className="flexCenter">
         <div className="homeRow">
           <Breadcrumb depth1={"서비스주문"} />
           <PageTitle title={title} imgUrl={imgUrl} />
-
           <ProductList category={category} />
+          <ProductAside changeCategory={changeCategory} category={category} />
         </div>
       </ServiceViewBlock>
     </>
