@@ -1,42 +1,31 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { IoIosArrowRoundForward  } from "react-icons/io";
-import ReactPaginate from 'react-paginate';
 import {Link} from 'react-router-dom'
 import newscompanydata from '@/assets/data/newscompanydata'
+import cn from 'classnames';
+import SearchBar from "@/components/news/SearchBar"
+import NewsPagination from './NewsPagination';
+
+
+
 
 const CompanyNewsSectionBlock = styled.div`
 
-    .pagination{
-        display: flex;
-        justify-content: center;
-        margin-top:50px;
-        align-items: center;
-      li {
-    font-size: 1.2em;
-    list-style-type: none; /* 페이지 번호의 기본 스타일 제거 */
-    margin: 0 5px; /* 각 페이지 번호 사이의 간격 설정 */
-    cursor: pointer; /* 커서 모양 변경 */
-    border-radius: 5px; /* 페이지 번호에 둥근 모서리 추가 */
-    transition: background-color 0.3s; /* 배경색 변경에 트랜지션 효과 적용 */
-    a{
-    padding: 5px 5px;
-        
-    }
-}
-
-li.active {
-    background-color: var(--blue); /* 활성화된 페이지 번호의 배경색 변경 */
-    color: var(--white); /* 활성화된 페이지 번호의 글자색 변경 */
-    padding: 10px 12px;
-    border-radius: 50%;
-}
-    }
+   
      .news__depth1 {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
+        transform: translateY(200px);
+                        opacity: 0;
+                        transition: all 0.8s ease;
+
+                        &.on{
+                        transform: translateY(0);
+                        opacity: 1;
+                        }
         .news__list {
             margin: 2% 2%;
             flex:0 0 28%;
@@ -69,7 +58,7 @@ li.active {
                         width: 100%;
                         height: auto;
                         transition: all 0.5s ease;
-                        filter: grayscale(2);
+                        filter: brightness(0.5);
                         margin-bottom: 20px;
                         
 
@@ -83,7 +72,8 @@ li.active {
                 }
 
                 &:hover .thumbnail__image {
-                    filter: grayscale(0);
+                    filter: brightness(1);
+                    
                 }
                &:hover  .news__text {
                   
@@ -91,9 +81,9 @@ li.active {
                       
                         .more{
                       
-                            color: var(--blue);
+                            color: var(--yellow);
                             span{
-                                color: var(--blue);
+                                color: var(--yellow);
                             }
 
                             em{
@@ -103,7 +93,7 @@ li.active {
                                 font-weight: bold;
                                 padding: 2px;
                                 border-radius: 50%;
-                                border: 1px solid var(--blue);
+                                border: 1px solid var(--yellow);
                                
                             }
                         }
@@ -167,15 +157,20 @@ li.active {
 const CompanyNewsSection = () => {
     const [pageNumber, setPageNumber] = useState(0); // 현재 페이지 번호 상태
     const postsPerPage = 9; // 한 페이지에 표시될 아이템 수
+    const [searchTerm, setSearchTerm] = useState('')
   
 
     const pagesVisited = pageNumber * postsPerPage; // 현재 페이지에서 보여질 아이템 시작 인덱스
     const pageCount = Math.ceil(newscompanydata.length / postsPerPage); // 전체 페이지 수
     const displayNewsData = newscompanydata
+    .filter((item) => {
+        if (!searchTerm) return true; // 검색어가 없는 경우 모든 항목을 반환
+        return item.maintext.toLowerCase().includes(searchTerm.toLowerCase()); 
+      })
     .slice(pagesVisited, pagesVisited + postsPerPage)
     .map((item, index) => (
         <li key={index} className='news__list'>
-        <Link to={`/newsDetail/${item.id}`} state={{item:item}} >
+        <Link to={`/newsDetail/${item.id}`} state={{item:item, type:'기업소식'}} >
         <div className="thumbnail">
             <div className="thumbnail__text">
         <span>SMART PICK IN</span>
@@ -183,7 +178,7 @@ const CompanyNewsSection = () => {
         <span>MAGAZINE</span>
         </div>
         <figure className='thumbnail__image'>
-        <img src="../../assets/image/news_thumbNail.png" alt="" />
+        <img src="../../assets/image/newsCompany_thumNail.png" alt="" />
         </figure>
         </div>
         <div className="news__text">
@@ -204,25 +199,31 @@ const CompanyNewsSection = () => {
 const handlePageChange = ({ selected }) => {
     setPageNumber(selected); // 페이지 변경 시 페이지 번호 업데이트
 };
+const [listAni, setListAni] = useState(false)
+
+const handleSearch = (value) => {
+    // 검색 버튼 클릭 시에만 필터링
+    setPageNumber(0); // 페이지 번호 초기화
+    setSearchTerm(value)
+};
+
+useEffect(()=>{
+    setListAni(true)
+},[])
 
 
  
     return (
         <CompanyNewsSectionBlock>
-            <ul className='news__depth1'>
+             <SearchBar type="type2"
+             value={searchTerm}
+            // onChange={(e) => setSearchTerm(e.target.value)}
+            onSearch={handleSearch}
+            />
+            <ul className={cn('news__depth1', listAni && 'on')}>
                 {displayNewsData}
             </ul>
-            <ReactPaginate
-                pageCount={pageCount}
-                pageRangeDisplayed={3}
-                marginPagesDisplayed={1}
-                previousLabel={pageNumber === 0 ? null : '이전'}
-                nextLabel={pageNumber === 1 ? null : '다음'}
-                breakLabel={'...'}
-                containerClassName={'pagination'}
-                activeClassName={'active'}
-                onPageChange={handlePageChange}
-            />
+            <NewsPagination pageCount={pageCount} onPageChange={handlePageChange} type='type2'/>
         </CompanyNewsSectionBlock>
     );
 };

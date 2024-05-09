@@ -14,7 +14,7 @@ const NewsDetailViewBlock = styled.section`
 
 const NewsDetailView = () => {
   const location = useLocation() 
-  const {item} = location.state
+  const {item, type} = location.state
   const title = [
     <span key="line1">SEO 최적화 분석을 실시간으로,</span>,
     <span key="line2">
@@ -43,7 +43,7 @@ const NewsDetailView = () => {
         <PageTitle title={title} imgUrl={imgUrl} />
       </div>
       </div>
-      <NewsDetailSection item={item} className='newsDetail'/>
+      <NewsDetailSection item={item} type={type} className='newsDetail'/>
     </NewsDetailViewBlock>
   );
 };
