@@ -12,11 +12,15 @@ const memberSlice = createSlice({
             state.members = action.payload
         },
         userLogin(state, action){
-            state.user = action.payload
-            localStorage.loging = JSON.stringify(action.payload) 
+            const { key, userId, userPw,userPwOk, userName, userCompany, userEmail, userTel} = action.payload.findUser
+            state.user = {key, userId, userPw,userPwOk, userName, userCompany, userEmail, userTel}
+            localStorage.loging = JSON.stringify({key:key, userId:userId}) 
         },
+
+      
         localUser(state, action){
-            state.user = action.payload
+            const findUser = state.members.find(item=>item.key==action.payload.key)
+            state.user = findUser
         },
         userLogout(state, action){
             state.user = null
@@ -28,14 +32,15 @@ const memberSlice = createSlice({
 export const { initMembers, userLogin, userLogout, localUser } = memberSlice.actions;
 export const fetchMembers = ()=> async dispatch => {
     try {
-        const snapshot = await memberDB.once('value')
-        const membersObj = snapshot.val()
-        const membersArr = Object.entries(membersObj).map(([key,value])=>{
-            return {key:key, ...value};
+        memberDB.on('value', (snapshot)=>{
+          const membersObj = snapshot.val()
+          const membersArr = Object.entries(membersObj).map(([key, value]) => {
+              return { key:key, ...value }; // 키와 값 모두 포함한 객체 생성
+          });
+          dispatch(initMembers(membersArr))
         })
-        dispatch(initMembers(membersArr))
-    } catch (error) {
-        console.error('오류:', error);
-    }
+      } catch (error) {
+          console.error('오류:', error);
+      }
 }
 export default memberSlice.reducer;

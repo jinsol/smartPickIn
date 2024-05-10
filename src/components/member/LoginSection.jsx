@@ -140,16 +140,14 @@ const LoginSection = () => {
                 setLock(true)
                 setTimeout(()=>{
                     alert("환영합니다!")
-                    dispatch(userLogin({key:findUser.key, userId:userId,}))
+                    dispatch(userLogin({findUser}))
                     if(nextUrl){
                         navigate(nextUrl, {state:JSON.parse(choiceProduct)})
                     } else{
                     navigate('/')
-                    return false
                     }
                 },200)
                  
-              
             }
         } else {
             alert("회원이 아닙니다.")

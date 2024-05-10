@@ -6,7 +6,9 @@ import Nav from "@/components/layout/Nav";
 import { useSelector, useDispatch } from "react-redux";
 import { initServiceMenu } from "@/store/service";
 import { initNewsMenu } from "@/store/news";
-import { userLogout, userLogin, fetchMembers } from "@/store/member";
+import { userLogout,  fetchMembers,localUser } from "@/store/member";
+import { CiLock,CiUnlock } from "react-icons/ci";
+import { PiUserPlusLight } from "react-icons/pi";
 
 const HeaderBlock = styled.div`
   text-align: center;
@@ -74,89 +76,53 @@ const HeaderBlock = styled.div`
       position: relative;
       z-index: 9999999;
     }
-    ul {
+    .mainDepth1{
       display: flex;
       justify-content: center;
-      height: auto;
-      @media (max-width: 768px) {
+      @media (max-width:768px){
         display: none;
       }
 
-      transition: all 0.5s ease;
-
-      &.open {
-        display: none;
-      }
-
-      li {
-        font-size: 1em;
-        color: #222222;
-        font-weight: bold;
-        font-size: 17px;
-        padding: 0px 0px;
-        white-space: nowrap;
-
-        ul {
-          width: 100%;
-          background: #1774d0;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          display: none;
-          padding: 0px 15px;
-          li {
-            display: block;
-            align-items: center;
-            color: #dadada;
-            padding: 20px 0;
-          }
-        }
-        a {
+      li{
+        font-size: 1.2em;
+        a{
+          padding: 40px 30px;
+          font-weight: 600;
           transition: all 0.3s ease;
-          padding: 40px 25px;
-
-          &:hover,
-          &.active {
-            color: #1774d0;
-            font-weight: bold;
+          &:hover, &.active{
+            color: var(--blue);
           }
         }
       }
-      .depthNews1 {
-        transition: all 0.5s;
-        &:hover {
-          .depthNews2 {
-            display: flex;
-            justify-content: center;
-            li {
-              transition: all 0.3s;
-              margin: 0 15px;
-              a {
-                &:hover {
-                  color: #fff;
-                }
-              }
-            }
+      .depthNews2, .depthService2{
+        width:100%; background:#1774d0; position:absolute; top:100%; left:0;   
+        transition: all 0.5s ease;
+        display: none;
+          justify-content: center;
+          padding: 20px 40px;
+        a{
+          font-size: 0.9em;
+          color:rgba(255,255,255,0.7);
+          transition: all 0.5s ease;
+          &:hover{
+            color: var(--white);
+            font-weight: 500;
           }
         }
       }
-      .depthService1 {
-        &:hover {
-          .depthService2 {
-            display: flex;
-            justify-content: center;
-            li {
-              transition: all 0.3s;
-              margin: 0 15px;
-              a {
-                &:hover {
-                  color: #fff;
-                }
-              }
-            }
-          }
+      .depthNews1:hover{
+        .depthNews2{
+          display: flex;
+          justify-content: center;
         }
       }
+      .depthService1:hover{
+        .depthService2{
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
     }
     .info {
       position: relative;
@@ -166,8 +132,13 @@ const HeaderBlock = styled.div`
       .infotext {
         display: flex;
         align-items: center;
+        justify-content: center;
         margin-right: 20px;
+        padding-top: 5px;
+
         a {
+          display:  inline-block;
+         font-size: 2em;
           padding-left: 15px;
         }
       }
@@ -210,23 +181,24 @@ const HeaderBlock = styled.div`
     .menu-wrap.open .line:last-child {
       transform: rotate(-45deg) translateX(10%);
     }
-  }
 `;
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const [loging,setLoging] = useState(localStorage.loging)
 
   const user = useSelector((state) => state.members.user);
   console.log(user);
 
   useEffect(() => {
     dispatch(fetchMembers());
-    let loging = localStorage.loging;
     if (loging) {
-      dispatch(userLogin(JSON.parse(loging)));
+      // console.log("로깅",loging)
+      dispatch(localUser(JSON.parse(loging)));
+      setLoging(localStorage.loging)
     }
-  }, [dispatch]);
+  }, [dispatch,loging]);
 
   // const handleLogout = (e)=>{
   //   e.preventDefault()
@@ -248,6 +220,9 @@ const Header = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(userLogout());
+    setLoging(null)
+    navigate('/')
+    // localStorage.removeItem('loggedInUser');
   };
 
   /* ================== 24.05.03 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
@@ -276,7 +251,7 @@ const Header = () => {
             <img src="./assets/image/logo_blue.png" alt="" />
           </Link>
         </h1>
-        <ul className={isOpen ? "open" : ""}>
+        <ul className={cn('mainDepth1', isOpen && 'open')}>
           <li>
             <NavLink to="/about">소개</NavLink>
           </li>
@@ -317,17 +292,17 @@ const Header = () => {
           </li>
         </ul>
         <div className="info">
-          {!user ? (
+          {!loging && !user ? (
             <div className="infotext">
-              <Link to="/login">로그인</Link>
-              <Link to="/agree">회원가입</Link>
+              <Link to="/login"><CiLock /></Link>
+              <Link to="/agree"><PiUserPlusLight /></Link>
             </div>
           ) : (
             <div className="infotext">
               <a href="#" onClick={handleLogout}>
-                로그아웃
+              <CiUnlock />
               </a>
-              <Link to="/agree">정보수정</Link>
+             <Link to="/usermodify">수정</Link>
             </div>
           )}
           <div

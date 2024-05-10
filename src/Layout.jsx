@@ -24,7 +24,7 @@ const Layout = () => {
 
   return (
     <>
-      <MouseFollower />
+      {/* <MouseFollower /> */}
       <Header />
       <Main isProductPage={isProductPage}>
         <Outlet />
