@@ -72,7 +72,7 @@ const HeaderBlock = styled.div`
         height: auto;
       }
       position: relative;
-      z-index: 9999;
+      z-index: 9999999;
     }
     ul {
       display: flex;

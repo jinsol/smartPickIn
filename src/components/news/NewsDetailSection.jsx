@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { IoIosArrowRoundForward,IoIosArrowRoundBack   } from "react-icons/io";
 import {useNavigate,Link } from 'react-router-dom';
 import newsdata from '@/assets/data/newsdata'
+import newscompanydata from '@/assets/data/newscompanydata'
+import cn from "classnames";
+
 
 
 
@@ -11,19 +14,28 @@ const NewsDetailSectionBlock = styled.div`
 .detail__wrap{
    max-width: 1500px;
    margin:150px  auto 20px;
+   transform: translateY(200px);
+                        opacity: 0;
+                        transition: all 0.8s ease;
+
+                        &.on{
+                        transform: translateY(0);
+                        opacity: 1;
+                        }
 
     .headerText{
         display: flex;
         justify-content: space-between;
         text-align: center;
         align-items: center;
-        background: var(--blue);
+        background: ${(props) => (props.type === '기업소식' ? 'var(--yellow)' : 'var(--blue)')};
         padding: 20px;
         border-radius: 20px;
         color: var(--white);
         margin:auto;
         margin-bottom: 30px;
         font-size: 1em;
+        
     }
     p{
         font-size: 1.2em;
@@ -45,7 +57,7 @@ const NewsDetailSectionBlock = styled.div`
         padding: 0 10px;
         font-size: 1.5em;
         .button02{
-            background: var(--blue);
+        background: ${(props) => (props.type === '기업소식' ? 'var(--yellow)' : 'var(--blue)')};
             border-radius: 50px;
             color: var(--white);
             transition: all 0.5s ease;
@@ -53,7 +65,8 @@ const NewsDetailSectionBlock = styled.div`
             padding: 10px 40px;
             }
             &:hover{
-                background: var(--blue-hover);
+        background: ${(props) => (props.type === '기업소식' ? 'var(--yellow-hover)' : 'var(--blue-hover)')};
+                
             }
         }
         .button01, .button03{
@@ -61,7 +74,8 @@ const NewsDetailSectionBlock = styled.div`
             align-items: center;
             justify-content: center;
             &:hover{
-                color: var(--blue);
+                color: ${(props) => (props.type === '기업소식' ? 'var(--yellow-hover)' : 'var(--blue-hover)')};
+               
                 em:nth-child(1){
                     transform: translateX(-5px);
                 }
@@ -81,24 +95,46 @@ const NewsDetailSectionBlock = styled.div`
 }
 `
 
-const NewsDetailSection = ({item}) => {
+const NewsDetailSection = ({item,type}) => {
 const navigate = useNavigate()
 const prevId = item.id-1
 const nextId = item.id+1
+const [prevData, setPrevData] = useState(null)
+const [nextData, setNextData] = useState(null)
+
 
 const goToPreviousPage = ()=>{
-    navigate('/news#소식')
-}
+    if(type=='소식'){
+        navigate('/news#소식')
+    } else{
+        navigate('/news#기업소식')
 
-const prevData = newsdata.filter((item,index)=>item.id == prevId)
-const nextData = newsdata.filter((item,index)=>item.id == nextId)
+    }
+}
+const [listAni, setListAni] = useState(false)
+
+useEffect(()=>{
+    setListAni(true)
+},[])
+
+
+useEffect(()=>{
+    if(type=='소식'){
+        setPrevData(newsdata.find((item,index)=>item.id == prevId))
+        setNextData(newsdata.find((item,index)=>item.id == nextId))
+    } else{
+        setPrevData(newscompanydata.find((item,index)=>item.id == prevId))
+        setNextData(newscompanydata.find((item,index)=>item.id == nextId))
+    }
+},[item, type])
+
     
 
 
     return (
-        <NewsDetailSectionBlock>
-            <div className="detail__wrap">
-                <div className="headerText">
+        <NewsDetailSectionBlock type={type}>
+            <div className={cn("detail__wrap", listAni && 'on')}>
+                <div className='headerText'>
           <h2>{item.maintext}</h2>
           <span>{item.date}</span>
           </div>
@@ -107,7 +143,7 @@ const nextData = newsdata.filter((item,index)=>item.id == nextId)
           {prevId > 0 ?   
             <div className="button01">
               <em><IoIosArrowRoundBack className='arrow' /></em>
-              <Link to={`/newsDetail/${prevId}`} state={{ item: prevData[0]}}>이전 게시글</Link>
+              <Link to={`/newsDetail/${prevId}`} state={{ item: prevData, type:type}}>이전 게시글</Link>
             </div>
             :<div></div>
           }
@@ -116,7 +152,7 @@ const nextData = newsdata.filter((item,index)=>item.id == nextId)
             </div>
             {nextId < 11 ?
             <div className="button03">
-            <Link to={`/newsDetail/${nextId}`} state={{item:nextData[0]}}>다음 게시글</Link>
+            <Link to={`/newsDetail/${nextId}`} state={{item:nextData, type:type}}>다음 게시글</Link>
             <em><IoIosArrowRoundForward className='arrow' /></em>
             </div>
             :<div></div>

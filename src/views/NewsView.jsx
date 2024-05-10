@@ -11,7 +11,7 @@ import { initNewsMenu } from "@/store/news"; // 액션 생성자를 가져옵니
 const NewsViewBlock = styled.section`
   width: 100%;
   min-height: 100vh;
-  padding: 20vh 0;
+  padding: 20vh;
 `;
 
 const NewsView = () => {
