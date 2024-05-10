@@ -6,11 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 // ======================= GSAP 애니메이션 =======================
 const AsideMenu = styled.aside`
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0;
-  width: 160px;
   background-color: var(--light-blue);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;

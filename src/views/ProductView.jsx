@@ -34,8 +34,8 @@ const ServiceView = () => {
         <div className="homeRow">
           <Breadcrumb depth1={"서비스주문"} />
           <PageTitle title={title} imgUrl={imgUrl} />
-          <ProductList category={category} />
           <ProductAside changeCategory={changeCategory} category={category} />
+          <ProductList category={category} />
         </div>
       </ServiceViewBlock>
     </>

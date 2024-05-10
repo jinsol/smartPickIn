@@ -35,7 +35,8 @@ const BtnWrapBlock = styled.div`
   }
 `;
 
-const BtnWrap = ({ id }) => {
+const BtnWrap = ({ product }) => {
+  const { id, price, thumbnail, title } = product;
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
 
@@ -53,6 +54,9 @@ const BtnWrap = ({ id }) => {
     const product = {
       id,
       qty,
+      price,
+      thumbnail,
+      title,
     };
     cartDB
       .child(userId)
@@ -82,6 +86,9 @@ const BtnWrap = ({ id }) => {
     const product = {
       id,
       qty,
+      price,
+      thumbnail,
+      title,
     };
     cartDB
       .child(userId)

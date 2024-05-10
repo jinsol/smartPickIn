@@ -13,7 +13,7 @@ const productSlice = createSlice({
   },
 });
 
-export const { initProducts } = productSlice.actions;
+export const { initProducts, cartProducts } = productSlice.actions;
 
 export const fetchProducts = () => async (dispatch) => {
   try {

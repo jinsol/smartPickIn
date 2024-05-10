@@ -3,6 +3,7 @@ import styled from "styled-components";
 import gsap from "gsap";
 
 const PageTitleWrap = styled.article`
+  padding: 20px 0;
   display: grid;
   grid-template-columns: 3fr 1fr;
   align-items: center;

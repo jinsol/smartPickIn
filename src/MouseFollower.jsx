@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { gsap } from "gsap/gsap-core";
 
 const MouseFollowerBlock = styled.span`
   position: fixed;
@@ -10,54 +10,79 @@ const MouseFollowerBlock = styled.span`
   z-index: 1;
 `;
 
-const MouseFollower = () => {
+const MouseFollower = ({ isMouseOverHeader }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isDoubleCircle, setIsDoubleCircle] = useState(false);
-  const location = useLocation();
-  const isProductPage = location.pathname.includes("/product");
+  console.log(isMouseOverHeader);
 
   useEffect(() => {
     const updateMousePosition = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });
-      setIsDoubleCircle(e.clientY > 100 && !isProductPage);
     };
     window.addEventListener("mousemove", updateMousePosition);
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
     };
-  }, [isProductPage]);
+  }, []);
+
+  useEffect(() => {
+    const moveFollower = () => {
+      if (isMouseOverHeader) {
+        gsap.to("#follower1", {
+          duration: 2,
+          x: position.x + 100,
+          y: position.y - 100,
+          opacity: 0.5,
+          scale: 15,
+          ease: "power2.out",
+        });
+        gsap.to("#follower2", {
+          duration: 2,
+          x: position.x - 100,
+          y: position.y + 100,
+          opacity: 0.5,
+          scale: 15,
+          ease: "power2.out",
+        });
+        document.getElementById("follower1").style.zIndex = "1";
+        document.getElementById("follower2").style.zIndex = "1";
+      } else {
+        gsap.to("#follower1", {
+          duration: 1,
+          x: position.x,
+          y: position.y,
+          opacity: 1,
+          scale: 1,
+          ease: "power2.out",
+        });
+        gsap.to("#follower2", {
+          duration: 1,
+          x: position.x,
+          y: position.y,
+          scale: 0,
+          ease: "power2.out",
+        });
+        document.getElementById("follower1").style.zIndex = "100000";
+        // document.getElementById("follower2").style.zIndex = "99999";
+      }
+    };
+
+    moveFollower();
+  }, [position, isMouseOverHeader]);
 
   return (
     <>
-      {isDoubleCircle ? (
-        <>
-          <MouseFollowerBlock
-            style={{
-              left: position.x + 100,
-              top: position.y - 100,
-              backgroundColor: "var(--blue)",
-              transform: "scale(15)",
-            }}
-          />
-          <MouseFollowerBlock
-            style={{
-              left: position.x - 100,
-              top: position.y + 100,
-              backgroundColor: "var(--yellow)",
-              transform: "scale(15)",
-            }}
-          />
-        </>
-      ) : (
-        <MouseFollowerBlock
-          style={{
-            left: position.x,
-            top: position.y,
-            backgroundColor: "var(--blue)",
-            zIndex: 100000,
-          }}
-        />
-      )}
+      <MouseFollowerBlock
+        id="follower1"
+        style={{
+          backgroundColor: "var(--blue)",
+        }}
+      />
+      <MouseFollowerBlock
+        id="follower2"
+        style={{
+          backgroundColor: "var(--yellow)",
+        }}
+      />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import cn from "classnames";
 import Nav from "@/components/layout/Nav";
@@ -250,8 +250,9 @@ const Header = () => {
     dispatch(userLogout());
   };
 
-  /* ================== 24.05.03 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
+  /* ================== 24.05.10 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
   const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
     const hash = decodeURIComponent(window.location.hash.slice(1));
     dispatch(initServiceMenu(hash));
@@ -284,7 +285,12 @@ const Header = () => {
             <NavLink to="/product">서비스주문</NavLink>
           </li>
           <li className="depthNews1">
-            <a onClick={() => newsMenuClick("소식")}>소식</a>
+            <a
+              onClick={() => newsMenuClick("소식")}
+              className={location.pathname.includes("/news") && "active"}
+            >
+              소식
+            </a>
             <ul className="depthNews2">
               <li>
                 <a onClick={() => newsMenuClick("소식")}>소식</a>
@@ -295,7 +301,12 @@ const Header = () => {
             </ul>
           </li>
           <li className="depthService1">
-            <a onClick={() => handleMenuClick("공지사항")}>고객센터</a>
+            <a
+              onClick={() => handleMenuClick("공지사항")}
+              className={location.pathname.includes("/service") && "active"}
+            >
+              고객센터
+            </a>
             <ul className="depthService2">
               <li>
                 <a onClick={() => handleMenuClick("공지사항")}>공지사항</a>

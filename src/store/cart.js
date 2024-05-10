@@ -23,9 +23,11 @@ export const fetchCart = () => async (dispatch) => {
       const cartArr = Object.entries(cartObj).map(([key, value]) => {
         return { key: key, ...value };
       });
-      const filteredCartArr = cartArr.filter((item) => item.key === userId);
+      const filteredCartArr = cartArr.filter((item) => item.key === userId)[0];
       dispatch(initCart(filteredCartArr));
-      console.log(filteredCartArr);
+      const cartData = { ...filteredCartArr };
+      delete cartData.key;
+      dispatch(initCart(cartData));
     });
   } catch (error) {
     console.error("Error fetching cart:", error);

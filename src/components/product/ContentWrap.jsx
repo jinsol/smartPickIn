@@ -27,14 +27,14 @@ const ContentWrapBlock = styled.div`
 `;
 
 const ContentWrap = ({ product }) => {
-  const { price, title, subtitle, hashtag, detail, id } = product;
+  const { price, title, subtitle, hashtag, detail } = product;
   return (
     <ContentWrapBlock className="ContentWrap">
       <TitleWrap title={title} subtitle={subtitle} />
       <p>★★★★★ 4.5 (총 몇 개의 평가)</p>
       <DetailWrap detail={detail} />
       <PriceWrap price={price}></PriceWrap>
-      <BtnWrap id={id} />
+      <BtnWrap product={product} />
       <HashtagWrap hashtag={hashtag} />
     </ContentWrapBlock>
   );

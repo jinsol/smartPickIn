@@ -23,6 +23,7 @@ li {
 button {
   all: unset;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .row {
@@ -33,6 +34,12 @@ button {
 .flexCenter {
   display: flex;
   place-content: center;
+  align-items: center;
+}
+
+.flexSpaceBetween {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
