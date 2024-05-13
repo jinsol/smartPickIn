@@ -12,6 +12,7 @@ import ServiceView from "@/views/ServiceView";
 import AgreeView from "@/views/AgreeView";
 import JoinView from "@/views/JoinView";
 import LoginView from "@/views/LoginView";
+import UserModifyView from "@/views/UserModifyView"
 import CartView from "@/views/CartView";
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <Route index element={<HomeView />} />
         <Route path="/join" element={<JoinView />} />
         <Route path="/login" element={<LoginView />} />
+        <Route path="/usermodify" element={<UserModifyView />} />
         <Route path="/agree" element={<AgreeView />} />
         <Route path="/about" element={<AboutView />} />
         <Route path="/product" element={<ProductView />} />

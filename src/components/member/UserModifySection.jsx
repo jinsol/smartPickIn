@@ -1,13 +1,13 @@
-import React, {useRef, useState, useEffect} from 'react';
-import styled from 'styled-components'
-import { memberDB } from '@/assets/firebase.js'
-import {useNavigate} from 'react-router-dom'
-import { fetchMembers } from '@/store/member'
-import { useDispatch, useSelector } from 'react-redux'
-import AutoInput from '@/components/member/AutoInput'
-import { IoPersonAddOutline } from "react-icons/io5";
+import React, {useState,useRef,useEffect} from 'react';
+import styled from 'styled-components';
+import {useSelector, useDispatch} from 'react-redux';
+import { memberDB} from '@/assets/firebase'
+import { useNavigate } from 'react-router-dom'
+import { fetchMembers, localUser, userLogout } from '@/store/member'
+import { PiPencilSimpleThin } from "react-icons/pi";
 
-const JoinSectionBlock = styled.div`
+
+const UserModifySectionBlock = styled.div`
      padding: 150px 30px;
     max-width: 1100px;
     margin: 0 auto;
@@ -84,53 +84,31 @@ const JoinSectionBlock = styled.div`
     }
     
     .btn { text-align:center; margin-top:20px; 
-        button { padding:15px 40px; background:var(--blue); color:#fff; font-size:1.5em; border-radius:20px; 
+        button{
+            padding:15px 40px; color:#fff; font-size:1.5em; border-radius:10px;
             transition: all 0.3s ease;
+            &:nth-child(1) {  
+            background:var(--blue);
             &:hover{background:var(--blue-hover)}
         }
-    }
-    .table03{
-        input[type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: #DFEFFE;
-  border-radius: 2px;
-  cursor: pointer;
-  height: 25px;
-  outline: 0;
-  width: 25px; 
-}
-input[type="checkbox"]::after {
-  border: solid var(--white);
-  border-width: 0 3px 3px 0;
-  content: '';
-  display: none;
-  height: 50%;
-  left: 37%;
-  position: relative;
-  top: 10%;
-  transform: rotate(45deg);
-  width: 15%;
-}
-input[type="checkbox"]:checked {
-  background: var(--blue);
-}
-input[type="checkbox"]:checked::after {
-  display: block;
-}
-.table03{
-    display: flex;
-}
+        &:nth-child(2) {  
+            border: 1px solid red;
+            color: red;
+            &:hover{background:red;  color: white;}
+           
+        }
+        }
+       
     }
 `
 
-const JoinSection = () => {
-    const [checking, setChecking] = useState(false)
-    const dispatch = useDispatch()
-    const members = useSelector(state=>state.members.members)
+const UserModifySection = () => {
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const user = useSelector(state=>state.members.user)
+    const [modAni,setModAni] = useState(false)
+
     const userIdRef = useRef("")
     const userPwRef = useRef("")
     const userPwOkRef = useRef("")
@@ -139,31 +117,22 @@ const JoinSection = () => {
     const userEmailRef = useRef("")
     const userTelRef = useRef("")
 
-    // const [userId, setUserId] = useState("")
-    // const [userPw, setUserPw] = useState("")
-    // const [userPwOk, setUserPwOk] = useState("")
-    // const [userName, setUserName] = useState("")
-    // const [userCompany, setUserCompany] = useState("")
-    // const [userEmail, setUserEmail] = useState("")
-    // const [userTel, setUserTel] = useState("")
-
-    const [userInfo, setUserInfo] =useState({
-        userId:"",
+    const [userInfo, setUserInfo] = useState({
+        userId :user ? user.userId : "",
         userPw:"",
         userPwOk:"",
-        userName:"",
-        userCompany:"",
-        userEmail:"",
-        userTel:"",
+        userName :user ? user.userName : "",
+        userCompany :user ? user.userCompany : "",
+        userEmail :user ? user.userEmail : "",
+        userTel :user ? user.userTel : "",
     })
 
-    const register = async (e) =>{
+    const handleChange = (e)=>{
+        const {value, name} = e.target
+        setUserInfo(userInfo=>({...userInfo,[name]:value}))
+    }
+    const modify = async (e) =>{
         e.preventDefault()
-        if (!userInfo.userId) {
-            alert("이메일을 입력하세요.")
-            userIdRef.current.focus()
-            return
-        }
         if (!userInfo.userPw) {
             alert("비밀번호를 입력하세요.")
             userPwRef.current.focus()
@@ -179,72 +148,47 @@ const JoinSection = () => {
             userPwRef.current.focus()
             return
         }
-
-        if (!idCheck(userId)) {
-            return false;
-        }
-        if(userInfo.userName.length === 1){
-            alert("이름을 2글자 이상 입력하세요.")
-            userNameRef.current.focus()
-            return false;
-        }
-        if(userInfo.userCompany.length === 1){
-            alert("업체명을 2글자 이상 입력하세요.")
-            userCompanyRef.current.focus()
-            return false;
-        }
-        if(!checking){
-            alert('자동입력방지를 확인하세요.')
-            return false;
-        }
-
-        const addMember = {userId:userInfo.userId, userPw:userInfo.userPw, userName:userInfo.userName, userCompany:userInfo.userCompany, userEmail:userInfo.userEmail, userTel:userInfo.userTel}
         try {
-            await memberDB.push(addMember)
-            alert("회원가입이 성공했습니다.")
-            navigate('/login')
+            await memberDB.child(user.key).update(userInfo)
+            dispatch(fetchMembers())
+            dispatch(localUser(JSON.parse(localStorage.getItem('loging')))) 
+            alert("회원정보를 수정했습니다.")
+            navigate('/')
         } catch(error){
             console.log("오류 : ", error)
         }
     }
-    
-    const idCheck = (value)=>{
-        let duplicate = members.find(item=>item.userId==value)
-        
-        console.log(duplicate)
-        if (duplicate) {
-            alert("중복된 아이디입니다.");
-            userIdRef.current.focus();
-            return false
+
+    const memberRemove = async (e)=>{
+        e.preventDefault()
+        const answer = confirm("정말로 탈퇴하시겠습니까?")
+        if (answer) {
+            try {
+                // await cartDB.child(user.key).remove()
+                await memberDB.child(user.key).remove()
+                dispatch(userLogout())
+                dispatch(fetchMembers())
+                navigate('/')
+            } catch(error){
+                console.log("오류 : ", error)
+            }
         } else {
-            return true
+            return 
         }
     }
 
     useEffect(()=>{
-        dispatch(fetchMembers())
-    }, [])
-    const changeAuto = (value)=>{
-        setChecking(value)
-    }
-
-    const [acountOpen, setAcountOpen] = useState(false)
-
-    useEffect(()=>{
-        setAcountOpen(true)
+        setModAni(true)
     },[])
+    
 
-    const handleChange = (e)=>{
-        const {value, name } = e.target
-        setUserInfo(userInfo=>({...userInfo, [name]:value}))
-    }
 
     return (
-        <JoinSectionBlock>
-            <form onSubmit={register} className={acountOpen && 'on'}>
+        <UserModifySectionBlock>
+             <form onSubmit={modify} className={modAni && 'on'}>
             <div className="agreeTitle01">
-                <h1><IoPersonAddOutline /></h1>
-                <h1>회원가입</h1>
+                <h1><PiPencilSimpleThin /></h1>
+                <h1>회원정보수정</h1>
             </div>
                 <div className="table01">
                 <table border="0">
@@ -263,7 +207,7 @@ const JoinSection = () => {
                     <tbody >
                         <tr>
                             <td><label htmlFor="userId">아이디 : </label></td>
-                            <td colSpan={3}><input type="text"  name="userId" id="userId" ref={userIdRef} value={userInfo.userId} onChange={(e)=>{handleChange(e); idCheck(e.target.value)}}  placeholder='아이디를 입력하세요.' /></td>
+                            <td colSpan={3}><input type="text"  name="userId" id="userId" ref={userIdRef} value={userInfo.userId} disabled/></td>
                         </tr>
                         <tr>
                             <td><label htmlFor="userPw">비밀번호 : </label></td>
@@ -287,7 +231,7 @@ const JoinSection = () => {
                     <tbody>
                         <tr>
                             <td><label htmlFor="userName">이름 : </label></td>
-                            <td><input type="text" name="userName" id="userName" ref={userNameRef} value={userInfo.userName} onChange={handleChange} placeholder='공백문자 및 특수문자는 입력 금지입니다.' /></td>
+                            <td><input type="text" name="userName" id="userName" ref={userNameRef} value={userInfo.userName} onChange={handleChange}/></td>
                         </tr>
                         <tr>
                             <td><label htmlFor="userCompany">업체명 : </label></td>
@@ -295,7 +239,7 @@ const JoinSection = () => {
                         </tr>
                         <tr>
                             <td><label htmlFor="userEmail">E-mail : </label></td>
-                            <td><input type="email" name="userEmail" id="userEmail" ref={userEmailRef} value={userInfo.userEmail} onChange={handleChange} placeholder='이메일을 입력하세요.' /></td>
+                            <td><input type="email" name="userEmail" id="userEmail" ref={userEmailRef} value={userInfo.userEmail} disabled/></td>
                         </tr>
                         <tr>
                             <td><label htmlFor="userTel">휴대폰번호 : </label></td>
@@ -306,40 +250,13 @@ const JoinSection = () => {
                        
                 </table>
                 </div>
-                <div className="table03">
-                <table border="0">
-                <caption>기타 개인설정</caption>
-                    <colgroup>
-                        <col />
-                        <col />
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td><label htmlFor="userName">정보 메일을 받겠습니다. </label></td>
-                        </tr>
-                        <tr>
-                        <td><input type="checkbox"/></td>
-                            <td><label htmlFor="userName">휴대폰 문자메세지를 받겠습니다. </label></td>
-                        </tr>
-                      
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td><label htmlFor="userName">다른분들이 나의 정보를 볼 수 있도록 합니다. </label></td>
-                        </tr>
-                        </tbody>
-                </table>
-                <div className="auto" style={{marginLeft:'65px', marginTop:'30px'}}>
-                    <h2 style={{textAlign:'left', paddingBottom:'20px', color:'var(--black)', fontWeight:'400'}}>자동입력방지</h2>
-                <AutoInput changeAuto={changeAuto} checking={checking}/>
-                </div>
-                </div>
                 <div className="btn">
-                    <button type="submit">회원가입</button>
+                    <button type="submit">정보수정</button>
+                    <button type="button" onClick={memberRemove} style={{marginLeft:"20px"}}>회원탈퇴</button>
                 </div>
             </form>
-        </JoinSectionBlock>
+        </UserModifySectionBlock>
     );
 };
 
-export default JoinSection;
+export default UserModifySection;
