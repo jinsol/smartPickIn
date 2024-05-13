@@ -47,6 +47,7 @@ const Question = styled.span`
   font-size: 1.6em;
   font-weight: 800;
   flex-basis: 10%;
+  justify-content: center;
 `;
 
 const Answer = styled.span`
@@ -54,6 +55,7 @@ const Answer = styled.span`
   font-size: 1.6em;
   font-weight: 800;
   flex-basis: 10%;
+  text-align: center;
 `;
 
 const AccordionCollapse = styled.div`

@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import gsap from "gsap";
+import TextPlugin from "gsap/TextPlugin";
+import Btn from "./Btn";
 import HomeSection01TextAni from "@/components/home/HomeSection01TextAni";
 
 const UnorderedListBox = styled.ul`
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 80px;
+  opacity: 0;
   @media (max-width: 1100px) {
     grid-template-columns: auto;
     gap: 0;
@@ -38,8 +41,8 @@ const TitleBox = styled.div`
   h2 {
     color: var(--black);
     span {
-      font-size: clamp(3.5em, 2.5vw, 4em);
       display: block;
+      font-size: 80px;
     }
   }
   @media (max-width: 1100px) {
@@ -66,9 +69,12 @@ const LineAniBox = styled.span`
       height: 1px;
       display: block;
       transition: all 2s;
-      background-color: gray;
+      background-color: var(--gray03);
     }
-    @media (max-width: 1100px) {
+  }
+  @media (max-width: 1100px) {
+    justify-content: center;
+    .LineAni {
       display: none;
     }
   }
@@ -83,12 +89,7 @@ const SupportBox = styled.div`
   * {
     font-size: clamp(16px, 2.5vw, 20px);
   }
-  a {
-    padding: 10px 40px;
-    border-radius: 50px;
-    color: white;
-    background-color: black;
-  }
+
   @media (max-width: 1100px) {
     justify-content: center;
     &.right {
@@ -118,10 +119,28 @@ const SubTitleBox = styled.div`
 
 const HomeSection01 = () => {
   React.useEffect(() => {
+    gsap.set(".homeRow", { opacity: 0, y: 100 }); // 초기에 opacity를 0으로 설정
+    gsap.to(".homeRow", {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      delay: 0.5, // 애니메이션 시작을 1초 뒤로 지연시킴
+      ease: "power1.out",
+    });
     gsap.to(".LineAni span", {
       opacity: 1,
       width: "100%",
       duration: 1,
+    });
+    gsap.registerPlugin(TextPlugin);
+    gsap.to(".SupportBox h3", {
+      duration: 2,
+      text: {
+        value: "#브랜딩 #순위상승 #매출 #NO어뷰징",
+        autoAlpha: 1,
+        ease: "power2.out",
+      },
+      delay: 0,
     });
   }, []);
 
@@ -144,8 +163,8 @@ const HomeSection01 = () => {
               </LineAniBox>
             </h2>
           </TitleBox>
-          <SupportBox>
-            <h3>#브랜딩 #순위상승 #매출 #NO어뷰징</h3>
+          <SupportBox className="SupportBox">
+            <h3>{/* #브랜딩 #순위상승 #매출 #NO어뷰징 */}</h3>
           </SupportBox>
         </ListBox>
         <ListBox className="right">
@@ -156,7 +175,7 @@ const HomeSection01 = () => {
             </h4>
           </SubTitleBox>
           <SupportBox className="right">
-            <a href="#">진단받기 →</a>
+            <Btn text={"진단받기"} />
           </SupportBox>
         </ListBox>
       </UnorderedListBox>

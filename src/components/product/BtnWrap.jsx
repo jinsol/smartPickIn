@@ -49,8 +49,8 @@ const BtnWrap = ({ product }) => {
     setQty(qty + 1);
   };
 
-  const userId = JSON.parse(localStorage.loging).userId;
   const onClickGoCart = () => {
+    const userId = JSON.parse(localStorage.loging).userId;
     const product = {
       id,
       qty,
@@ -83,6 +83,7 @@ const BtnWrap = ({ product }) => {
   };
 
   const onClickBuyNow = () => {
+    const userId = JSON.parse(localStorage.loging).userId;
     const product = {
       id,
       qty,

@@ -14,7 +14,7 @@ const HomeSection04SlideBlock = styled.li`
     }
     .swiper-wrapper {
       .swiper-slide {
-        max-width: 90%;
+        /* max-width: 90%; */
       }
     }
   }

@@ -5,7 +5,7 @@ import Breadcrumb from "@/components/layout/Breadcrumb";
 import PageTitle from "@/components/layout/PageTitle";
 import NewsDetailSection from "@/components/news/NewsDetailSection";
 import { initNewsMenu } from "@/store/news"; // 액션 생성자를 가져옵니다.
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const NewsDetailViewBlock = styled.section`
   width: 100%;
@@ -13,8 +13,8 @@ const NewsDetailViewBlock = styled.section`
 `;
 
 const NewsDetailView = () => {
-  const location = useLocation() 
-  const {item, type} = location.state
+  const location = useLocation();
+  const { item, type } = location.state;
   const title = [
     <span key="line1">SEO 최적화 분석을 실시간으로,</span>,
     <span key="line2">
@@ -37,13 +37,13 @@ const NewsDetailView = () => {
   // };
   return (
     <NewsDetailViewBlock>
-        <div className="flexCenter">
-      <div className="homeRow" >
-        <Breadcrumb depth1={"소식"} depth2={activeMenu} />
-        <PageTitle title={title} imgUrl={imgUrl} />
+      <div className="flexCenter">
+        <div className="homeRow">
+          <Breadcrumb depth1={"소식"} depth2={"소식"} depth3={item.maintext} />
+          <PageTitle title={title} imgUrl={imgUrl} />
+        </div>
       </div>
-      </div>
-      <NewsDetailSection item={item} type={type} className='newsDetail'/>
+      <NewsDetailSection item={item} type={type} className="newsDetail" />
     </NewsDetailViewBlock>
   );
 };

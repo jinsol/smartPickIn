@@ -14,6 +14,9 @@ const Section = styled.section`
   .ContentWrap {
     grid-row-end: span 2;
   }
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ProductDetailSection = ({ product }) => {

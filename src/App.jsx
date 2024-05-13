@@ -12,7 +12,7 @@ import ServiceView from "@/views/ServiceView";
 import AgreeView from "@/views/AgreeView";
 import JoinView from "@/views/JoinView";
 import LoginView from "@/views/LoginView";
-import UserModifyView from "@/views/UserModifyView"
+import UserModifyView from "@/views/UserModifyView";
 import CartView from "@/views/CartView";
 
 const App = () => {
@@ -20,18 +20,26 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomeView />} />
+        {/* 회원가입 (시작) */}
         <Route path="/join" element={<JoinView />} />
         <Route path="/login" element={<LoginView />} />
-        <Route path="/usermodify" element={<UserModifyView />} />
         <Route path="/agree" element={<AgreeView />} />
+        {/* 회원가입 (끝) */}
         <Route path="/about" element={<AboutView />} />
+        {/* 상품구매 (시작) */}
         <Route path="/product" element={<ProductView />} />
         <Route path="/product/:id" element={<ProductDetailView />} />
+        {/* 상품구매 (끝) */}
+        {/* 기업소식 (시작) */}
         <Route path="/news" element={<NewsView />} />
         <Route path="/newsDetail/:subject" element={<NewsDetailView />} />
-        <Route path="/ask" element={<AskView />} />
+        {/* 기업소식 (끝) */}
         <Route path="/service/" element={<ServiceView />} />
+        <Route path="/ask" element={<AskView />} />
+        {/* 마이페이지 (시작 */}
         <Route path="/cart/" element={<CartView />} />
+        <Route path="/usermodify" element={<UserModifyView />} />
+        {/* 마이페이지 (끝) */}
       </Route>
     </Routes>
   );

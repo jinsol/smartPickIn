@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TitleLine3 from "@/components/layout/TitleLine3";
-gsap.registerPlugin(ScrollTrigger);
+import { FaArrowRight } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const SectionBlock = styled.section`
   padding: 10vh 0;
+  position: relative;
   & > ul {
     margin: 0 auto;
     display: grid;
-    grid-template-columns: auto 3fr;
+    grid-template-columns: 1fr 3fr;
     gap: 80px;
     @media (max-width: 1450px) {
       width: 100%;
@@ -22,12 +24,71 @@ const SectionBlock = styled.section`
     }
   }
   .TextBox {
-    article {
-      position: sticky;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 10vh;
+    gap: 40px;
+    height: fit-content;
+    > * {
+      &:nth-child(1) {
+      }
+      &:nth-child(2) {
+      }
+    }
+    .TextBoxCon4 {
+      @media (max-width: 1100px) {
+        display: none;
+      }
       top: 10vh;
-      h2 {
-        position: sticky;
-        top: 10vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      div {
+        background-color: var(--white);
+        aspect-ratio: 1/1;
+        border-radius: 30px;
+        padding: 10%;
+        border: 1px solid var(--gray06);
+        transition: all 0.3s;
+        position: relative;
+        cursor: pointer;
+        > * {
+          transition: all 0.3s;
+          display: block;
+        }
+        .BoxNumber {
+          color: var(--blue);
+          font-weight: 800;
+          font-size: 1em;
+          display: block;
+        }
+        .BoxTitle {
+          color: var(--gray03);
+          font-size: 1.4em;
+          font-weight: 800;
+        }
+        .BoxArrow {
+          position: absolute;
+          right: 10%;
+          bottom: 10%;
+          border: 1px solid var(--gray03);
+          color: var(--gray03);
+          display: flex;
+          place-content: center;
+          place-items: center;
+          padding: 10px;
+          border-radius: 50%;
+        }
+        &.active {
+          background-color: var(--blue);
+          > * {
+            color: var(--white);
+            &.BoxArrow {
+              border: 1px solid var(--white);
+            }
+          }
+        }
       }
     }
   }
@@ -39,31 +100,27 @@ const ContentsBox = styled.li`
   gap: 30px;
   width: 100%;
   min-height: 500px;
-  /* perspective: 900px; */
   perspective-origin: top;
   ul {
     position: sticky;
     display: grid;
     top: 10vh;
-    /* background-color: rgba(255, 255, 255, 0.1); */
     background-color: var(--light-blue);
     border-radius: 20px;
-    /* backdrop-filter: blur(20px); */
     border: 1px solid white;
     width: 100%;
     min-height: 80vh;
     transition: all 0.5s;
     grid-template-rows: auto auto auto 1fr;
-    gap: 2%;
-    padding: 7%;
-    opacity: 0;
-    transform: translateX(100%);
+    gap: 4%;
+    padding: 10%;
     word-break: auto-phrase;
     li {
     }
     .number {
       color: var(--blue);
       font-weight: 900;
+      font-size: 1.4em;
     }
     .title {
       font-weight: 800;
@@ -72,7 +129,7 @@ const ContentsBox = styled.li`
     .subTitle {
       font-size: clamp(16px, 2.5vw, 23px);
       font-weight: 600;
-      color: gray;
+      color: var(--gray01);
     }
     .content {
       color: gray;
@@ -86,48 +143,6 @@ const ContentsBox = styled.li`
 `;
 
 const HomeSection02 = () => {
-  React.useEffect(() => {
-    gsap.utils.toArray(".TextBox span").forEach((selector) => {
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: selector,
-            start: "100% 100%",
-            end: "100% 100%",
-            scrub: 1,
-            // markers: true,
-          },
-        })
-        .fromTo(
-          selector,
-          { opacity: 0, y: 100 },
-          { opacity: 1, y: 0, ease: "none", duration: 5 },
-          0
-        );
-    });
-  }, []);
-
-  React.useEffect(() => {
-    gsap.utils.toArray(".ContentsBox ul").forEach((selector) => {
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: selector,
-            start: "100% 100%",
-            end: "100% 100%",
-            scrub: 1,
-            // markers: true,
-          },
-        })
-        .fromTo(
-          selector,
-          { opacity: 0, x: 100 },
-          { opacity: 1, x: 0, ease: "none", duration: 0 },
-          0
-        );
-    });
-  }, []);
-
   const contents = [
     {
       title: "플레이스 마케팅",
@@ -140,7 +155,7 @@ const HomeSection02 = () => {
     {
       title: "사이트 마케팅",
       subTitle:
-        "검색시 나오지 않는 사이트는 의미가 없다.검색엔진최적화(SEO)를 통해 우선순위를 기대해 보세요.",
+        "검색시 나오지 않는 사이트는 의미가 없다. 검색엔진최적화(SEO)를 통해 우선순위를 기대해 보세요.",
       content:
         "기본적인 사이트맵, robots의 부재를 비롯하여 메타태그, 오픈그래프, 파비콘, 캐노니컬, 스키마 마크업 등 SEO에 직·간접적으로 관련을 맺는 대부분의 요소를 검토하고, 자신의 사이트명 혹은 희망하는 키워드에서 웹사이트가 노출될 수 있도록 합니다.",
       img: "/assets/image/service_place.png",
@@ -163,18 +178,88 @@ const HomeSection02 = () => {
   ];
 
   const TL3C = ["내 업체에", "꼭 맞는 마케팅", "지금 시작해보세요."];
+  gsap.registerPlugin(ScrollTrigger);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    gsap.utils.toArray(".ContentsBox ul").forEach((selector, index) => {
+      const textBoxCon4Div = document.querySelector(
+        `.TextBoxCon4 > div:nth-child(${index + 1})`
+      );
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: selector,
+            start: "100% 100%", // 요소가 화면 위로 올라올 때 트리거
+            end: "100% 100%", // 요소가 화면의 중앙으로 올 때 이벤트 끝
+            scrub: 1,
+          },
+        })
+        .add(() => {
+          textBoxCon4Div.classList.add("active"); // active 클래스 추가
+        }, 0)
+        .fromTo(
+          selector.querySelector(".number"),
+          { opacity: 0, x: -50 },
+          { opacity: 1, x: 0, ease: "none", duration: 0.5 },
+          0
+        )
+        .fromTo(
+          selector.querySelector(".title"),
+          { opacity: 0, x: -50 },
+          { opacity: 1, x: 0, ease: "none", duration: 0.5 },
+          0.1
+        )
+        .fromTo(
+          selector.querySelector(".subTitle"),
+          { opacity: 0, x: -50 },
+          { opacity: 1, x: 0, ease: "none", duration: 0.5 },
+          0.1
+        )
+        .fromTo(
+          selector.querySelector(".content"),
+          { opacity: 0, x: -50 },
+          { opacity: 1, x: 0, ease: "none", duration: 0.5 },
+          0.2
+        )
+        .fromTo(
+          selector.querySelector(".image"),
+          { opacity: 0 },
+          { opacity: 1, ease: "none", duration: 1 },
+          0.2
+        );
+    });
+  }, []);
+
+  const onClickBox = () => {
+    navigate("/product");
+  };
 
   return (
     <SectionBlock>
       <ul className="homeRow">
         <li className="TextBox">
           <TitleLine3 TL3C={TL3C} />
+          <div className="TextBoxCon4">
+            {contents.map((item, index) => {
+              return (
+                <div key={index} onClick={onClickBox}>
+                  <span className="BoxNumber">0{index + 1}</span>
+                  <span className="BoxTitle">{item.title}</span>
+                  <span className="BoxArrow">
+                    <FaArrowRight />
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </li>
+
         <ContentsBox className="ContentsBox">
           {contents.map((item, index) => {
             return (
               <ul key={index}>
-                <li className="number">{index + 1}</li>
+                <li className="number">0{index + 1}</li>
                 <li className="title">{item.title}</li>
                 <li className="subTitle">{item.subTitle}</li>
                 <li className="content">{item.content}</li>

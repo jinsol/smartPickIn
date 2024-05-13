@@ -27,7 +27,7 @@ const BreadcrumbWrap = styled.div`
     }
   }
 `;
-const Breadcrumb = ({ depth1, depth2 }) => {
+const Breadcrumb = ({ depth1, depth2, depth3 }) => {
   return (
     <BreadcrumbWrap className="breadcrumb-wrap">
       <ol className="breadcrumb">
@@ -41,13 +41,13 @@ const Breadcrumb = ({ depth1, depth2 }) => {
           <MdChevronRight />
         </li>
         {!depth2 ? (
-          <li className="active">
+          <li className={!depth3 ? "active" : ""}>
             <a>{depth1}</a>
           </li>
         ) : (
           <>
             <li>
-              {depth1 == "서비스주문" ? (
+              {depth1 === "서비스주문" ? (
                 <Link to="/product">{depth1}</Link>
               ) : (
                 <a>{depth1}</a>
@@ -56,9 +56,19 @@ const Breadcrumb = ({ depth1, depth2 }) => {
             <li className="rightArrow">
               <MdChevronRight />
             </li>
-            <li className="depth2 active">
+            <li className={!depth3 ? "depth2 active" : "depth2"}>
               <a>{depth2}</a>
             </li>
+            {depth3 && (
+              <>
+                <li className="rightArrow">
+                  <MdChevronRight />
+                </li>
+                <li className="depth3 active">
+                  <a>{depth3}</a>
+                </li>
+              </>
+            )}
           </>
         )}
       </ol>

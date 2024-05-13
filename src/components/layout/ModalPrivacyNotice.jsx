@@ -3,17 +3,23 @@ import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 
 const Modal = styled.article`
-  display: none;
-  width: 50%;
+  transition: 0.6s;
+  visibility: hidden;
+  transform: scale(0.8);
+  opacity: 0;
+  display: block;
+  inset: 10% 20%;
+  width: 60%;
   height: 80%;
   position: fixed;
-  inset: 10% 25%;
   z-index: 100000;
-  background-color: white;
+  background-color: var(--blue);
   border-radius: 20px;
-  /* overflow: hidden; */
+  overflow: hidden;
   &.on {
-    display: block;
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
   }
   .ModalHeader {
     height: 10%;
@@ -21,11 +27,16 @@ const Modal = styled.article`
   .ModalContent {
     height: 90%;
   }
+  > * {
+    padding: 4%;
+  }
+  @media (max-width: 1100px) {
+    inset: 10% 10%;
+    width: 80%;
+  }
 `;
 
 const ModalHeader = styled.div`
-  background-color: var(--blue);
-  height: 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,6 +48,7 @@ const ModalHeader = styled.div`
 
 const ModalContent = styled.div`
   overflow-y: scroll;
+  background-color: var(--white);
   p {
     font-size: 1rem;
     color: var(--gray02);
@@ -72,6 +84,7 @@ const BtnClose = styled.button`
 `;
 
 const ModalOveray = styled.div`
+  transition: 0.6s;
   &.on {
     position: fixed;
     inset: 0;

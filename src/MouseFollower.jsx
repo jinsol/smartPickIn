@@ -10,13 +10,12 @@ const MouseFollowerBlock = styled.span`
   z-index: 1;
 `;
 
-const MouseFollower = ({ isMouseOverHeader }) => {
+const MouseFollower = ({ isMouseOverHeader, handleFollowerMouseEnter }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  console.log(isMouseOverHeader);
 
   useEffect(() => {
     const updateMousePosition = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      setPosition({ x: e.clientX + 20, y: e.clientY + 20 });
     };
     window.addEventListener("mousemove", updateMousePosition);
     return () => {
@@ -73,6 +72,7 @@ const MouseFollower = ({ isMouseOverHeader }) => {
     <>
       <MouseFollowerBlock
         id="follower1"
+        onMouseEnter={handleFollowerMouseEnter}
         style={{
           backgroundColor: "var(--blue)",
         }}

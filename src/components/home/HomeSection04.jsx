@@ -28,7 +28,7 @@ const UnorderedListBox = styled.ul`
 
 const TitleBox = styled.h3`
   span {
-    font-size: clamp(34px, 48px, 56px);
+    font-size: clamp(62px, 2.5vw, 82px);
     display: block;
     &:nth-child(1) {
       color: var(--gray02);
@@ -59,9 +59,11 @@ const TitleBox = styled.h3`
 `;
 
 const SubTitleBox = styled.p`
+  padding: 20px 0;
   span {
     display: block;
     font-size: clamp(16px, 36px, 20px);
+    line-height: 180%;
   }
 `;
 

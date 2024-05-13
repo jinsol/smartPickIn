@@ -6,11 +6,11 @@ import Nav from "@/components/layout/Nav";
 import { useSelector, useDispatch } from "react-redux";
 import { initServiceMenu } from "@/store/service";
 import { initNewsMenu } from "@/store/news";
-import { userLogout,  fetchMembers,localUser } from "@/store/member";
-import { CiLock,CiUnlock } from "react-icons/ci";
+import { userLogout, fetchMembers, localUser } from "@/store/member";
+import { CiLock, CiUnlock } from "react-icons/ci";
 import { PiUserPlusLight } from "react-icons/pi";
 
-const HeaderBlock = styled.div`
+const HeaderBlock = styled.header`
   text-align: center;
   position: fixed;
   display: flex;
@@ -76,117 +76,127 @@ const HeaderBlock = styled.div`
       position: relative;
       z-index: 9999999;
     }
-    .mainDepth1{
+    .mainDepth1 {
       display: flex;
       justify-content: center;
-      @media (max-width:768px){
+      @media (max-width: 768px) {
         display: none;
       }
 
-      li{
+      li {
         font-size: 1.2em;
-        a{
+        a {
+          /* 추가 제안드립니다! */
+          display: block;
+          cursor: pointer;
+          /* 추가 제안드립니다! */
           padding: 40px 30px;
           font-weight: 600;
           transition: all 0.3s ease;
-          &:hover, &.active{
+          &:hover,
+          &.active {
             color: var(--blue);
           }
         }
       }
-      .depthNews2, .depthService2{
-        width:100%; background:#1774d0; position:absolute; top:100%; left:0;   
+      .depthNews2,
+      .depthService2 {
+        width: 100%;
+        background: #1774d0;
+        position: absolute;
+        top: 100%;
+        left: 0;
         transition: all 0.5s ease;
         display: none;
-          justify-content: center;
-          padding: 20px 40px;
-        a{
+        justify-content: center;
+        /* padding: 20px 40px; !제거 제안드립니다! */
+        a {
           font-size: 0.9em;
-          color:rgba(255,255,255,0.7);
+          color: rgba(255, 255, 255, 0.7);
           transition: all 0.5s ease;
-          &:hover{
+          &:hover {
             color: var(--white);
             font-weight: 500;
           }
         }
       }
-      .depthNews1:hover{
-        .depthNews2{
+      .depthNews1:hover {
+        .depthNews2 {
           display: flex;
           justify-content: center;
         }
       }
-      .depthService1:hover{
-        .depthService2{
+      .depthService1:hover {
+        .depthService2 {
           display: flex;
           justify-content: center;
         }
       }
     }
-    }
-    .info {
-      position: relative;
-      z-index: 9999;
+  }
+  .info {
+    position: relative;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    .infotext {
       display: flex;
       align-items: center;
-      .infotext {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 20px;
-        padding-top: 5px;
+      justify-content: center;
+      margin-right: 20px;
+      padding-top: 5px;
 
-        a {
-          display:  inline-block;
-         font-size: 2em;
-          padding-left: 15px;
-        }
+      a {
+        display: inline-block;
+        font-size: 2em;
+        padding-left: 15px;
       }
     }
-    .menu-wrap {
-      position: relative;
-      width: 28px;
-      height: 16px;
-      cursor: pointer;
-      z-index: 9999999;
-    }
-    .menu-wrap .line {
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      border-radius: 2px;
-      background: #222;
-      left: 0;
-    }
-    .menu-wrap .line:first-child {
-      top: 0;
-      transform-origin: 25% 50%;
-      transition: 0.3s;
-    }
-    .menu-wrap .line:nth-child(2) {
-      top: calc(50% - 1px);
-    }
-    .menu-wrap .line:last-child {
-      bottom: 0;
-      transform-origin: 25% 50%;
-      transition: 0.3s;
-    }
+  }
+  .menu-wrap {
+    position: relative;
+    width: 28px;
+    height: 16px;
+    cursor: pointer;
+    z-index: 9999999;
+  }
+  .menu-wrap .line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: #222;
+    left: 0;
+  }
+  .menu-wrap .line:first-child {
+    top: 0;
+    transform-origin: 25% 50%;
+    transition: 0.3s;
+  }
+  .menu-wrap .line:nth-child(2) {
+    top: calc(50% - 1px);
+  }
+  .menu-wrap .line:last-child {
+    bottom: 0;
+    transform-origin: 25% 50%;
+    transition: 0.3s;
+  }
 
-    .menu-wrap.open .line:first-child {
-      transform: rotate(45deg) translateX(10%);
-    }
-    .menu-wrap.open .line:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-wrap.open .line:last-child {
-      transform: rotate(-45deg) translateX(10%);
-    }
+  .menu-wrap.open .line:first-child {
+    transform: rotate(45deg) translateX(10%);
+  }
+  .menu-wrap.open .line:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-wrap.open .line:last-child {
+    transform: rotate(-45deg) translateX(10%);
+  }
 `;
 
-const Header = () => {
+const Header = ({ onMouseEnter, onMouseLeave }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const [loging,setLoging] = useState(localStorage.loging)
+  const [loging, setLoging] = useState(localStorage.loging);
 
   const user = useSelector((state) => state.members.user);
   console.log(user);
@@ -196,9 +206,9 @@ const Header = () => {
     if (loging) {
       // console.log("로깅",loging)
       dispatch(localUser(JSON.parse(loging)));
-      setLoging(localStorage.loging)
+      setLoging(localStorage.loging);
     }
-  }, [dispatch,loging]);
+  }, [dispatch, loging]);
 
   // const handleLogout = (e)=>{
   //   e.preventDefault()
@@ -220,8 +230,8 @@ const Header = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(userLogout());
-    setLoging(null)
-    navigate('/')
+    setLoging(null);
+    navigate("/");
     // localStorage.removeItem('loggedInUser');
   };
 
@@ -242,17 +252,17 @@ const Header = () => {
     dispatch(initNewsMenu(value));
   };
 
-  /* ================== 24.05.03 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
+  /* ================== 24.05.10 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
 
   return (
-    <HeaderBlock>
+    <HeaderBlock onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <nav id="header__nav">
         <h1 className="logo">
           <Link to="/">
             <img src="./assets/image/logo_blue.png" alt="" />
           </Link>
         </h1>
-        <ul className={cn('mainDepth1', isOpen && 'open')}>
+        <ul className={cn("mainDepth1", isOpen && "open")}>
           <li>
             <NavLink to="/about">소개</NavLink>
           </li>
@@ -305,15 +315,19 @@ const Header = () => {
         <div className="info">
           {!loging && !user ? (
             <div className="infotext">
-              <Link to="/login"><CiLock /></Link>
-              <Link to="/agree"><PiUserPlusLight /></Link>
+              <Link to="/login">
+                <CiLock />
+              </Link>
+              <Link to="/agree">
+                <PiUserPlusLight />
+              </Link>
             </div>
           ) : (
             <div className="infotext">
               <a href="#" onClick={handleLogout}>
-              <CiUnlock />
+                <CiUnlock />
               </a>
-             <Link to="/usermodify">수정</Link>
+              <Link to="/usermodify">수정</Link>
             </div>
           )}
           <div

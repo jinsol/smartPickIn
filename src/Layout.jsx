@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import Header from "@/components/layout/Header";
@@ -13,17 +13,21 @@ const Main = styled.main`
   backdrop-filter: blur(60px);
 `;
 const Layout = () => {
-  const [isMouseOverHeader, setIsMouseOverHeader] = useState(false);
+  const [isMouseOverHeader, setIsMouseOverHeader] = useState("");
+
   const handleHeaderMouseEnter = () => {
-    setIsMouseOverHeader(true);
+    setIsMouseOverHeader(false);
   };
 
   const handleHeaderMouseLeave = () => {
-    setIsMouseOverHeader(false);
+    setIsMouseOverHeader(true);
   };
   return (
     <>
-      <MouseFollower isMouseOverHeader={isMouseOverHeader} />
+      <MouseFollower
+        isMouseOverHeader={isMouseOverHeader}
+        onMouseEnter={handleHeaderMouseEnter}
+      />
       <Header
         onMouseEnter={handleHeaderMouseEnter}
         onMouseLeave={handleHeaderMouseLeave}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 // import { EffectCoverflow } from "swiper";
-import { EffectCoverflow, Mousewheel, FreeMode } from "swiper/modules";
+import { EffectCoverflow, FreeMode } from "swiper/modules";
 // import SwiperCore, { EffectCoverflow } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -32,19 +32,13 @@ const HomeSection03SlideBlock = styled.article`
       }
 
       .swiper-slide-prev {
-        /* transform: skewY(10deg) translateX(20px); */
-        /* background-color: red; */
         opacity: 0.9;
       }
       .swiper-slide-active {
-        /* background-color: green; */
-        /* transform: translateY(45px); */
         opacity: 1;
       }
       .swiper-slide-next {
-        /* transform: skewY(-10deg) translateX(-20px); */
         opacity: 0.9;
-        /* background-color: blue; */
       }
     }
   }
@@ -53,7 +47,7 @@ const HomeSection03SlideBlock = styled.article`
 const HomeSection03Slide = () => {
   const options = {
     // width: 800,
-    modules: [EffectCoverflow, Mousewheel, FreeMode],
+    modules: [EffectCoverflow, FreeMode],
     slidesPerView: 2,
     slidesPerGroup: 1,
     spaceBetween: 30,
@@ -71,10 +65,6 @@ const HomeSection03Slide = () => {
     //자동슬라이드
     autoplay: {
       delay: 100,
-    },
-    //마우스휠
-    mousewheel: {
-      invert: true,
     },
     breakpoints: {
       1101: {

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { IoChatbubble, IoMegaphone, IoChevronDownSharp } from "react-icons/io5";
 import ModalPrivacyNotice from "./ModalPrivacyNotice";
@@ -54,25 +55,49 @@ const FamilySite = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    gap: 60px;
     svg {
       transition: all 0.3s;
     }
   }
   .depth2 {
     position: absolute;
-    display: none !important;
+    /* display: none !important; */
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: all 0.3s;
+    display: flex !important;
     width: 100%;
+    border-radius: 10px;
+    margin-top: 6px;
     max-height: 140px;
     background-color: white;
-    color: red;
+    color: var(--gray01);
+    overflow-x: hidden;
     overflow-y: scroll;
+
     flex-direction: column;
+    &::-webkit-scrollbar {
+      width: 16px;
+      border-radius: 30px;
+      overflow: hidden;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--blue);
+      border-radius: 30px;
+      border: 4px solid transparent;
+      background-clip: padding-box;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: var(--light-blue);
+      border-radius: 30px;
+    }
     li {
       a {
         display: block;
         padding: 10px 20px;
-        transition: display 0 visibility 0.5s;
+        transition: all 0.3s;
       }
     }
   }
@@ -81,16 +106,17 @@ const FamilySite = styled.li`
       transform: rotate(180deg);
     }
     .depth2 {
-      display: flex !important;
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
       li {
-        a {
-          display: block;
-          visibility: visible;
-          opacity: 1;
+        a:hover {
+          background-color: var(--light-blue);
+          font-weight: 600;
+          color: var(--blue);
         }
       }
     }
-    background-color: red;
   }
 `;
 
@@ -116,6 +142,7 @@ const Address = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0.4em 0;
+  line-height: 140%;
   @media (max-width: 1100px) {
     width: 100%;
   }
@@ -144,20 +171,25 @@ const Copyright = styled.ul`
 const TelInfo = styled.li`
   position: relative;
   h4 {
-    text-align: right;
-
-    * {
-      display: block;
-    }
-    a {
-      font-size: 48px;
-    }
-    button {
-      padding: 10px 15px;
-      border: 1px solid white;
-      border-radius: 50px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
   }
+
+  * {
+    display: block;
+  }
+  a {
+    font-size: 48px;
+  }
+  button {
+    padding: 16px 30px;
+    border: 1px solid white;
+    border-radius: 50px;
+    font-size: 1.2em;
+  }
+
   @media (max-width: 1100px) {
     h4 {
       display: flex;
@@ -238,7 +270,7 @@ const Footer = () => {
           </Logo>
           <Company className="company">
             <li>
-              <a href="#">문의하기</a>
+              <Link to="/ask">문의하기</Link>
             </li>
             <li>
               <a href="#">SEO 제안서 다운받기</a>

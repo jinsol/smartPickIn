@@ -122,23 +122,33 @@ const ProductList = ({ category }) => {
         ".ProductUl li",
         {
           opacity: 0,
-          scale: 0.5,
+          y: 100,
         },
-        { opacity: 1, scale: 1, stagger: 0.1 }
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power2.out",
+          stagger: 0.1,
+        }
       );
       setProducts(list);
-      window.scrollTo(0, 0);
     } else {
       setProducts(list.filter((item) => item.category === category));
       gsap.fromTo(
         ".ProductUl li",
         {
           opacity: 0,
-          scale: 0.5,
+          y: 100,
         },
-        { opacity: 1, scale: 1, stagger: 0.1 }
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power2.out",
+          stagger: 0.1,
+        }
       );
-      window.scrollTo(0, 0);
     }
   }, [list, category]);
 

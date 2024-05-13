@@ -56,6 +56,15 @@ button {
   border-top: 2px solid var(--black);
 }
 
+.BblueCwhite {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.tabMargin {
+  margin: 20px 0;
+}
+
 .homeRow {
   width: 1450px;
   transition: all 0.3s;

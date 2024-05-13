@@ -14,20 +14,12 @@ const HomeSection04SlideItemBlock = styled.ul`
   cursor: pointer;
   position: relative;
   backdrop-filter: blur(20px);
-
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   * {
     transition: all 0.5s;
   }
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    /* background-color: var(--blue); */
-    /* background: linear-gradient(
-      130deg,
-      rgba(23, 116, 208, 0.3),
-      rgba(23, 116, 208, 1)
-    ); */
-
     border: 1px solid var(--white);
     transform: translateY(-5px);
     box-shadow: 5px -5px 0px 5px var(--gray06), -5px 5px 0px 5px var(--blue);

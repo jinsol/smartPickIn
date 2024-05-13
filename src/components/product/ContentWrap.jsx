@@ -13,14 +13,20 @@ const ContentWrapBlock = styled.div`
   border: 1px solid var(--gray04);
   border-radius: 10px;
   padding: 2em;
+  background-color: rgba(255, 255, 255, 0.5);
+  > div {
+    &:nth-child(1) {
+      border-bottom: 2px solid var(--gray01);
+    }
+  }
   .HashtagWrap {
     display: flex;
     gap: 10px;
     span {
       border-radius: 50px;
-      border: 1px solid red;
-      background-color: pink;
-      color: red;
+      border: 1px solid var(--blue);
+      background-color: var(--light-blue);
+      color: var(--blue);
       padding: 6px 20px;
     }
   }
@@ -31,7 +37,6 @@ const ContentWrap = ({ product }) => {
   return (
     <ContentWrapBlock className="ContentWrap">
       <TitleWrap title={title} subtitle={subtitle} />
-      <p>★★★★★ 4.5 (총 몇 개의 평가)</p>
       <DetailWrap detail={detail} />
       <PriceWrap price={price}></PriceWrap>
       <BtnWrap product={product} />

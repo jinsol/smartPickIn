@@ -6,25 +6,24 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 // ======================= GSAP 애니메이션 =======================
 const AsideMenu = styled.aside`
-  background-color: var(--light-blue);
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
   overflow: hidden;
   z-index: 1;
   ul {
+    display: inline-flex;
+    background-color: var(--light-blue);
     li {
       font-size: 1.2em;
       button {
         display: block;
         width: 100%;
-        padding: 10px 0;
-        padding-left: 20px;
+        padding: 10px 20px;
       }
       &.active {
-        background-color: var(--blue);
-        color: var(--white);
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
+        button {
+          color: var(--blue);
+          border-bottom: 2px solid var(--blue);
+          font-weight: 800;
+        }
       }
     }
   }
@@ -41,7 +40,7 @@ const ProductAside = ({ changeCategory, category }) => {
   ];
 
   return (
-    <AsideMenu className="asideMenu">
+    <AsideMenu className="asideMenu tabMargin">
       <ul>
         {categoryList.map((item, index) => {
           return (

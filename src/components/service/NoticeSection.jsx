@@ -132,17 +132,11 @@ const NoticeSection = () => {
         </BoardHeader>
 
         {currentItems.map((item, index) => (
-          // <BoardContent key={index}>
-          //   <li>{index}</li>
-          //   <li>{item.subject}</li>
-          //   <li>{item.date.split("T")[0]}</li>
-          // </BoardContent>
           <div key={index} className="accordion-item">
             <AccordionHeader className="accordion-header">
               <button type="button" onClick={onClickAccordion}>
                 <BoardContent>
                   <li>{totalItems - (indexOfFirstItem + index)}</li>
-
                   <li className="HeaderTitle">{item.subject}</li>
                   <li>{item.date.split("T")[0]}</li>
                 </BoardContent>
