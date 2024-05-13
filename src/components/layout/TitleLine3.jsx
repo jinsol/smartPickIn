@@ -7,8 +7,6 @@ const TitleLine3Block = styled.article`
   h2 {
     span {
       display: block;
-      line-height: 1.4em;
-      font-size: clamp(62px, 2.5vw, 82px);
       &:nth-child(1) {
         color: lightgray;
       }
@@ -43,7 +41,11 @@ const TitleLine3 = ({ TL3C }) => {
     <TitleLine3Block>
       <h2 className="TextAni">
         {TL3C.map((item, index) => {
-          return <span key={index}>{item}</span>;
+          return (
+            <span key={index} className="largeFont">
+              {item}
+            </span>
+          );
         })}
       </h2>
     </TitleLine3Block>

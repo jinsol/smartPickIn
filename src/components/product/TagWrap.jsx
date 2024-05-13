@@ -65,7 +65,7 @@ const TagWrap = ({ tag }) => {
   };
 
   return (
-    <TagWrapBlock>
+    <TagWrapBlock className="TagWrap">
       {tag &&
         // Array.isArray(tag) &&
         tag.map((item, index) => (

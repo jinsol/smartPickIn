@@ -10,6 +10,7 @@ const AsideMenu = styled.aside`
   z-index: 1;
   ul {
     display: inline-flex;
+    flex-wrap: wrap;
     background-color: var(--light-blue);
     li {
       font-size: 1.2em;

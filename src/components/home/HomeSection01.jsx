@@ -42,7 +42,6 @@ const TitleBox = styled.div`
     color: var(--black);
     span {
       display: block;
-      font-size: 80px;
     }
   }
   @media (max-width: 1100px) {
@@ -86,9 +85,6 @@ const SupportBox = styled.div`
   &.right {
     justify-content: flex-end;
   }
-  * {
-    font-size: clamp(16px, 2.5vw, 20px);
-  }
 
   @media (max-width: 1100px) {
     justify-content: center;
@@ -108,12 +104,14 @@ const SubTitleBox = styled.div`
     span {
       display: block;
       font-weight: 300;
-      font-size: clamp(16px, 2.5vw, 20px);
     }
   }
   @media (max-width: 1100px) {
     justify-content: center;
     padding-bottom: 0;
+    h4 {
+      padding: 10px 0;
+    }
   }
 `;
 
@@ -150,12 +148,12 @@ const HomeSection01 = () => {
         <ListBox>
           <TitleBox>
             <h2 className="box_left_title">
-              <span>
+              <span className="largeFont">
                 잘되는 <Yellow>&quot;</Yellow>
                 <HomeSection01TextAni />
                 <Yellow>&quot;</Yellow>의 비밀
               </span>
-              <LineAniBox>
+              <LineAniBox className="largeFont">
                 스마트픽인
                 <i className="LineAni">
                   <span></span>
@@ -163,15 +161,17 @@ const HomeSection01 = () => {
               </LineAniBox>
             </h2>
           </TitleBox>
-          <SupportBox className="SupportBox">
+          <SupportBox className="SupportBox mediumFont">
             <h3>{/* #브랜딩 #순위상승 #매출 #NO어뷰징 */}</h3>
           </SupportBox>
         </ListBox>
         <ListBox className="right">
           <SubTitleBox>
             <h4>
-              <span>SEO 검색엔진 최적화 전문가들이 </span>
-              <span>맞춤형 순위상승 전략을 제안드립니다.</span>
+              <span className="bodyFont">SEO 검색엔진 최적화 전문가들이 </span>
+              <span className="bodyFont">
+                맞춤형 순위상승 전략을 제안드립니다.
+              </span>
             </h4>
           </SubTitleBox>
           <SupportBox className="right">

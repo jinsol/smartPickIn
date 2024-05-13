@@ -18,6 +18,18 @@ const ArticleBlock = styled.article`
     gap: 40px;
     @media (max-width: 1100px) {
       grid-template-columns: 1fr 1fr;
+      .TitleWrap {
+        display: inline-block;
+      }
+      .TitleWrap,
+      .TagWrap {
+        padding: 10px 0;
+      }
+      .TagWrap {
+        position: absolute;
+        display: inline-flex;
+        right: 0;
+      }
     }
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
@@ -48,6 +60,7 @@ const ProductLi = styled.li`
       }
       &:nth-child(2) {
         flex-basis: auto;
+        padding: 20px 0;
       }
       &:nth-child(3) {
         flex-basis: auto;
@@ -86,6 +99,12 @@ const ContentWrap = styled.div`
   }
   @media (max-width: 1100px) {
     display: block;
+
+    .HashtagWrap {
+      padding: 10px 0;
+      display: flex;
+      gap: 10px;
+    }
   }
 `;
 

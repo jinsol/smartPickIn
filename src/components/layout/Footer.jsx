@@ -22,6 +22,7 @@ const FooterBlock = styled.footer`
     @media (max-width: 1100px) {
       display: flex;
       flex-direction: column-reverse;
+      gap: 40px;
     }
   }
 `;
@@ -131,7 +132,6 @@ const Company = styled.ul`
       padding: 0 20px;
     }
     a {
-      font-size: 20px;
       font-weight: 600;
     }
   }
@@ -270,13 +270,17 @@ const Footer = () => {
           </Logo>
           <Company className="company">
             <li>
-              <Link to="/ask">문의하기</Link>
+              <Link to="/ask" className="mediumFont">
+                문의하기
+              </Link>
             </li>
             <li>
-              <a href="#">SEO 제안서 다운받기</a>
+              <a href="#" className="mediumFont">
+                SEO 제안서 다운받기
+              </a>
             </li>
             <li>
-              <a href="#" onClick={onClickPersonalData}>
+              <a href="#" onClick={onClickPersonalData} className="mediumFont">
                 개인정보처리방침
               </a>
             </li>

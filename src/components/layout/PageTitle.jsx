@@ -18,10 +18,6 @@ const PageTitleWrap = styled.article`
 
 const PageTitleSection = styled.h2`
   color: var(--black);
-  font-size: 4.5em;
-  @media (max-width: 1100px) {
-    font-size: clamp(3.6em, 2.5vw, 4em);
-  }
   p {
     opacity: 0;
     transform: translateY(100px);
@@ -64,7 +60,11 @@ const PageTitle = ({ title, imgUrl }) => {
     <PageTitleWrap>
       <PageTitleSection ref={titleRef}>
         {title.map((item, index) => {
-          return <p key={index}>{item}</p>;
+          return (
+            <p key={index} className="largeFont">
+              {item}
+            </p>
+          );
         })}
       </PageTitleSection>
       <PageImage className="pageImage">

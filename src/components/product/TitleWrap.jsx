@@ -15,7 +15,7 @@ const TitleWrapBlock = styled.div`
 
 const TitleWrap = ({ title, subtitle }) => {
   return (
-    <TitleWrapBlock>
+    <TitleWrapBlock className="TitleWrap">
       <h4>{subtitle}</h4>
       <h3>{title}</h3>
     </TitleWrapBlock>

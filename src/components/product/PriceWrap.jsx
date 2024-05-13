@@ -17,7 +17,7 @@ const PriceWrapBlock = styled.div`
 
 const PriceWrap = ({ price }) => {
   return (
-    <PriceWrapBlock>
+    <PriceWrapBlock className="PriceWrap">
       <p>
         <span>VAT 별도</span>
         {price == "옵션별 상이" ? (

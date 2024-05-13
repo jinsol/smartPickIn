@@ -13,7 +13,6 @@ const HomeSection03TitleBlock = styled.div`
   h2 {
     span {
       display: block;
-      font-size: clamp(62px, 2.5vw, 82px);
       &:nth-child(1) {
         color: lightgray;
       }
@@ -50,8 +49,8 @@ const HomeSection03Title = () => {
   return (
     <HomeSection03TitleBlock className="homeRow">
       <h2>
-        <span>안 들리세요?</span>
-        <span>매출 오르는 소리!</span>
+        <span className="largeFont">안 들리세요?</span>
+        <span className="largeFont">매출 오르는 소리!</span>
       </h2>
     </HomeSection03TitleBlock>
   );

@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SectionBlock = styled.section`
   @media (max-width: 1100px) {
-    justify-content: start;
+    padding: 10vh 0;
   }
 `;
 
@@ -28,7 +28,6 @@ const UnorderedListBox = styled.ul`
 
 const TitleBox = styled.h3`
   span {
-    font-size: clamp(62px, 2.5vw, 82px);
     display: block;
     &:nth-child(1) {
       color: var(--gray02);
@@ -62,8 +61,6 @@ const SubTitleBox = styled.p`
   padding: 20px 0;
   span {
     display: block;
-    font-size: clamp(16px, 36px, 20px);
-    line-height: 180%;
   }
 `;
 
@@ -128,11 +125,11 @@ const HomeSection04 = () => {
   }, []);
 
   return (
-    <section className="section04 flexCenter">
+    <SectionBlock className="section04 flexCenter">
       <UnorderedListBox className="homeRow">
         <li>
           <TitleBox className="TextBox">
-            <span>
+            <span className="largeFont">
               순위상승
               <i className="IconAni">
                 <img src="/assets/image/rank_up.png" alt="rank_up" />
@@ -140,16 +137,18 @@ const HomeSection04 = () => {
                 <img src="/assets/image/rank_up.png" alt="rank_up" />
               </i>
             </span>
-            <span>어떻게 해야할지 모르겠다면?</span>
+            <span className="largeFont">어떻게 해야할지 모르겠다면?</span>
           </TitleBox>
           <SubTitleBox>
-            <span>처음 진행하시나요?</span>
-            <span>순위를 올릴 수 있는 방법은 뭐가 있을까요?</span>
+            <span className="bodyFont">처음 진행하시나요?</span>
+            <span className="bodyFont">
+              순위를 올릴 수 있는 방법은 뭐가 있을까요?
+            </span>
           </SubTitleBox>
         </li>
         <HomeSection04Slide />
       </UnorderedListBox>
-    </section>
+    </SectionBlock>
   );
 };
 

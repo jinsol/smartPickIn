@@ -8,6 +8,9 @@ const MouseFollowerBlock = styled.span`
   height: 20px;
   border-radius: 50%;
   z-index: 1;
+  @media (max-width: 1100px) {
+    display: none;
+  }
 `;
 
 const MouseFollower = ({ isMouseOverHeader, handleFollowerMouseEnter }) => {
