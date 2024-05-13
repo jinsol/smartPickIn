@@ -14,6 +14,7 @@ const NewsDetailSectionBlock = styled.div`
 .detail__wrap{
    max-width: 1500px;
    margin:150px  auto 20px;
+   padding: 30px;
    transform: translateY(200px);
                         opacity: 0;
                         transition: all 0.8s ease;
@@ -35,6 +36,9 @@ const NewsDetailSectionBlock = styled.div`
         margin:auto;
         margin-bottom: 30px;
         font-size: 1em;
+        @media (max-width:768px){
+            font-size:0.8em;
+        }
         
     }
     p{
@@ -43,6 +47,10 @@ const NewsDetailSectionBlock = styled.div`
         line-height: 1.8em;
         letter-spacing: 0.1em;
         white-space: pre-line;
+        margin-bottom: 30px;
+        @media (max-width:768px){
+            font-size:1em;
+        }
         strong{
             color: var(--black);
             background: var(--yellow);
@@ -56,6 +64,9 @@ const NewsDetailSectionBlock = styled.div`
         margin: 20px auto;
         padding: 0 10px;
         font-size: 1.5em;
+        @media (max-width:768px){
+            font-size:1.2em;
+        }
         .button02{
         background: ${(props) => (props.type === '기업소식' ? 'var(--yellow)' : 'var(--blue)')};
             border-radius: 50px;

@@ -4,16 +4,20 @@ import { CiSearch } from "react-icons/ci";
 
 const SearchBarWrapper = styled.div`
 form{
-    margin: 0px 60px;
     display: flex;
     justify-content: right;
     align-items: center;
+    @media (max-width:1200px){
+    justify-content: center;
+
+    }
     }
 `;
 
 const SearchInput = styled.input`
     /* 입력 필드의 스타일 */
-    width: 300px;
+    width: 100%;
+    max-width: 350px;
     padding: 20px 50px;
     margin-right: 8px;
     border-radius: 50px;
@@ -22,6 +26,13 @@ const SearchInput = styled.input`
     border: 1px solid var(--gray05);
     transition: all 0.3s ease;
     font-size: 1.1em;
+    @media (max-width:1200px){
+        width: 100%;
+    max-width: 500px;
+
+    }
+    
+   
     &:hover{
         border: 1px solid var(--blue)
     }

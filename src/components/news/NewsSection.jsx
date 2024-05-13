@@ -13,28 +13,32 @@ const NewsSectionBlock = styled.div`
    
      .news__depth1 {
         width: 100%;
-        display: flex;
+        /* display: flex;
         justify-content: space-around;
-        flex-wrap: wrap;
+        flex-wrap: wrap; */
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap:50px;
         margin: 50px auto;
-        padding: 10px;
         transform: translateY(200px);
         opacity: 0;
         transition: all 0.8s ease;
+
+        @media (max-width:1200px){
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (max-width:768px){
+            grid-template-columns: 1fr;
+            gap:20px;
+
+            
+        }
 
                         &.on{
                         transform: translateY(0);
                         opacity: 1;
                         }
         .news__list {
-            margin: 2% 2%;
-            flex: 0 0 28%;
-            overflow: hidden;
-
-            @media (max-width:1200px){
-                margin: 2% 2%;
-            flex:0 0 46%;               
-                            }
 
             a {
                 .thumbnail {
@@ -51,6 +55,19 @@ const NewsSectionBlock = styled.div`
                             font-size: 1.3em;
                             color: var(--white);
                             white-space: pre-line;
+
+                            @media (max-width:900px){
+                            font-size: 1.1em;
+                            }
+                            @media (max-width:768px){
+                            font-size: 1.5em;
+                            }
+                            @media (max-width:600px){
+                                font-size: 1.2em;
+                            }
+                            @media (max-width:550px){
+                                font-size: 1em;
+                            }
                             /* word-break:keep-all; */
                         }
                       
@@ -59,6 +76,11 @@ const NewsSectionBlock = styled.div`
                             letter-spacing: 1em;
                             color: var(--white);
                             font-weight: lighter;
+
+                            @media (max-width:900px){
+                            font-size: 0.3em;
+                                
+                            }
                         }
                         
                     }
@@ -67,7 +89,7 @@ const NewsSectionBlock = styled.div`
                         height: auto;
                         transition: all 0.5s ease;
                          filter: brightness(0.5);
-                        margin-bottom: 40px;
+                        margin-bottom: 15px;
                         
 
                         img {
@@ -112,13 +134,25 @@ const NewsSectionBlock = styled.div`
                     text-align: left;
                     h2{
                             font-size: 1.2em;
-                            @media (max-width:1100px){
+                            @media (max-width:1300px){
                                 font-size: 1.1em;
                             }
+                            @media (max-width:1200px){
+                                font-size: 1em;
+                                
+                            }
                             @media (max-width:768px){
+                                font-size: 1.2em;
+                            }
+                            @media (max-width:650px){
+                                font-size: 1em;
+                            }
+                            @media (max-width:550px){
                                 font-size: 0.9em;
                             }
-                           
+                            @media (max-width:500px){
+                                font-size: 0.8em;
+                            }
                         }
                       
 
@@ -135,6 +169,20 @@ const NewsSectionBlock = styled.div`
                             -webkit-line-clamp: 2;
                             -webkit-box-orient: vertical;
                             word-break: keep-all;
+                            
+                            @media (max-width:1200px){
+                            font-size: 1em;
+                                
+                            }
+                            @media (max-width:900px){
+                            font-size: 0.8em;
+                            }
+                            @media (max-width:768px){
+                            font-size: 1em;
+                            }
+                            @media (max-width:550px){
+                            font-size: 0.8em;
+                            }
                         }
                     .news__text2 {
                         display: flex;
@@ -240,7 +288,7 @@ const handleSearch = (value) => {
  
     return (
         <NewsSectionBlock>
-            <SearchBar type="type1"
+            <SearchBar
              value={searchTerm}
             // onChange={(e) => setSearchTerm(e.target.value)}
             onSearch={handleSearch}

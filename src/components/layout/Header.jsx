@@ -63,7 +63,7 @@ const HeaderBlock = styled.div`
     text-align: center;
     align-items: center;
     position: relative;
-    padding: 0px 1%;
+    padding: 0px 2%;
     background: rgba(255, 255, 255, 0.5); /* 반투명한 배경색 */
 
     .logo {
@@ -86,7 +86,7 @@ const HeaderBlock = styled.div`
       li{
         font-size: 1.2em;
         a{
-          padding: 40px 30px;
+          padding: 40px 15px;
           font-weight: 600;
           transition: all 0.3s ease;
           &:hover, &.active{
@@ -94,12 +94,13 @@ const HeaderBlock = styled.div`
           }
         }
       }
-      .depthNews2, .depthService2{
+      .depthNews2, .depthService2, .depthMypage2{
         width:100%; background:#1774d0; position:absolute; top:100%; left:0;   
-        transition: all 0.5s ease;
-        display: none;
-          justify-content: center;
+        transition: all 0.3s ease;
           padding: 20px 40px;
+          display: flex;
+          justify-content: center;
+          opacity: 0;
         a{
           font-size: 0.9em;
           color:rgba(255,255,255,0.7);
@@ -110,16 +111,29 @@ const HeaderBlock = styled.div`
           }
         }
       }
+ 
+      .depthNews1{
+        a{&.on{
+          color: var(--blue);
+        }
+      }
+      }
       .depthNews1:hover{
         .depthNews2{
-          display: flex;
-          justify-content: center;
+          opacity: 1;
+
         }
       }
       .depthService1:hover{
         .depthService2{
-          display: flex;
-          justify-content: center;
+          opacity: 1;
+
+        }
+      }
+      .depthMypage1:hover{
+        .depthMypage2{
+          opacity: 1;
+
         }
       }
     }
@@ -239,6 +253,7 @@ const Header = () => {
   const newsMenuClick = (value) => {
     navigate(`/news/#${value}`);
     dispatch(initNewsMenu(value));
+    setAtag(true)
   };
 
   /* ================== 24.05.03 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
@@ -290,6 +305,19 @@ const Header = () => {
           <li>
             <NavLink to="/ask">문의하기</NavLink>
           </li>
+          <li className="depthMypage1">
+            <a>마이페이지</a>
+            <ul className="depthMypage2">
+              <li>
+                <a>장바구니</a>
+              </li>
+              <li>
+                <Link to='/usermodify'>
+                정보수정
+                </Link>
+              </li>
+            </ul>
+          </li>
         </ul>
         <div className="info">
           {!loging && !user ? (
@@ -302,7 +330,6 @@ const Header = () => {
               <a href="#" onClick={handleLogout}>
               <CiUnlock />
               </a>
-             <Link to="/usermodify">수정</Link>
             </div>
           )}
           <div
