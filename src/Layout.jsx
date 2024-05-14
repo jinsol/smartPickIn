@@ -38,9 +38,20 @@ const Layout = () => {
   };
   return (
     <>
-      {/* <MouseFollower /> */}
-      <Header />
-      <Main isProductPage={isProductPage}>
+      {width > 1100 ? (
+        <MouseFollower
+          isMouseOverHeader={isMouseOverHeader}
+          onMouseEnter={handleHeaderMouseEnter}
+        />
+      ) : (
+        <BackEffect />
+      )}
+
+      <Header
+        onMouseEnter={handleHeaderMouseEnter}
+        onMouseLeave={handleHeaderMouseLeave}
+      />
+      <Main>
         <Outlet />
       </Main>
       <Footer />
