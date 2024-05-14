@@ -9,6 +9,8 @@ const PageTitleWrap = styled.article`
   gap: 80px;
   @media (max-width: 1100px) {
     grid-template-columns: auto;
+    margin-top: 15%;
+
     .pageImage {
       display: none;
     }

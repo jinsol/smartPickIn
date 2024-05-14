@@ -9,6 +9,7 @@ import { initNewsMenu } from "@/store/news";
 import { userLogout,  fetchMembers,localUser } from "@/store/member";
 import { CiLock,CiUnlock } from "react-icons/ci";
 import { PiUserPlusLight } from "react-icons/pi";
+import Logoimage from '@/assets/image/logo_blue.png'
 
 const HeaderBlock = styled.div`
   text-align: center;
@@ -79,16 +80,24 @@ const HeaderBlock = styled.div`
     .mainDepth1{
       display: flex;
       justify-content: center;
-      @media (max-width:768px){
+      @media (max-width:810px){
         display: none;
       }
 
       li{
         font-size: 1.2em;
+        @media (max-width:1200px){
+          font-size: 1em;
+        }
         a{
-          padding: 40px 15px;
+          padding: 40px 35px;
           font-weight: 600;
           transition: all 0.3s ease;
+          cursor: pointer;
+          @media (max-width:1200px){
+          padding: 40px 20px;
+            
+          }
           &:hover, &.active{
             color: var(--blue);
           }
@@ -96,15 +105,19 @@ const HeaderBlock = styled.div`
       }
       .depthNews2, .depthService2, .depthMypage2{
         width:100%; background:#1774d0; position:absolute; top:100%; left:0;   
-        transition: all 0.3s ease;
+        transition: all 0.5s ease;
           padding: 20px 40px;
           display: flex;
           justify-content: center;
+          transform: scaleY(0);
           opacity: 0;
+          z-index: -99999;
+          transform-origin: top center;
         a{
           font-size: 0.9em;
           color:rgba(255,255,255,0.7);
           transition: all 0.5s ease;
+          cursor: pointer;
           &:hover{
             color: var(--white);
             font-weight: 500;
@@ -120,20 +133,20 @@ const HeaderBlock = styled.div`
       }
       .depthNews1:hover{
         .depthNews2{
+          transform: scaleY(1);
           opacity: 1;
-
         }
       }
       .depthService1:hover{
         .depthService2{
+          transform: scaleY(1);
           opacity: 1;
-
         }
       }
       .depthMypage1:hover{
         .depthMypage2{
+          transform: scaleY(1);
           opacity: 1;
-
         }
       }
     }
@@ -253,8 +266,10 @@ const Header = () => {
   const newsMenuClick = (value) => {
     navigate(`/news/#${value}`);
     dispatch(initNewsMenu(value));
-    setAtag(true)
   };
+  const myPageClick = ()=>{
+    navigate('/my')
+  }
 
   /* ================== 24.05.03 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
 
@@ -263,7 +278,7 @@ const Header = () => {
       <nav id="header__nav">
         <h1 className="logo">
           <Link to="/">
-            <img src="./assets/image/logo_blue.png" alt="" />
+            <img src={Logoimage} alt="로고이미지" />
           </Link>
         </h1>
         <ul className={cn('mainDepth1', isOpen && 'open')}>
@@ -305,19 +320,27 @@ const Header = () => {
           <li>
             <NavLink to="/ask">문의하기</NavLink>
           </li>
-          <li className="depthMypage1">
-            <a>마이페이지</a>
-            <ul className="depthMypage2">
-              <li>
-                <a>장바구니</a>
-              </li>
-              <li>
-                <Link to='/usermodify'>
-                정보수정
-                </Link>
-              </li>
-            </ul>
+          {
+  loging || user ? (
+    <ul>
+      <li className="depthMypage1">
+        <a onClick={myPageClick}>마이페이지</a>
+        <ul className="depthMypage2">
+          <li>
+            <Link to='/usermodify'>
+              정보수정
+            </Link>
           </li>
+          <li>
+            <a>장바구니</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  ) : (
+    <div></div>
+  )
+}
         </ul>
         <div className="info">
           {!loging && !user ? (
@@ -342,7 +365,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      <Nav isOpen={isOpen} toggleMenu={toggleMenu} />
+      <Nav isOpen={isOpen} toggleMenu={toggleMenu} loging={loging} user={user} />
     </HeaderBlock>
   );
 };

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
+import Pdfimage from '@/assets/image/about_ic02.png'
 // import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const AboutSection02Block = styled.div`
@@ -190,7 +191,7 @@ const AboutSection02 = () => {
                    </p>
                 </div>
                 <div className="downrold">
-                 <figure className='imagebox'> <img src="./assets/image/about_ic02.png" alt="" /></figure>
+                 <figure className='imagebox'> <img src={Pdfimage} alt="pdf이미지" /></figure>
                   <a href="https://site-high.com/files/proposal_seo.pdf" target='_blank' className='downbutton'>파일열기</a>
                 </div>
              </div>

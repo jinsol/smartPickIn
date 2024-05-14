@@ -97,21 +97,39 @@ justify-content: center;
         }
       }
     }
+    li:last-child{
+      .hidden3{
+        display:none;
+        li{
+          font-size:20px;
+          margin-top: 15px;
+          color:gray;
+          padding:5px 0;
+        }
+        &.open{
+          display:block;
+        }
+      }
+    }
   }
 }
 
 
 `
 
-const Nav = ({isOpen, toggleMenu}) => {
+const Nav = ({isOpen, toggleMenu,loging,user}) => {
   const [click, setClick] = useState(false)
   const [click1, setClick1] = useState(false)
+  const [click2, setClick2] = useState(false)
 
   const depthClick = ()=>{
     setClick(!click)
   }
   const depthClick1 = ()=>{
     setClick1(!click1)
+  }
+  const depthClick2 =()=>{
+    setClick2(!click2)
   }
     
     return (
@@ -157,11 +175,28 @@ const Nav = ({isOpen, toggleMenu}) => {
                         <NavLink to ="/ask"><span className='strong'>05</span> 문의하기<IoMdArrowDropright className='arrow' />
                       </NavLink>
                     </li>
+                    {
+                     user || loging ? (
+            <ul>
+              <li onClick={depthClick2}>
+                <a className={click && 'on'}><span className='strong'>06</span> 마이페이지 
+                  {!click2 ? <IoMdArrowDropdown className='arrow' /> : <IoMdArrowDropup className='arrow' />}
+                </a>
+                <ul className={cn("hidden3", click2 && "open")}>
+                  <li onClick={toggleMenu}> <Link to="/news#소식">정보수정</Link></li>
+                  <li onClick={toggleMenu}> <Link to="/news#기업소식">장바구니</Link></li>
                 </ul>
+              </li>
+            </ul>
+          ) : (
+            <div></div>
+          )}
+      </ul>  
       </div>
       <div className="box"></div>
         </NavBlock>
     );
 };
+
 
 export default Nav;

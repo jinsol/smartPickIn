@@ -10,7 +10,7 @@ const PaginationWrapper = styled.div`
         .pagination {
             display: flex;
         justify-content: center;
-        margin-top:50px;
+        margin:30px 0;
         align-items: center;
       li {
     font-size: 1.2em;

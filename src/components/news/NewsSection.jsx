@@ -56,17 +56,19 @@ const NewsSectionBlock = styled.div`
                             color: var(--white);
                             white-space: pre-line;
 
-                            @media (max-width:900px){
-                            font-size: 1.1em;
+                            @media (max-width:1200px){
+                            font-size: 1.8em;
                             }
-                            @media (max-width:768px){
+
+                            @media (max-width:900px){
                             font-size: 1.5em;
                             }
-                            @media (max-width:600px){
-                                font-size: 1.2em;
+                            @media (max-width:768px){
+                            font-size: 1.8em;
                             }
+                           
                             @media (max-width:550px){
-                                font-size: 1em;
+                                font-size: 1.6em;
                             }
                             /* word-break:keep-all; */
                         }
@@ -138,21 +140,17 @@ const NewsSectionBlock = styled.div`
                                 font-size: 1.1em;
                             }
                             @media (max-width:1200px){
-                                font-size: 1em;
+                                font-size: 1.2em;
                                 
                             }
                             @media (max-width:768px){
-                                font-size: 1.2em;
+                                font-size: 1.5em;
                             }
-                            @media (max-width:650px){
-                                font-size: 1em;
-                            }
+                           
                             @media (max-width:550px){
-                                font-size: 0.9em;
+                                font-size: 1.3em;
                             }
-                            @media (max-width:500px){
-                                font-size: 0.8em;
-                            }
+                         
                         }
                       
 
@@ -175,13 +173,13 @@ const NewsSectionBlock = styled.div`
                                 
                             }
                             @media (max-width:900px){
-                            font-size: 0.8em;
+                            font-size: 0.9em;
                             }
                             @media (max-width:768px){
                             font-size: 1em;
                             }
                             @media (max-width:550px){
-                            font-size: 0.8em;
+                            font-size: 0.9em;
                             }
                         }
                     .news__text2 {

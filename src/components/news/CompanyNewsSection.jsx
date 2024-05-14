@@ -92,18 +92,19 @@ const CompanyNewsSectionBlock = styled.div`
                             font-size: 1.3em;
                             color: var(--white);
                             white-space: pre-line;
+                            @media (max-width:1200px){
+                            font-size: 1.8em;
+                            }
 
                             @media (max-width:900px){
-                            font-size: 1.1em;
-                            }
-                            @media (max-width:768px){
                             font-size: 1.5em;
                             }
-                            @media (max-width:600px){
-                                font-size: 1.2em;
+                            @media (max-width:768px){
+                            font-size: 1.8em;
                             }
+                           
                             @media (max-width:550px){
-                                font-size: 1em;
+                                font-size: 1.6em;
                             }
                             /* word-break:keep-all; */
                         }
@@ -170,26 +171,22 @@ const CompanyNewsSectionBlock = styled.div`
                 .news__text {
                     text-align: left;
                     h2{
-                            font-size: 1.2em;
+                            font-size: 1.1em;
                             @media (max-width:1300px){
-                                font-size: 1.1em;
+                                font-size: 1em;
                             }
                             @media (max-width:1200px){
-                                font-size: 1em;
+                                font-size: 1.2em;
                                 
                             }
-                            @media (max-width:850px){
-                                font-size: 1em;
+                            @media (max-width:768px){
+                                font-size: 1.5em;
                             }
-                            @media (max-width:650px){
-                                font-size: 1em;
-                            }
+                           
                             @media (max-width:550px){
-                                font-size: 0.9em;
+                                font-size: 1.3em;
                             }
-                            @media (max-width:500px){
-                                font-size: 0.8em;
-                            }
+                         
                         }
 
                     span{
@@ -209,13 +206,13 @@ const CompanyNewsSectionBlock = styled.div`
                                 
                             }
                             @media (max-width:900px){
-                            font-size: 0.8em;
+                            font-size: 0.9em;
                             }
                             @media (max-width:768px){
                             font-size: 1em;
                             }
                             @media (max-width:550px){
-                            font-size: 0.8em;
+                            font-size: 0.9em;
                             }
                         }
                     .news__text2 {

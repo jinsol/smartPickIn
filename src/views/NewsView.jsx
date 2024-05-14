@@ -11,7 +11,9 @@ import { initNewsMenu } from "@/store/news"; // 액션 생성자를 가져옵니
 const NewsViewBlock = styled.section`
   width: 100%;
   min-height: 100vh;
-  padding: 20vh;
+  padding: 20vh 0;
+  @media (max-width:1200px){
+  }
 `;
 
 const NewsView = () => {
@@ -22,7 +24,7 @@ const NewsView = () => {
     </span>,
   ];
   const menu = ["소식", "기업소식"];
-  const imgUrl = "/assets/image/cs_bg_icn.png";
+  const imgUrl = "/assets/image/news_bg_icn.png";
   const activeMenu = useSelector((state) => state.news.newsMenu);
   const dispatch = useDispatch();
 
@@ -44,6 +46,7 @@ const NewsView = () => {
           menu={menu}
           activeMenu={activeMenu}
           onClick={handleMenuClick}
+         
         />
         {activeMenu === "소식" && <NewsSection />}
         {activeMenu === "기업소식" && <CompanyNewsSection />}

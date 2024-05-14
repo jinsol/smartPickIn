@@ -14,6 +14,7 @@ import JoinView from "@/views/JoinView";
 import LoginView from "@/views/LoginView";
 import UserModifyView from "@/views/UserModifyView"
 import CartView from "@/views/CartView";
+import MyView from "@/views/MyView"
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/ask" element={<AskView />} />
         <Route path="/service/" element={<ServiceView />} />
         <Route path="/cart/" element={<CartView />} />
+        <Route path="/my" element={<MyView/>}/>
       </Route>
     </Routes>
   );
