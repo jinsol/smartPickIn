@@ -97,7 +97,8 @@ const HeaderBlock = styled.header`
         }
       }
       .depthNews2,
-      .depthService2 {
+      .depthService2,
+      .depthMypage2 {
         width: 100%;
         background: #1774d0;
         position: absolute;
@@ -133,6 +134,12 @@ const HeaderBlock = styled.header`
       }
       .depthService1:hover {
         .depthService2 {
+          display: flex;
+          justify-content: center;
+        }
+      }
+      .depthMypage1:hover {
+        .depthMypage2 {
           display: flex;
           justify-content: center;
         }
@@ -320,19 +327,17 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
             <NavLink to="/ask">문의하기</NavLink>
           </li>
           {loging || user ? (
-            <ul>
-              <li className="depthMypage1">
-                <a onClick={myPageClick}>마이페이지</a>
-                <ul className="depthMypage2">
-                  <li>
-                    <Link to="/usermodify">정보수정</Link>
-                  </li>
-                  <li>
-                    <a>장바구니</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+            <li className="depthMypage1">
+              <a onClick={myPageClick}>마이페이지</a>
+              <ul className="depthMypage2">
+                <li>
+                  <Link to="/usermodify">정보수정</Link>
+                </li>
+                <li>
+                  <Link to="/cart">장바구니</Link>
+                </li>
+              </ul>
+            </li>
           ) : (
             <div></div>
           )}

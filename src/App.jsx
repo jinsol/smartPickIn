@@ -39,6 +39,7 @@ const App = () => {
         <Route path="/ask" element={<AskView />} />
         {/* 마이페이지 (시작 */}
         <Route path="/cart/" element={<CartView />} />
+        <Route path="/usermodify" element={<UserModifyView />} />
         <Route path="/my" element={<MyView />} />
       </Route>
     </Routes>
