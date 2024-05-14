@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ImageWrap from "./ImageWrap";
 import ContentWrap from "./ContentWrap";
 import ReviewWrap from "./ReviewWrap";
+import ProductModal from "./ProductModal";
 
 const Section = styled.section`
   display: grid;
@@ -26,6 +27,7 @@ const ProductDetailSection = ({ product }) => {
       <ImageWrap thumbnail={thumbnail} />
       <ContentWrap product={product} />
       <ReviewWrap />
+      <ProductModal />
     </Section>
   );
 };

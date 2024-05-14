@@ -4,14 +4,14 @@ import styled from "styled-components";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import PageTitle from "@/components/layout/PageTitle";
 import PageTab from "@/components/layout/PageTab";
-import NewsSection from "@/components/news/NewsSection"
-import CompanyNewsSection from "@/components/news/CompanyNewsSection"
+import NewsSection from "@/components/news/NewsSection";
+import CompanyNewsSection from "@/components/news/CompanyNewsSection";
 import { initNewsMenu } from "@/store/news"; // 액션 생성자를 가져옵니다.
 
 const NewsViewBlock = styled.section`
   width: 100%;
   min-height: 100vh;
-  padding: 20vh;
+  padding: 20vh 0;
 `;
 
 const NewsView = () => {

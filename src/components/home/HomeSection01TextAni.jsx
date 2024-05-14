@@ -10,6 +10,9 @@ const TextAni = styled.div`
     height: 100%;
     width: auto;
   }
+  @media (max-width: 768px) {
+    margin: 0px;
+  }
 `;
 
 const HomeSection01TextAni = () => {

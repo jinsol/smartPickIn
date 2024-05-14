@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CartQtyWrap from "./CartQtyWrap";
 import { useNavigate } from "react-router";
 import { cartDB } from "@/assets/firebase";
+import ProductModal from "./ProductModal";
 
 const BtnWrapBlock = styled.div`
   display: flex;
@@ -39,6 +40,7 @@ const BtnWrap = ({ product }) => {
   const { id, price, thumbnail, title } = product;
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
+  const [message, setMessage] = useState(""); // 메시지 상태 추가
 
   const decreaseQuantity = () => {
     if (!(qty <= 1)) {
@@ -80,6 +82,8 @@ const BtnWrap = ({ product }) => {
       .catch((error) => {
         console.error("Error adding product to cart: ", error);
       });
+    document.querySelector(".Modal").classList.add("active");
+    setMessage("장바구니에 상품을 추가했습니다.");
   };
 
   const onClickBuyNow = () => {
@@ -113,6 +117,7 @@ const BtnWrap = ({ product }) => {
       .catch((error) => {
         console.error("Error adding product to cart: ", error);
       });
+    setMessage("바로 구매하기를 선택하셨습니다. 장바구니로 이동합니다.");
     navigate("/cart");
   };
 
@@ -133,6 +138,7 @@ const BtnWrap = ({ product }) => {
       <button className="BuyNow" onClick={onClickBuyNow}>
         바로 구매하기
       </button>
+      <ProductModal message={message} />
     </BtnWrapBlock>
   );
 };

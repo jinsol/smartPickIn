@@ -33,6 +33,7 @@ button {
 
 .largeFont {
   font-size: 80px;
+  letter-spacing: -2px;
   transition: all 0.3s;
   line-height: 120%;
   word-break: keep-all;

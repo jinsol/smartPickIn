@@ -12,7 +12,7 @@ const SectionBlock = styled.section`
   & > ul {
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: auto 3fr;
     gap: 80px;
     @media (max-width: 1450px) {
       width: 100%;
@@ -138,6 +138,10 @@ const ContentsBox = styled.li`
     .image {
       position: absolute;
       inset: auto 0 0 auto;
+      @media (max-width: 1100px) {
+        width: 80%;
+        padding: 5%;
+      }
     }
   }
 `;
@@ -262,7 +266,7 @@ const HomeSection02 = () => {
                 <li className="number">0{index + 1}</li>
                 <li className="title">{item.title}</li>
                 <li className="subTitle">{item.subTitle}</li>
-                <li className="content">{item.content}</li>
+                <li className="content bodyFont">{item.content}</li>
                 <li className="image">
                   <img src={item.img} alt={item.title} />
                 </li>

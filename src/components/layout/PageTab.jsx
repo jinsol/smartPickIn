@@ -9,7 +9,9 @@ const TabUl = styled.ul`
   margin: 20px 0;
   li {
     font-size: 1.2em;
-    padding: 0.6em 2em 0.7em;
+    button {
+      padding: 0.6em 2em 0.7em;
+    }
     &.active {
       color: var(--white);
       font-weight: 800;
