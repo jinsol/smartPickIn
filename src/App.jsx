@@ -14,6 +14,7 @@ import JoinView from "@/views/JoinView";
 import LoginView from "@/views/LoginView";
 import UserModifyView from "@/views/UserModifyView";
 import CartView from "@/views/CartView";
+import MyView from "@/views/MyView";
 
 const App = () => {
   return (
@@ -38,8 +39,7 @@ const App = () => {
         <Route path="/ask" element={<AskView />} />
         {/* 마이페이지 (시작 */}
         <Route path="/cart/" element={<CartView />} />
-        <Route path="/usermodify" element={<UserModifyView />} />
-        {/* 마이페이지 (끝) */}
+        <Route path="/my" element={<MyView />} />
       </Route>
     </Routes>
   );

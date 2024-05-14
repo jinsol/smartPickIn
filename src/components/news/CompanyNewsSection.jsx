@@ -14,13 +14,26 @@ const CompanyNewsSectionBlock = styled.div`
 
    
      .news__depth1 {
-        display: flex;
+        /* display: flex;
         justify-content: center;
         align-items: center;
-        flex-wrap: wrap;
+        flex-wrap: wrap; */
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap:50px;
+        margin-top: 50px;
         transform: translateY(200px);
-                        opacity: 0;
-                        transition: all 0.8s ease;
+        opacity: 0;
+        transition: all 0.8s ease;
+
+        @media (max-width:1200px){
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (max-width:768px){
+            grid-template-columns: 1fr;
+        gap:20px;
+        }
+
 
                         &.on{
                         transform: translateY(0);
@@ -41,9 +54,22 @@ const CompanyNewsSectionBlock = styled.div`
                         left: 50%;
                         transform: translate(-50%, -50%);
                         z-index: 99999;
+                        white-space: pre-line;
                         h2{
                             font-size: 1.5em;
                             color: var(--white);
+                                 @media (max-width:900px){
+                            font-size: 1.1em;
+                            }
+                            @media (max-width:768px){
+                            font-size: 1.5em;
+                            }
+                            @media (max-width:600px){
+                                font-size: 1.2em;
+                            }
+                            @media (max-width:550px){
+                                font-size: 1em;
+                            }
                         }
                       
                         span{
@@ -51,6 +77,48 @@ const CompanyNewsSectionBlock = styled.div`
                             letter-spacing: 1em;
                             color: var(--white);
                             font-weight: lighter;
+                        }
+                        
+                    }
+                    .thumbnail__text {
+                        width: 100%;
+                        text-align: center;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 99999;
+                        h2{
+                            font-size: 1.3em;
+                            color: var(--white);
+                            white-space: pre-line;
+                            @media (max-width:1200px){
+                            font-size: 1.8em;
+                            }
+
+                            @media (max-width:900px){
+                            font-size: 1.5em;
+                            }
+                            @media (max-width:768px){
+                            font-size: 1.8em;
+                            }
+                           
+                            @media (max-width:550px){
+                                font-size: 1.6em;
+                            }
+                            /* word-break:keep-all; */
+                        }
+                      
+                        span{
+                            font-size: 0.5em;
+                            letter-spacing: 1em;
+                            color: var(--white);
+                            font-weight: lighter;
+
+                            @media (max-width:900px){
+                            font-size: 0.3em;
+                                
+                            }
                         }
                         
                     }
@@ -102,6 +170,24 @@ const CompanyNewsSectionBlock = styled.div`
 
                 .news__text {
                     text-align: left;
+                    h2{
+                            font-size: 1.1em;
+                            @media (max-width:1300px){
+                                font-size: 1em;
+                            }
+                            @media (max-width:1200px){
+                                font-size: 1.2em;
+                                
+                            }
+                            @media (max-width:768px){
+                                font-size: 1.5em;
+                            }
+                           
+                            @media (max-width:550px){
+                                font-size: 1.3em;
+                            }
+                         
+                        }
 
                     span{
                             font-size: 1.1em;
@@ -115,6 +201,19 @@ const CompanyNewsSectionBlock = styled.div`
                             -webkit-line-clamp: 2;
                             -webkit-box-orient: vertical;
                             word-break: keep-all;
+                            @media (max-width:1200px){
+                            font-size: 1em;
+                                
+                            }
+                            @media (max-width:900px){
+                            font-size: 0.9em;
+                            }
+                            @media (max-width:768px){
+                            font-size: 1em;
+                            }
+                            @media (max-width:550px){
+                            font-size: 0.9em;
+                            }
                         }
                     .news__text2 {
                         display: flex;

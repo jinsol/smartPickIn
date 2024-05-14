@@ -159,9 +159,15 @@ const JoinSection = () => {
 
     const register = async (e) =>{
         e.preventDefault()
+        const specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
         if (!userInfo.userId) {
             alert("이메일을 입력하세요.")
             userIdRef.current.focus()
+            return
+        }
+        if(specialCharacters.test(userInfo.userId)){
+            alert("특수문자 사용이 불가합니다.")
+            userIdRef.current.focus();
             return
         }
         if (!userInfo.userPw) {
@@ -263,7 +269,7 @@ const JoinSection = () => {
                     <tbody >
                         <tr>
                             <td><label htmlFor="userId">아이디 : </label></td>
-                            <td colSpan={3}><input type="text"  name="userId" id="userId" ref={userIdRef} value={userInfo.userId} onChange={(e)=>{handleChange(e); idCheck(e.target.value)}}  placeholder='아이디를 입력하세요.' /></td>
+                            <td colSpan={3}><input type="text"  name="userId" id="userId" ref={userIdRef} value={userInfo.userId} onChange={(e)=>{handleChange(e); idCheck(e.target.value)}}  placeholder="'@' 를 포함한 모든 특수문자 사용이 불가합니다." /></td>
                         </tr>
                         <tr>
                             <td><label htmlFor="userPw">비밀번호 : </label></td>

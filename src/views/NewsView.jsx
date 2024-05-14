@@ -22,7 +22,7 @@ const NewsView = () => {
     </span>,
   ];
   const menu = ["소식", "기업소식"];
-  const imgUrl = "/assets/image/cs_bg_icn.png";
+  const imgUrl = "/assets/image/news_bg_icn.png";
   const activeMenu = useSelector((state) => state.news.newsMenu);
   const dispatch = useDispatch();
 

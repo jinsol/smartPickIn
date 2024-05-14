@@ -9,6 +9,7 @@ import { initNewsMenu } from "@/store/news";
 import { userLogout, fetchMembers, localUser } from "@/store/member";
 import { CiLock, CiUnlock } from "react-icons/ci";
 import { PiUserPlusLight } from "react-icons/pi";
+import Logoimage from "@/assets/image/logo_blue.png";
 
 const HeaderBlock = styled.header`
   text-align: center;
@@ -63,7 +64,7 @@ const HeaderBlock = styled.header`
     text-align: center;
     align-items: center;
     position: relative;
-    padding: 0px 1%;
+    padding: 0px 2%;
     background: rgba(255, 255, 255, 0.5); /* 반투명한 배경색 */
 
     .logo {
@@ -79,17 +80,13 @@ const HeaderBlock = styled.header`
     .mainDepth1 {
       display: flex;
       justify-content: center;
-      @media (max-width: 768px) {
+      @media (max-width: 810px) {
         display: none;
       }
 
       li {
         font-size: 1.2em;
         a {
-          /* 추가 제안드립니다! */
-          display: block;
-          cursor: pointer;
-          /* 추가 제안드립니다! */
           padding: 40px 30px;
           font-weight: 600;
           transition: all 0.3s ease;
@@ -109,7 +106,7 @@ const HeaderBlock = styled.header`
         transition: all 0.5s ease;
         display: none;
         justify-content: center;
-        /* padding: 20px 40px; !제거 제안드립니다! */
+        padding: 20px 40px;
         a {
           font-size: 0.9em;
           color: rgba(255, 255, 255, 0.7);
@@ -117,6 +114,14 @@ const HeaderBlock = styled.header`
           &:hover {
             color: var(--white);
             font-weight: 500;
+          }
+        }
+      }
+
+      .depthNews1 {
+        a {
+          &.on {
+            color: var(--blue);
           }
         }
       }
@@ -251,6 +256,9 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
     navigate(`/news/#${value}`);
     dispatch(initNewsMenu(value));
   };
+  const myPageClick = () => {
+    navigate("/my");
+  };
 
   /* ================== 24.05.10 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
 
@@ -259,7 +267,7 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
       <nav id="header__nav">
         <h1 className="logo">
           <Link to="/">
-            <img src="./assets/image/logo_blue.png" alt="" />
+            <img src={Logoimage} alt="로고이미지" />
           </Link>
         </h1>
         <ul className={cn("mainDepth1", isOpen && "open")}>
@@ -311,6 +319,23 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
           <li>
             <NavLink to="/ask">문의하기</NavLink>
           </li>
+          {loging || user ? (
+            <ul>
+              <li className="depthMypage1">
+                <a onClick={myPageClick}>마이페이지</a>
+                <ul className="depthMypage2">
+                  <li>
+                    <Link to="/usermodify">정보수정</Link>
+                  </li>
+                  <li>
+                    <a>장바구니</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          ) : (
+            <div></div>
+          )}
         </ul>
         <div className="info">
           {!loging && !user ? (
@@ -340,7 +365,12 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
           </div>
         </div>
       </nav>
-      <Nav isOpen={isOpen} toggleMenu={toggleMenu} />
+      <Nav
+        isOpen={isOpen}
+        toggleMenu={toggleMenu}
+        loging={loging}
+        user={user}
+      />
     </HeaderBlock>
   );
 };
