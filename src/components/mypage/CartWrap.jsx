@@ -7,7 +7,7 @@ const CartWrapBlock = styled.div`
   display: flex;
   flex-direction: column;
   .CartList:not(:last-child) {
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid var(--gray06);
   }
 `;
 

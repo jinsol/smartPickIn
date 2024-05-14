@@ -22,6 +22,14 @@ const CartListBlock = styled.div`
       flex-basis: 20%;
     }
   }
+  .BtnDelete {
+    background-color: var(--white);
+    color: #ff1a1a;
+    font-weight: 800;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border: 1px solid var(--gray03);
+  }
 `;
 
 const CartList = ({ item }) => {
@@ -98,7 +106,7 @@ const CartList = ({ item }) => {
       <div>
         Total
         <PriceWrap price={TotalPrice} />
-        <button type="button" onClick={onClickDelete}>
+        <button type="button" className="BtnDelete" onClick={onClickDelete}>
           삭제하기
         </button>
       </div>

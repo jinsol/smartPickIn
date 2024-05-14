@@ -138,7 +138,7 @@ const BtnWrap = ({ product }) => {
       <button className="BuyNow" onClick={onClickBuyNow}>
         바로 구매하기
       </button>
-      <ProductModal message={message} />
+      {/* <ProductModal message={message} /> */}
     </BtnWrapBlock>
   );
 };
