@@ -23,8 +23,9 @@
     "react-redux": "^9.1.1",
     "react-router-dom": "^6.23.0",
     "react-simple-captcha": "^9.3.1",
+    "react-simple-chatbot": "^0.6.1",
     "redux": "^5.0.1",
-    "styled-components": "^6.1.8",
+    "styled-components": "^4.0.0",
     "swiper": "^11.1.1"
   },
   "devDependencies": {

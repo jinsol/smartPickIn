@@ -76,7 +76,12 @@ const JoinSectionBlock = styled.div`
                 &:hover{
                     border:1px solid var(--blue);
                 }
-                
+                &::-webkit-outer-spin-button,
+&::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
             }
           
         }
@@ -129,6 +134,7 @@ const JoinSection = () => {
     const [checking, setChecking] = useState(false)
     const dispatch = useDispatch()
     const members = useSelector(state=>state.members.members)
+    
 
     const navigate = useNavigate()
     const userIdRef = useRef("")
@@ -160,6 +166,7 @@ const JoinSection = () => {
     const register = async (e) =>{
         e.preventDefault()
         const specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+        const numFilter = /[1234567890]+/
         if (!userInfo.userId) {
             alert("이메일을 입력하세요.")
             userIdRef.current.focus()
@@ -199,6 +206,11 @@ const JoinSection = () => {
             userCompanyRef.current.focus()
             return false;
         }
+       if(!numFilter.test(userInfo.userTel)){
+            alert("숫자만 입력 가능합니다.")
+            userTelRef.current.focus()
+            return false
+       }
         if(!checking){
             alert('자동입력방지를 확인하세요.')
             return false;
@@ -245,6 +257,8 @@ const JoinSection = () => {
         setUserInfo(userInfo=>({...userInfo, [name]:value}))
     }
 
+    
+
     return (
         <JoinSectionBlock>
             <form onSubmit={register} className={acountOpen && 'on'}>
@@ -277,7 +291,7 @@ const JoinSection = () => {
                         </tr>
                         <tr>
                             <td><label htmlFor="userPwOk">비밀번호확인 : </label></td>
-                            <td><input type="password" name="userPwOk" id="userPwOk" ref={userPwOkRef} value={userInfo.userPwOk} onChange={handleChange} placeholder='비밀번호를 동일하게 입력해주세요.' /></td>
+                            <td><input type="password" name="userPwOk" id="userPwOk" ref={userPwOkRef} value={userInfo.userPwOk} onChange={handleChange} placeholder='비밀번호를 동일하게 입력해주세요.'/></td>
                         </tr>
                         </tbody>
                        
@@ -305,7 +319,7 @@ const JoinSection = () => {
                         </tr>
                         <tr>
                             <td><label htmlFor="userTel">휴대폰번호 : </label></td>
-                            <td><input type="tel" maxLength='11' name="userTel" id="userTel" ref={userTelRef} value={userInfo.userTel} onChange={handleChange} placeholder="-  를 제외하고 입력해주세요." /></td>
+                            <td><input type="tel" maxLength='11' name="userTel" id="userTel" ref={userTelRef} value={userInfo.userTel} onChange={handleChange} placeholder="-  를 제외하고 입력해주세요."  /></td>
                         </tr>
                        
                         </tbody>

@@ -6,6 +6,7 @@ import Nav from "@/components/layout/Nav";
 import { useSelector, useDispatch } from "react-redux";
 import { initServiceMenu } from "@/store/service";
 import { initNewsMenu } from "@/store/news";
+import {initMyMenu} from "@/store/my"
 import { userLogout, fetchMembers, localUser } from "@/store/member";
 import { CiLock, CiUnlock } from "react-icons/ci";
 import { PiUserPlusLight } from "react-icons/pi";
@@ -25,6 +26,7 @@ const HeaderBlock = styled.header`
     left: 30px;
     a {
       margin-right: 10px;
+      cursor: pointer;
     }
   }
   .itemcount {
@@ -80,6 +82,7 @@ const HeaderBlock = styled.header`
     .mainDepth1 {
       display: flex;
       justify-content: center;
+      cursor: pointer;
       @media (max-width: 810px) {
         display: none;
       }
@@ -211,7 +214,6 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
   const [loging, setLoging] = useState(localStorage.loging);
 
   const user = useSelector((state) => state.members.user);
-  console.log(user);
 
   useEffect(() => {
     dispatch(fetchMembers());
@@ -263,8 +265,9 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
     navigate(`/news/#${value}`);
     dispatch(initNewsMenu(value));
   };
-  const myPageClick = () => {
-    navigate("/my");
+  const myPageClick = (value) => {
+    navigate(`/my/#${value}`);
+    dispatch(initMyMenu(value))
   };
 
   /* ================== 24.05.10 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
@@ -328,7 +331,8 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
           </li>
           {loging || user ? (
             <li className="depthMypage1">
-              <a onClick={myPageClick}>마이페이지</a>
+              <a onClick={() => myPageClick("마이페이지")}
+              className={location.pathname.includes("/my") && "active"}>마이페이지</a>
               <ul className="depthMypage2">
                 <li>
                   <Link to="/usermodify">정보수정</Link>
@@ -357,7 +361,6 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
               <a href="#" onClick={handleLogout}>
                 <CiUnlock />
               </a>
-              <Link to="/usermodify">수정</Link>
             </div>
           )}
           <div

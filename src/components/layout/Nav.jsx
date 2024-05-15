@@ -26,15 +26,15 @@ justify-content: center;
 .nav__menu{
   .depth1{
     li{
-      font-size:32px;
-      padding:35px 0;
+      font-size:25px;
+      padding:25px 0;
       line-height: 35px;
       position:relative;
       z-index:99999999;
       font-weight: 500;
       color: var(--gray01);
       @media (max-width:768px){
-        font-size: 25px;
+        font-size: 20px;
       }
       
       
@@ -49,9 +49,9 @@ justify-content: center;
           .arrow{
             display: inline-block;
             position: absolute;
-            top:35px;
+            top:30px;
             @media (max-width:768px){
-            top:38px;
+            top:33px;
       }
           }
           .strong{
@@ -75,6 +75,10 @@ justify-content: center;
           font-size:20px;
           color:gray;
           padding:5px 0;
+          @media (max-width:768px){
+              font-size: 15px;
+            
+      }
         }
         &.on{
           display:block;
@@ -91,6 +95,10 @@ justify-content: center;
           margin-top: 15px;
           color:gray;
           padding:5px 0;
+          @media (max-width:768px){
+              font-size: 15px;
+            
+      }
         }
         &.open{
           display:block;
@@ -105,6 +113,10 @@ justify-content: center;
           margin-top: 15px;
           color:gray;
           padding:5px 0;
+          @media (max-width:768px){
+              font-size: 15px;
+            
+      }
         }
         &.open{
           display:block;

@@ -120,10 +120,14 @@ input[type="checkbox"]:checked::after {
         .agSection02{
             table{
                 border:none;
+                width: 100%;
                 tr{
                     td{
-                        padding: 10px;
+                        padding: 10px 0;
                         text-align: center;
+                        @media (max-width:550px){
+                            font-size: 0.9em;
+                        }
                     }
                    
                 }
