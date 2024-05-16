@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const TabUl = styled.ul`
   display: inline-flex;
+  flex-wrap: wrap;
   background-color: var(--light-blue);
   border-radius: 50px;
   position: relative;
@@ -17,6 +18,14 @@ const TabUl = styled.ul`
       font-weight: 800;
       background-color: var(--blue);
       border-radius: 50px;
+    }
+  }
+  @media (max-width: 768px) {
+    li {
+      font-size: 1em;
+      button {
+        padding: 0.6em 1.2em 0.7em;
+      }
     }
   }
 `;

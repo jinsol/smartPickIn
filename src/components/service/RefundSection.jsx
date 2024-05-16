@@ -33,6 +33,9 @@ const SectionBlock = styled.section`
       }
     }
   }
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Blue = styled.span`

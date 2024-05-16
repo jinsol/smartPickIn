@@ -11,6 +11,7 @@ const ContentWrapBlock = styled.div`
   flex-direction: column;
   gap: 20px;
   border: 1px solid var(--gray04);
+  height: fit-content;
   border-radius: 10px;
   padding: 2em;
   background-color: rgba(255, 255, 255, 0.5);
@@ -22,12 +23,14 @@ const ContentWrapBlock = styled.div`
   .HashtagWrap {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
     span {
       border-radius: 50px;
       border: 1px solid var(--blue);
       background-color: var(--light-blue);
       color: var(--blue);
       padding: 6px 20px;
+      word-break: auto-phrase;
     }
   }
 `;

@@ -17,6 +17,7 @@ const Section = styled.section`
   }
   @media (max-width: 1100px) {
     grid-template-columns: 1fr;
+    padding: 4vh 0;
   }
 `;
 

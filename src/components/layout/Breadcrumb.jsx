@@ -6,6 +6,8 @@ import { MdHome, MdChevronRight } from "react-icons/md";
 const BreadcrumbWrap = styled.div`
   ol {
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 4px;
     align-items: center;
     font-size: 1.2em;
     font-weight: 700;
@@ -23,6 +25,15 @@ const BreadcrumbWrap = styled.div`
         display: flex;
         align-items: center;
         gap: 8px;
+      }
+    }
+  }
+  @media (max-width: 1100px) {
+    ol {
+      li {
+        &.rightArrow {
+          padding: 0 6px;
+        }
       }
     }
   }

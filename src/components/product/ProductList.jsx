@@ -16,8 +16,10 @@ const ArticleBlock = styled.article`
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
+
     @media (max-width: 1100px) {
       grid-template-columns: 1fr 1fr;
+
       .TitleWrap {
         display: inline-block;
       }
@@ -26,7 +28,6 @@ const ArticleBlock = styled.article`
         padding: 10px 0;
       }
       .TagWrap {
-        position: absolute;
         display: inline-flex;
         right: 0;
       }
@@ -61,6 +62,9 @@ const ProductLi = styled.li`
       &:nth-child(2) {
         flex-basis: auto;
         padding: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
       }
       &:nth-child(3) {
         flex-basis: auto;
@@ -91,6 +95,7 @@ const ContentWrap = styled.div`
     background-color: var(--gray02);
     grid-column: span 3;
     height: 1px;
+    width: 100%;
   }
   .HashtagWrap {
     span {
@@ -104,6 +109,8 @@ const ContentWrap = styled.div`
       padding: 10px 0;
       display: flex;
       gap: 10px;
+      row-gap: 4px;
+      flex-wrap: wrap;
     }
   }
 `;

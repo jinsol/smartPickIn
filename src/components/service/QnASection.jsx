@@ -40,6 +40,16 @@ const AccordionHeader = styled.h3`
       }
     }
   }
+  @media (max-width: 768px) {
+    button {
+      padding: 1em;
+      span {
+        &.HeaderTitle {
+          font-size: 1em;
+        }
+      }
+    }
+  }
 `;
 
 const Question = styled.span`

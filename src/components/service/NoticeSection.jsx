@@ -24,6 +24,21 @@ const SectionBlock = styled.section`
       }
     }
   }
+  @media (max-width: 768px) {
+    ul {
+      li {
+        &:nth-child(1) {
+          display: none;
+        }
+        &:nth-child(2) {
+          flex-basis: 75%;
+        }
+        &:nth-child(3) {
+          flex-basis: 25%;
+        }
+      }
+    }
+  }
 `;
 
 const BoardHeader = styled.ul`
@@ -35,6 +50,9 @@ const BoardHeader = styled.ul`
   padding: 1.5em 0;
   li {
     color: var(--black) !important;
+  }
+  @media (max-width: 768px) {
+    font-size: 1em;
   }
 `;
 
@@ -58,6 +76,14 @@ const BoardContent = styled.ul`
     &:hover {
       &:nth-child(2) {
         color: var(--blue);
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    li {
+      padding: 1em 0;
+      &:nth-child(2) {
+        font-size: 1em;
       }
     }
   }
@@ -95,6 +121,11 @@ const AccordionCollapse = styled.div`
         opacity: 1;
         transform: translateY(0);
       }
+    }
+  }
+  @media (max-width: 768px) {
+    .accordion-content {
+      font-size: 1em;
     }
   }
 `;
