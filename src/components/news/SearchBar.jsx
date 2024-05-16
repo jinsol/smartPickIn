@@ -68,9 +68,10 @@ const SearchButton = styled.button`
 const SearchBar = ({ onSearch,type}) => {
     const [searchInput, setSearchInput] = useState("")
     const searchRef = useRef("")
-    const handleButtonClick = () => {
+    const handleButtonClick = (e) => {
+        e.preventDefault(); // 이벤트의 기본 동작을 막음
         onSearch(searchInput); // 검색 버튼 클릭 시에만 필터링 함수 호출
-        setSearchInput("")
+        setSearchInput("");
     };
     const onChange = (e) =>{
     setSearchInput(e.target.value)

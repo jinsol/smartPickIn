@@ -96,7 +96,9 @@ const LoginSectionBlock = styled.div`
 const LoginSection = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
     const members = useSelector(state=>state.members.members)
+
     const [userId, setUserId] = useState("")
     const [userPw, setUserPw] = useState("")
     const [lock, setLock] = useState(false)
@@ -111,12 +113,9 @@ const LoginSection = () => {
     useEffect(()=>{
         setLoginAni(true)
     },[])
-    
-
     useEffect(()=>{
         dispatch(fetchMembers())
     }, [])
-
     const handleLogin = (e)=>{
         e.preventDefault()
         if (!userId) {
@@ -147,7 +146,6 @@ const LoginSection = () => {
                     navigate('/')
                     }
                 },200)
-                 
             }
         } else {
             alert("회원이 아닙니다.")
