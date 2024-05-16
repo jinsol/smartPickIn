@@ -1,8 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 import MySection from '@/components/my/MySection'
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import PageTitle from "@/components/layout/PageTitle";
 import styled from 'styled-components';
+import {useSelector} from 'react-redux';
+
 
 
 
@@ -14,14 +16,21 @@ width: 100%;
   padding: 20vh 3vh;
 
   }
+  span:first-child{
+    display: flex;
+  }
 `
 
 
 const MyView = () => {
+  const user = useSelector(state=>state.members.user)
+  const userName = user ? user.userName : '';
+
+
     const title = [
-        <span key="line1">마이페이지</span>,
+        <span key="line1">안녕하세요</span>,
         <span key="line2">
-          <b>MyPage</b>
+          <b>{userName}님</b>
         </span>,
       ];
   const imgUrl = "/assets/image/cs_bg_icn_mypage.png";

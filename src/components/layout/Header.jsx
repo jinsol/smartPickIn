@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import cn from "classnames";
 import Nav from "@/components/layout/Nav";
 import { useSelector, useDispatch } from "react-redux";
 import { initServiceMenu } from "@/store/service";
 import { initNewsMenu } from "@/store/news";
-import {initMyMenu} from "@/store/my"
-import { userLogout, fetchMembers, localUser } from "@/store/member";
-import { CiLock, CiUnlock } from "react-icons/ci";
+import { initMyMenu} from "@/store/my"
+import { userLogout,  fetchMembers,localUser } from "@/store/member";
+import { CiLock,CiUnlock } from "react-icons/ci";
 import { PiUserPlusLight } from "react-icons/pi";
-import Logoimage from "@/assets/image/logo_blue.png";
+import Logoimage from '@/assets/image/logo_blue.png'
 
-const HeaderBlock = styled.header`
+const HeaderBlock = styled.div`
   text-align: center;
   position: fixed;
   display: flex;
@@ -26,7 +26,6 @@ const HeaderBlock = styled.header`
     left: 30px;
     a {
       margin-right: 10px;
-      cursor: pointer;
     }
   }
   .itemcount {
@@ -79,150 +78,155 @@ const HeaderBlock = styled.header`
       position: relative;
       z-index: 9999999;
     }
-    .mainDepth1 {
+    .mainDepth1{
       display: flex;
       justify-content: center;
-      cursor: pointer;
-      @media (max-width: 810px) {
+      @media (max-width:810px){
         display: none;
       }
 
-      li {
+      li{
         font-size: 1.2em;
-        a {
-          padding: 40px 30px;
+        @media (max-width:1200px){
+          font-size: 1em;
+        }
+        a{
+          padding: 40px 35px;
           font-weight: 600;
           transition: all 0.3s ease;
-          &:hover,
-          &.active {
+          cursor: pointer;
+          @media (max-width:1200px){
+          padding: 40px 20px;
+            
+          }
+          &:hover, &.active{
             color: var(--blue);
           }
         }
       }
-      .depthNews2,
-      .depthService2,
-      .depthMypage2 {
-        width: 100%;
-        background: #1774d0;
-        position: absolute;
-        top: 100%;
-        left: 0;
+      .depthNews2, .depthService2, .depthMypage2{
+        width:100%; background:#1774d0; position:absolute; top:100%; left:0;   
         transition: all 0.5s ease;
-        display: none;
-        justify-content: center;
-        padding: 20px 40px;
-        a {
+          padding: 20px 40px;
+          display: flex;
+          justify-content: center;
+          transform: scaleY(0);
+          opacity: 0;
+          z-index: -99999;
+          transform-origin: top center;
+        a{
           font-size: 0.9em;
-          color: rgba(255, 255, 255, 0.7);
+          color:rgba(255,255,255,0.7);
           transition: all 0.5s ease;
-          &:hover {
+          cursor: pointer;
+          &:hover{
             color: var(--white);
             font-weight: 500;
           }
         }
       }
-
-      .depthNews1 {
-        a {
-          &.on {
-            color: var(--blue);
-          }
+ 
+      .depthNews1{
+        a{&.active{
+          color: var(--blue);
         }
       }
-      .depthNews1:hover {
-        .depthNews2 {
-          display: flex;
-          justify-content: center;
+      }
+      .depthNews1:hover{
+        .depthNews2{
+          transform: scaleY(1);
+          opacity: 1;
         }
       }
-      .depthService1:hover {
-        .depthService2 {
-          display: flex;
-          justify-content: center;
+      .depthService1:hover{
+        .depthService2{
+          transform: scaleY(1);
+          opacity: 1;
         }
       }
-      .depthMypage1:hover {
-        .depthMypage2 {
-          display: flex;
-          justify-content: center;
+      .depthMypage1:hover{
+        .depthMypage2{
+          transform: scaleY(1);
+          opacity: 1;
         }
       }
     }
-  }
-  .info {
-    position: relative;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    .infotext {
+    }
+    .info {
+      position: relative;
+      z-index: 9999;
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-right: 20px;
-      padding-top: 5px;
+      .infotext {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        padding-top: 5px;
 
-      a {
-        display: inline-block;
-        font-size: 2em;
-        padding-left: 15px;
+        a {
+          display:  inline-block;
+         font-size: 2em;
+          padding-left: 15px;
+        }
       }
     }
-  }
-  .menu-wrap {
-    position: relative;
-    width: 28px;
-    height: 16px;
-    cursor: pointer;
-    z-index: 9999999;
-  }
-  .menu-wrap .line {
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    border-radius: 2px;
-    background: #222;
-    left: 0;
-  }
-  .menu-wrap .line:first-child {
-    top: 0;
-    transform-origin: 25% 50%;
-    transition: 0.3s;
-  }
-  .menu-wrap .line:nth-child(2) {
-    top: calc(50% - 1px);
-  }
-  .menu-wrap .line:last-child {
-    bottom: 0;
-    transform-origin: 25% 50%;
-    transition: 0.3s;
-  }
+    .menu-wrap {
+      position: relative;
+      width: 28px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 9999999;
+    }
+    .menu-wrap .line {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      border-radius: 2px;
+      background: #222;
+      left: 0;
+    }
+    .menu-wrap .line:first-child {
+      top: 0;
+      transform-origin: 25% 50%;
+      transition: 0.3s;
+    }
+    .menu-wrap .line:nth-child(2) {
+      top: calc(50% - 1px);
+    }
+    .menu-wrap .line:last-child {
+      bottom: 0;
+      transform-origin: 25% 50%;
+      transition: 0.3s;
+    }
 
-  .menu-wrap.open .line:first-child {
-    transform: rotate(45deg) translateX(10%);
-  }
-  .menu-wrap.open .line:nth-child(2) {
-    opacity: 0;
-  }
-  .menu-wrap.open .line:last-child {
-    transform: rotate(-45deg) translateX(10%);
-  }
+    .menu-wrap.open .line:first-child {
+      transform: rotate(45deg) translateX(10%);
+    }
+    .menu-wrap.open .line:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-wrap.open .line:last-child {
+      transform: rotate(-45deg) translateX(10%);
+    }
 `;
 
-const Header = ({ onMouseEnter, onMouseLeave }) => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const [loging, setLoging] = useState(localStorage.loging);
+  const [loging,setLoging] = useState(localStorage.loging)
 
   const user = useSelector((state) => state.members.user);
+  console.log(user);
 
   useEffect(() => {
     dispatch(fetchMembers());
     if (loging) {
       // console.log("로깅",loging)
       dispatch(localUser(JSON.parse(loging)));
-      setLoging(localStorage.loging);
+      setLoging(localStorage.loging)
     }
-  }, [dispatch, loging]);
+  }, [dispatch,loging]);
 
   // const handleLogout = (e)=>{
   //   e.preventDefault()
@@ -244,14 +248,13 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(userLogout());
-    setLoging(null);
-    navigate("/");
+    setLoging(null)
+    navigate('/')
     // localStorage.removeItem('loggedInUser');
   };
 
-  /* ================== 24.05.10 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
+  /* ================== 24.05.03 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
   const navigate = useNavigate();
-  const location = useLocation();
   useEffect(() => {
     const hash = decodeURIComponent(window.location.hash.slice(1));
     dispatch(initServiceMenu(hash));
@@ -270,17 +273,17 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
     dispatch(initMyMenu(value))
   };
 
-  /* ================== 24.05.10 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
+  /* ================== 24.05.03 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
 
   return (
-    <HeaderBlock onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <HeaderBlock>
       <nav id="header__nav">
         <h1 className="logo">
           <Link to="/">
             <img src={Logoimage} alt="로고이미지" />
           </Link>
         </h1>
-        <ul className={cn("mainDepth1", isOpen && "open")}>
+        <ul className={cn('mainDepth1', isOpen && 'open')}>
           <li>
             <NavLink to="/about">소개</NavLink>
           </li>
@@ -288,12 +291,9 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
             <NavLink to="/product">서비스주문</NavLink>
           </li>
           <li className="depthNews1">
-            <a
-              onClick={() => newsMenuClick("소식")}
-              className={location.pathname.includes("/news") && "active"}
-            >
-              소식
-            </a>
+            <a onClick={() => newsMenuClick("소식")}
+             className={location.pathname.includes("/news") && "active"}>소식</a>
+            
             <ul className="depthNews2">
               <li>
                 <a onClick={() => newsMenuClick("소식")}>소식</a>
@@ -304,12 +304,7 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
             </ul>
           </li>
           <li className="depthService1">
-            <a
-              onClick={() => handleMenuClick("공지사항")}
-              className={location.pathname.includes("/service") && "active"}
-            >
-              고객센터
-            </a>
+            <a onClick={() => handleMenuClick("공지사항")}>고객센터</a>
             <ul className="depthService2">
               <li>
                 <a onClick={() => handleMenuClick("공지사항")}>공지사항</a>
@@ -329,37 +324,41 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
           <li>
             <NavLink to="/ask">문의하기</NavLink>
           </li>
-          {loging || user ? (
-            <li className="depthMypage1">
-              <a onClick={() => myPageClick("마이페이지")}
+          {
+  loging || user ? (
+    <ul>
+      <li className="depthMypage1">
+      <a onClick={() => myPageClick("마이페이지")}
               className={location.pathname.includes("/my") && "active"}>마이페이지</a>
-              <ul className="depthMypage2">
-                <li>
-                  <Link to="/usermodify">정보수정</Link>
-                </li>
-                <li>
-                  <Link to="/cart">장바구니</Link>
-                </li>
-              </ul>
-            </li>
-          ) : (
-            <div></div>
-          )}
+        <ul className="depthMypage2">
+          <li>
+            <Link to='/usermodify'>
+              정보수정
+            </Link>
+          </li>
+          <li>
+          <Link to='/cart'>
+              장바구니
+            </Link>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  ) : (
+    <div></div>
+  )
+}
         </ul>
         <div className="info">
           {!loging && !user ? (
             <div className="infotext">
-              <Link to="/login">
-                <CiLock />
-              </Link>
-              <Link to="/agree">
-                <PiUserPlusLight />
-              </Link>
+              <Link to="/login"><CiLock /></Link>
+              <Link to="/agree"><PiUserPlusLight /></Link>
             </div>
           ) : (
             <div className="infotext">
               <a href="#" onClick={handleLogout}>
-                <CiUnlock />
+              <CiUnlock />
               </a>
             </div>
           )}
@@ -373,12 +372,7 @@ const Header = ({ onMouseEnter, onMouseLeave }) => {
           </div>
         </div>
       </nav>
-      <Nav
-        isOpen={isOpen}
-        toggleMenu={toggleMenu}
-        loging={loging}
-        user={user}
-      />
+      <Nav isOpen={isOpen} toggleMenu={toggleMenu} loging={loging} user={user} />
     </HeaderBlock>
   );
 };

@@ -126,6 +126,8 @@ const UserModifySection = () => {
         userEmail :user ? user.userEmail : "",
         userTel :user ? user.userTel : "",
     })
+    const numFilter = /[1234567890]+/
+    const specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
     const handleChange = (e)=>{
         const {value, name} = e.target
@@ -148,6 +150,16 @@ const UserModifySection = () => {
             userPwRef.current.focus()
             return
         }
+        if(!numFilter.test(userInfo.userTel)){
+            alert("숫자만 입력 가능합니다.")
+            userTelRef.current.focus()
+            return false
+       }
+       if(specialCharacters.test(userInfo.userTel)){
+        alert("특수문자 사용이 불가합니다.")
+        userTelRef.current.focus();
+        return
+    }
         try {
             await memberDB.child(user.key).update(userInfo)
             dispatch(fetchMembers())
@@ -158,7 +170,6 @@ const UserModifySection = () => {
             console.log("오류 : ", error)
         }
     }
-
     const memberRemove = async (e)=>{
         e.preventDefault()
         const answer = confirm("정말로 탈퇴하시겠습니까?")

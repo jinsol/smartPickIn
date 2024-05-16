@@ -82,7 +82,6 @@ justify-content: center;
         }
         &.on{
           display:block;
-          color:green;
 
         }
       }
@@ -191,12 +190,12 @@ const Nav = ({isOpen, toggleMenu,loging,user}) => {
                      user || loging ? (
             <ul>
               <li onClick={depthClick2}>
-                <a className={click && 'on'}><span className='strong'>06</span> 마이페이지 
+                <a className={click2 && 'on'}><span className='strong'>06</span> 마이페이지 
                   {!click2 ? <IoMdArrowDropdown className='arrow' /> : <IoMdArrowDropup className='arrow' />}
                 </a>
                 <ul className={cn("hidden3", click2 && "open")}>
-                  <li onClick={toggleMenu}> <Link to="/news#소식">정보수정</Link></li>
-                  <li onClick={toggleMenu}> <Link to="/news#기업소식">장바구니</Link></li>
+                  <li onClick={toggleMenu}> <Link to="/usermodify">정보수정</Link></li>
+                  <li onClick={toggleMenu}> <Link to="/cart">장바구니</Link></li>
                 </ul>
               </li>
             </ul>

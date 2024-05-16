@@ -90,14 +90,17 @@ const MySectionBlock = styled.section`
 const MySection = () => {
 
     const [myAni,setMyAni] =useState(false)
-    const navgiate = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(()=>{
         setMyAni(true)
     },[])
 
     const infoClick = ()=>{
-        navgiate('/usermodify')
+        navigate('/usermodify')
+    }
+    const cartClick =()=>{
+        navigate('/cart')
     }
   
     return (
@@ -108,7 +111,7 @@ const MySection = () => {
                 <h2>정보수정</h2>
             </li>
             <span></span>
-            <li className={cn('cart',myAni && 'on')}>
+            <li className={cn('cart',myAni && 'on')} onClick={cartClick}>
             <h1 className="icon"><CgShoppingCart /></h1>
                 <h2>장바구니</h2>
             </li>
