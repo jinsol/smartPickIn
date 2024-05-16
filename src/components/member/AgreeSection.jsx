@@ -84,6 +84,16 @@ input[type="checkbox"]:checked::after {
         } 
         //공통 style
         .agSection01{
+            label{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid var(--gray06);
+                width: 100%;
+                padding: 0 10px;
+                cursor: pointer;
+
+            }
             /* input{
             }
             input, checkbox{
@@ -118,6 +128,16 @@ input[type="checkbox"]:checked::after {
             }
         }
         .agSection02{
+            label{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid var(--gray06);
+                width: 100%;
+                padding: 0 10px;
+                cursor: pointer;
+
+            }
             table{
                 border:none;
                 width: 100%;
@@ -142,6 +162,13 @@ input[type="checkbox"]:checked::after {
             }
         }
         .agSection03{
+            label{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 10px;
+                cursor: pointer;
+            }
             h2{
                 color: var(--gray02);
                 font-weight: 400;
@@ -232,8 +259,17 @@ const AgreeSection = () => {
                 <h1>약관동의</h1>
             </div>
             <div className="agSection01">
-                <h2>회원가입 약관 <input type="checkbox" checked={personalInfoAgreed} onChange={handlePersonalInfoChange}/></h2>
-                <p className='agreeText'>
+            <label htmlFor="personalInfoCheckbox" style={{ display: 'flex', alignItems: 'center' }}>
+    <h2 style={{ cursor: 'pointer', marginRight: '10px', marginBottom: '0' }}>회원가입 약관</h2>
+    <input 
+        type="checkbox" 
+        id="personalInfoCheckbox"
+        checked={personalInfoAgreed} 
+        onChange={handlePersonalInfoChange} 
+        style={{ marginRight: '5px', marginBottom: '0' }} // 스타일 조정
+    />
+</label>
+<p className='agreeText'>
                 제1조 (목적)
 이 약관은 스마트픽인 회사(광고대행)이 운영, 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)의 이용에 관한 스마트픽인과 이용자의 권리·의무 및 책임사항 등을 규정함을 목적으로 합니다.
 ※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다」
@@ -386,7 +422,16 @@ const AgreeSection = () => {
                 </p>
             </div>
             <div className="agSection02">
-                <h2>개인정보 수집 및 이용 <input type="checkbox" checked={collectionAgreed} onChange={handleCollectionChange} /></h2>
+            <label htmlFor="collectionCheckbox">
+    <h2 style={{ cursor: 'pointer' }}>개인정보 수집 및 이용</h2>
+    <input 
+        type="checkbox" 
+        id="collectionCheckbox"
+        checked={collectionAgreed} 
+        onChange={handleCollectionChange} 
+    />
+</label>
+
                 <table>
                     <thead style={{textAlign:'center'}}>
                         <tr>
@@ -410,7 +455,15 @@ const AgreeSection = () => {
                 </table>
             </div>
             <div className="agSection03">
-            <h2>회원약관의 모두 동의합니다 <input type="checkbox" checked={allAgreed} onChange={handleAllAgreeChange}/></h2>
+            <label htmlFor="allAgreedCheckbox">
+    <h2 style={{ cursor: 'pointer' }}>회원약관의 모두 동의합니다</h2>
+    <input 
+        type="checkbox" 
+        id="allAgreedCheckbox"
+        checked={allAgreed} 
+        onChange={handleAllAgreeChange} 
+    />
+</label>
             </div>
             <div className="btn">
                 <button type='button'>취소</button>

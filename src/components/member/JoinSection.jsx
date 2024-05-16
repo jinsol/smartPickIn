@@ -68,6 +68,7 @@ const JoinSectionBlock = styled.div`
                 border: 1px solid var(--gray06);
                 text-indent:1em; 
                 transition: border 0.3s ease;
+                letter-spacing: 0;
                 &:focus{
                     outline: none;
                     border:1px solid var(--blue);
