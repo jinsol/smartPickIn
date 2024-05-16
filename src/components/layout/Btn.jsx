@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaArrowRight } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const BtnBlock = styled.button`
   display: flex;
@@ -39,9 +40,13 @@ const BtnBlock = styled.button`
   }
 `;
 
-const Btn = ({ text }) => {
+const Btn = ({ text, link }) => {
+  const navigate = useNavigate();
+  const onClickLink = () => {
+    navigate(link);
+  };
   return (
-    <BtnBlock className="BblueCwhite">
+    <BtnBlock className="BblueCwhite" onClick={onClickLink}>
       {text} <FaArrowRight className="icon" />
     </BtnBlock>
   );

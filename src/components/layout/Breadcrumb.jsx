@@ -57,7 +57,13 @@ const Breadcrumb = ({ depth1, depth2, depth3 }) => {
               <MdChevronRight />
             </li>
             <li className={!depth3 ? "depth2 active" : "depth2"}>
-              <a>{depth2}</a>
+              {depth2 === "소식" ? (
+                <Link to="/news#소식">{depth2}</Link>
+              ) : depth2 === "기업소식" ? (
+                <Link to="/news#기업소식">{depth2}</Link>
+              ) : (
+                <a>{depth2}</a>
+              )}
             </li>
             {depth3 && (
               <>

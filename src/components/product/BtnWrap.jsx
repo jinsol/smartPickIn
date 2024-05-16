@@ -40,7 +40,7 @@ const BtnWrap = ({ product }) => {
   const { id, price, thumbnail, title } = product;
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
-  const [message, setMessage] = useState(""); // 메시지 상태 추가
+  const [message, setMessage] = useState({ title: "", content: "", link: "" }); // 메시지 상태 추가
 
   const decreaseQuantity = () => {
     if (!(qty <= 1)) {
@@ -52,73 +52,97 @@ const BtnWrap = ({ product }) => {
   };
 
   const onClickGoCart = () => {
-    const userId = JSON.parse(localStorage.loging).userId;
-    const product = {
-      id,
-      qty,
-      price,
-      thumbnail,
-      title,
-    };
-    cartDB
-      .child(userId)
-      .once("value")
-      .then((snapshot) => {
-        const cartData = snapshot.val();
-        if (cartData && cartData[id]) {
-          // 이미 해당 상품이 장바구니에 있는 경우, 수량을 업데이트
-          const existingProduct = cartData[id];
-          const updatedQty = existingProduct.qty + qty;
-          // 장바구니에 있는 상품의 수량만 업데이트
-          return cartDB.child(userId).child(id).update({ qty: updatedQty });
-        } else {
-          // 해당 상품이 장바구니에 없는 경우, 새로 추가
-          return cartDB.child(userId).child(id).set(product);
-        }
-      })
-      .then(() => {
-        console.log("Product added to cart successfully");
-      })
-      .catch((error) => {
-        console.error("Error adding product to cart: ", error);
+    const loggedInUser = localStorage.getItem("loging");
+    if (loggedInUser) {
+      const userId = JSON.parse(localStorage.loging).userId;
+      const product = {
+        id,
+        qty,
+        price,
+        thumbnail,
+        title,
+      };
+      cartDB
+        .child(userId)
+        .once("value")
+        .then((snapshot) => {
+          const cartData = snapshot.val();
+          if (cartData && cartData[id]) {
+            // 이미 해당 상품이 장바구니에 있는 경우, 수량을 업데이트
+            const existingProduct = cartData[id];
+            const updatedQty = existingProduct.qty + qty;
+            // 장바구니에 있는 상품의 수량만 업데이트
+            return cartDB.child(userId).child(id).update({ qty: updatedQty });
+          } else {
+            // 해당 상품이 장바구니에 없는 경우, 새로 추가
+            return cartDB.child(userId).child(id).set(product);
+          }
+        })
+        .then(() => {
+          console.log("Product added to cart successfully");
+        })
+        .catch((error) => {
+          console.error("Error adding product to cart: ", error);
+        });
+      document.querySelector(".Modal").classList.add("active");
+      setMessage({
+        title: "장바구니에 상품을 추가했습니다",
+        content:
+          "상품을 더 둘러보세요! 언제든지 마이페이지에서 상품을 확인할 수 있습니다 .",
+        link: "/cart",
       });
-    document.querySelector(".Modal").classList.add("active");
-    setMessage("장바구니에 상품을 추가했습니다.");
+    } else {
+      document.querySelector(".Modal").classList.add("active");
+      setMessage({
+        title: "로그인이 필요한 기능입니다",
+        content: "로그인 페이지로 이동하시겠습니까?",
+        link: "/login",
+      });
+    }
   };
 
   const onClickBuyNow = () => {
-    const userId = JSON.parse(localStorage.loging).userId;
-    const product = {
-      id,
-      qty,
-      price,
-      thumbnail,
-      title,
-    };
-    cartDB
-      .child(userId)
-      .once("value")
-      .then((snapshot) => {
-        const cartData = snapshot.val();
-        if (cartData && cartData[id]) {
-          // 이미 해당 상품이 장바구니에 있는 경우, 수량을 업데이트
-          const existingProduct = cartData[id];
-          const updatedQty = existingProduct.qty + qty;
-          // 장바구니에 있는 상품의 수량만 업데이트
-          return cartDB.child(userId).child(id).update({ qty: updatedQty });
-        } else {
-          // 해당 상품이 장바구니에 없는 경우, 새로 추가
-          return cartDB.child(userId).child(id).set(product);
-        }
-      })
-      .then(() => {
-        console.log("Product added to cart successfully");
-      })
-      .catch((error) => {
-        console.error("Error adding product to cart: ", error);
+    const loggedInUser = localStorage.getItem("loging");
+    if (loggedInUser) {
+      const userId = JSON.parse(localStorage.loging).userId;
+      const product = {
+        id,
+        qty,
+        price,
+        thumbnail,
+        title,
+      };
+      cartDB
+        .child(userId)
+        .once("value")
+        .then((snapshot) => {
+          const cartData = snapshot.val();
+          if (cartData && cartData[id]) {
+            // 이미 해당 상품이 장바구니에 있는 경우, 수량을 업데이트
+            const existingProduct = cartData[id];
+            const updatedQty = existingProduct.qty + qty;
+            // 장바구니에 있는 상품의 수량만 업데이트
+            return cartDB.child(userId).child(id).update({ qty: updatedQty });
+          } else {
+            // 해당 상품이 장바구니에 없는 경우, 새로 추가
+            return cartDB.child(userId).child(id).set(product);
+          }
+        })
+        .then(() => {
+          console.log("Product added to cart successfully");
+        })
+        .catch((error) => {
+          console.error("Error adding product to cart: ", error);
+        });
+      navigate("/cart");
+    } else {
+      document.querySelector(".Modal").classList.add("active");
+      setMessage({
+        title: "로그인이 필요한 기능입니다",
+        content: "로그인 페이지로 이동하시겠습니까?",
+        link: "/login",
       });
-    setMessage("바로 구매하기를 선택하셨습니다. 장바구니로 이동합니다.");
-    navigate("/cart");
+    }
   };
 
   return (
@@ -138,7 +162,7 @@ const BtnWrap = ({ product }) => {
       <button className="BuyNow" onClick={onClickBuyNow}>
         바로 구매하기
       </button>
-      {/* <ProductModal message={message} /> */}
+      <ProductModal message={message} />
     </BtnWrapBlock>
   );
 };

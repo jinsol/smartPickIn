@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaCircleInfo } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const ProductModalBlock = styled.div`
   position: fixed;
@@ -13,6 +14,7 @@ const ProductModalBlock = styled.div`
   background-color: var(--white);
   padding: 30px;
   max-width: 500px;
+  min-width: 300px;
   height: fit-content;
   border-radius: 20px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
@@ -77,9 +79,15 @@ const ProductModalBlock = styled.div`
   }
 `;
 
-const ProductModal = ({}) => {
+const ProductModal = ({ message }) => {
+  const navigate = useNavigate();
+  const { title, content, link } = message;
   const onClickClose = () => {
     document.querySelector(".Modal").classList.remove("active");
+  };
+  const onClickLink = () => {
+    document.querySelector(".Modal").classList.remove("active");
+    navigate(link);
   };
   return (
     <>
@@ -89,17 +97,15 @@ const ProductModal = ({}) => {
             <span className="ModalIcon">
               <FaCircleInfo />
             </span>
-            <span>장바구니에 상품을 추가했습니다</span>
+            <span>{title}</span>
           </div>
           <div className="ModalContent">
-            <span>
-              상품을 더 둘러보세요! 언제든지 마이페이지에서 상품을 확인할 수
-              있습니다 .
-            </span>
+            <span>{content}</span>
           </div>
         </div>
         <div className="ModalBtn">
-          <button onClick={onClickClose}>확인</button>
+          <button onClick={onClickClose}>취소</button>
+          <button onClick={onClickLink}>이동하기</button>
         </div>
       </ProductModalBlock>
     </>

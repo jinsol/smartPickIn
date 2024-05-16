@@ -39,7 +39,7 @@ const NewsDetailView = () => {
     <NewsDetailViewBlock>
       <div className="flexCenter">
         <div className="homeRow">
-          <Breadcrumb depth1={"소식"} depth2={"소식"} depth3={item.maintext} />
+          <Breadcrumb depth1={"소식"} depth2={type} depth3={item.maintext} />
           <PageTitle title={title} imgUrl={imgUrl} />
         </div>
       </div>

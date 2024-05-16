@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import gsap from "gsap";
 import TextPlugin from "gsap/TextPlugin";
-import Btn from "./Btn";
+import Btn from "../layout/Btn";
 import HomeSection01TextAni from "@/components/home/HomeSection01TextAni";
 
 const UnorderedListBox = styled.ul`
@@ -175,7 +175,7 @@ const HomeSection01 = () => {
             </h4>
           </SubTitleBox>
           <SupportBox className="right">
-            <Btn text={"진단받기"} />
+            <Btn text={"진단받기"} link={"/ask"} />
           </SupportBox>
         </ListBox>
       </UnorderedListBox>

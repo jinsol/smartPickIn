@@ -27,7 +27,6 @@ const ProductDetailSection = ({ product }) => {
       <ImageWrap thumbnail={thumbnail} />
       <ContentWrap product={product} />
       <ReviewWrap />
-      <ProductModal />
     </Section>
   );
 };

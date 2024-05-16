@@ -5,7 +5,7 @@ import { IoChatbubble, IoMegaphone, IoChevronDownSharp } from "react-icons/io5";
 import ModalPrivacyNotice from "./ModalPrivacyNotice";
 
 const FooterBlock = styled.footer`
-  z-index: 99999;
+  z-index: 99998;
   position: relative;
   background-color: var(--blue);
   color: white;
