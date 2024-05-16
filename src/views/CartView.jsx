@@ -18,6 +18,11 @@ const CartViewBlock = styled.section`
     gap: 40px;
     padding: 40px 0;
   }
+  @media (max-width: 1100px) {
+    .ArticleWrap {
+      grid-template-columns: 1fr;
+    }
+  }
   .noCart {
     display: grid;
     margin-top: 30px;

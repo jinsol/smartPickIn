@@ -21,6 +21,17 @@ const CartListBlock = styled.div`
     &:nth-child(3) {
       flex-basis: 20%;
     }
+    @media (max-width: 1100px) {
+      &:nth-child(1) {
+        flex-basis: 30%;
+      }
+      &:nth-child(2) {
+        flex-basis: 50%;
+      }
+      &:nth-child(3) {
+        flex-basis: 20%;
+      }
+    }
   }
   .BtnDelete {
     background-color: var(--white);
@@ -60,7 +71,10 @@ const CartList = ({ item }) => {
           const existingProduct = cartData[id];
           const updatedQty = existingProduct.qty + (newQty - qty); // 새로운 수량에서 기존 수량을 뺀 값을 사용
           // 장바구니에 있는 상품의 수량만 업데이트
-          return cartDB.child(userId).child(id).update({ qty: updatedQty });
+          return cartDB
+            .child(userId)
+            .child(id)
+            .update({ qty: updatedQty });
         } else {
           // 해당 상품이 장바구니에 없는 경우, 에러 처리 또는 예외처리
           throw new Error("Product does not exist in cart");
