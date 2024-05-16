@@ -5,6 +5,10 @@ import cn from 'classnames'
 import { FaCheck } from "react-icons/fa";
 
 const AutoinputBlock = styled.div`
+p{
+  font-size: 0.9em;
+  margin-top: 20px;
+}
 button{
     border: 1px solid var(--blue);
     padding: 10px;
@@ -88,12 +92,14 @@ class CaptchaTest extends Component {
 
             <div className="col mt-3">
               <div>
+                <p>입력문구를 입력 후 아래버튼을 클릭하세요.</p>
                 <button type="button"
                   className={cn('btn', 'btn-primary',  this.props.checking ?  'on' : '' )}
                   onClick={() => this.doSubmit()}
                 >
                  <FaCheck />
                 </button>
+
               </div>
             </div>
           </div>

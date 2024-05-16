@@ -10,6 +10,11 @@ const memberSlice = createSlice({
     reducers : {
         initMembers(state, action){
             state.members = action.payload
+            const loggedInUser = JSON.parse(localStorage.getItem('loging'))
+            if(loggedInUser){
+                const findUser = state.members.find(item=>item.key==loggedInUser.key)
+                state.user=findUser
+            }
         },
         userLogin(state, action){
             const { key, userId, userPw,userPwOk, userName, userCompany, userEmail, userTel} = action.payload.findUser
