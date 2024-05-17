@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from "styled-components";
 import gsap from "gsap";
+import {useNavigate} from 'react-router-dom'
 
 
 const AboutSection04Block = styled.div`
@@ -68,6 +69,7 @@ const AboutSection04Block = styled.div`
         padding: 15px;
         text-align: center;
         flex: 0 0 30%;
+        cursor: pointer;
         transition: all 0.5s ease;
         @media (max-width:1100px){
             margin: 50px auto;
@@ -130,6 +132,10 @@ const AboutSection04Block = styled.div`
 
 
 const AboutSection04 = () => {
+  const navigate = useNavigate()
+  const handleClick = ()=>{
+    navigate('/cart')
+  }
     const picData = [
         {
             num: '01',
@@ -183,7 +189,7 @@ const AboutSection04 = () => {
                 <ul className='depth1'>
                     {
                         picData.map((item, index)=>(
-                            <li key={index} className='card'>
+                            <li key={index} className='card' onClick={handleClick}>
                                 <div className="picbox">
                                 <img src={item.image} alt="" />
                                 </div>

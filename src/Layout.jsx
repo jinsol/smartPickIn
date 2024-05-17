@@ -5,6 +5,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MouseFollower from "./MouseFollower";
 import BackEffect from "./BackEffect";
+import TopButton from "@/components/layout/TopButton"
+
 
 const Main = styled.main`
   z-index: 1;
@@ -53,6 +55,7 @@ const Layout = () => {
       />
       <Main>
         <Outlet />
+        <TopButton/>
       </Main>
       <Footer />
     </>
