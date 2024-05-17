@@ -28,7 +28,25 @@ const MouseFollower = ({ isMouseOverHeader, handleFollowerMouseEnter }) => {
 
   useEffect(() => {
     const moveFollower = () => {
-      if (isMouseOverHeader) {
+      if (!isMouseOverHeader || position.y < 100) {
+        gsap.to("#follower1", {
+          duration: 1,
+          x: position.x,
+          y: position.y,
+          opacity: 1,
+          scale: 1,
+          ease: "power2.out",
+        });
+        gsap.to("#follower2", {
+          duration: 1,
+          x: position.x,
+          y: position.y,
+          scale: 0,
+          ease: "power2.out",
+        });
+        document.getElementById("follower1").style.zIndex = "100000";
+        // document.getElementById("follower2").style.zIndex = "99999";
+      } else {
         gsap.to("#follower1", {
           duration: 2,
           x: position.x + 100,
@@ -47,24 +65,6 @@ const MouseFollower = ({ isMouseOverHeader, handleFollowerMouseEnter }) => {
         });
         document.getElementById("follower1").style.zIndex = "1";
         document.getElementById("follower2").style.zIndex = "1";
-      } else {
-        gsap.to("#follower1", {
-          duration: 1,
-          x: position.x,
-          y: position.y,
-          opacity: 1,
-          scale: 1,
-          ease: "power2.out",
-        });
-        gsap.to("#follower2", {
-          duration: 1,
-          x: position.x,
-          y: position.y,
-          scale: 0,
-          ease: "power2.out",
-        });
-        document.getElementById("follower1").style.zIndex = "100000";
-        // document.getElementById("follower2").style.zIndex = "99999";
       }
     };
 

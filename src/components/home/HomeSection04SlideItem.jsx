@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const HomeSection04SlideItemBlock = styled.ul`
   background-color: white;
@@ -85,8 +86,10 @@ const DecoImage = styled.li`
 `;
 
 const HomeSection04SlideItem = ({ tag, title, list, image }) => {
+  const navigate = useNavigate();
+  const onClickBlock = () => navigate("/product");
   return (
-    <HomeSection04SlideItemBlock>
+    <HomeSection04SlideItemBlock onClick={onClickBlock}>
       <Tag>{tag}</Tag>
       <Title>{title}</Title>
       <li>

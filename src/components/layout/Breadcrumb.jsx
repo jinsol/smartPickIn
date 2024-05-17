@@ -60,6 +60,8 @@ const Breadcrumb = ({ depth1, depth2, depth3 }) => {
             <li>
               {depth1 === "서비스주문" ? (
                 <Link to="/product">{depth1}</Link>
+              ) : depth1 === "마이페이지" ? (
+                <Link to="/my">{depth1}</Link>
               ) : (
                 <a>{depth1}</a>
               )}

@@ -39,6 +39,8 @@ const CartViewBlock = styled.section`
       padding: 30px 0;
     }
   }
+  @media (max-width: 768px) {
+  }
 `;
 
 const CartView = () => {

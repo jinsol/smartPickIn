@@ -28,6 +28,13 @@ const AsideMenu = styled.aside`
       }
     }
   }
+  @media (max-width: 768px) {
+    ul {
+      li {
+        font-size: 1em;
+      }
+    }
+  }
 `;
 
 const ProductAside = ({ changeCategory, category }) => {

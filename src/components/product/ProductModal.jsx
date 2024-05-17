@@ -72,8 +72,15 @@ const ProductModalBlock = styled.div`
       justify-content: flex-end;
       button {
         font-size: 1.2em;
-        color: var(--blue);
-        font-weight: 800;
+
+        &.BtnSub {
+          color: var(--gray03);
+          font-weight: 500;
+        }
+        &.BtnMain {
+          color: var(--blue);
+          font-weight: 800;
+        }
       }
     }
   }
@@ -104,8 +111,12 @@ const ProductModal = ({ message }) => {
           </div>
         </div>
         <div className="ModalBtn">
-          <button onClick={onClickClose}>취소</button>
-          <button onClick={onClickLink}>이동하기</button>
+          <button onClick={onClickClose} className="BtnSub">
+            취소
+          </button>
+          <button onClick={onClickLink} className="BtnMain">
+            이동하기
+          </button>
         </div>
       </ProductModalBlock>
     </>

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaAngleUp } from "react-icons/fa6";
+import { FaAngleDown } from "react-icons/fa6";
 
 const Section = styled.section``;
 
@@ -42,10 +42,10 @@ const AccordionHeader = styled.h3`
   }
   @media (max-width: 768px) {
     button {
-      padding: 1em;
+      padding: 1em 0;
       span {
         &.HeaderTitle {
-          font-size: 1em;
+          font-size: 16px;
         }
       }
     }
@@ -58,6 +58,9 @@ const Question = styled.span`
   font-weight: 800;
   flex-basis: 10%;
   justify-content: center;
+  @media (max-width: 1100px) {
+    font-size: 1em;
+  }
 `;
 
 const Answer = styled.span`
@@ -66,6 +69,9 @@ const Answer = styled.span`
   font-weight: 800;
   flex-basis: 10%;
   text-align: center;
+  @media (max-width: 1100px) {
+    font-size: 1em;
+  }
 `;
 
 const AccordionCollapse = styled.div`
@@ -81,7 +87,7 @@ const AccordionCollapse = styled.div`
       transition: all 0.5s ease-in 0.3s;
       div {
         p {
-          padding: 1em 0;
+          padding-bottom: 1em;
           span {
             display: block;
           }
@@ -100,6 +106,11 @@ const AccordionCollapse = styled.div`
       }
     }
   }
+  @media (max-width: 1100px) {
+    &.active {
+      padding: 1em 0;
+    }
+  }
   .accordion-body {
     display: flex;
     .accordion-answer {
@@ -108,6 +119,9 @@ const AccordionCollapse = styled.div`
       line-height: 180%;
 
       color: var(--black);
+      @media (max-width: 768px) {
+        flex-basis: 85%;
+      }
     }
   }
 `;
@@ -577,7 +591,7 @@ const QnASection = () => {
                 <Question>Q.</Question>
                 <span className="HeaderTitle">{item.Question}</span>
                 <span className="HeaderIcon">
-                  <FaAngleUp />
+                  <FaAngleDown />
                 </span>
               </button>
             </AccordionHeader>

@@ -275,8 +275,12 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <a href="#" className="mediumFont">
-                SEO 제안서 다운받기
+              <a
+                className="mediumFont"
+                href="https://site-high.com/files/proposal_seo.pdf"
+                target="_blank"
+              >
+                SEO 제안서 보기
               </a>
             </li>
             <li>

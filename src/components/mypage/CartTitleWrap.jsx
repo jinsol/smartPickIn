@@ -19,6 +19,12 @@ const CartTitleWrapBlock = styled.h3`
     color: var(--gray01);
     letter-spacing: -0.2px;
   }
+  @media (min-width: 768px) {
+    b,
+    span {
+      font-size: 1em;
+    }
+  }
 `;
 
 const CartTitleWrap = ({ title }) => {

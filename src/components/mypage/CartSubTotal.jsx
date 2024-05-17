@@ -12,7 +12,11 @@ const CartSubTotal = ({ list, totalPrice }) => {
       </ul>
       {Object.values(list).map((item, index) => {
         return (
-          <ul className="flexSpaceBetween" key={index}>
+          <ul
+            className="flexSpaceBetween"
+            key={index}
+            style={{ lineHeight: "180%" }}
+          >
             <li className="title">
               {item.title}, {item.qty}개
             </li>
@@ -23,7 +27,7 @@ const CartSubTotal = ({ list, totalPrice }) => {
         );
       })}
       <ul className="flexSpaceBetween">
-        <li className="title">VAT ()</li>
+        <li className="title">VAT</li>
         <li className="content"></li>
       </ul>
     </CartSubTotalBlock>

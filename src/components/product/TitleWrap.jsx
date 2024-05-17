@@ -11,6 +11,14 @@ const TitleWrapBlock = styled.div`
     color: var(--black);
     line-height: 180%;
   }
+  @media (max-width: 768px) {
+    h4 {
+      font-size: 1em;
+    }
+    h3 {
+      font-size: 1em;
+    }
+  }
 `;
 
 const TitleWrap = ({ title, subtitle }) => {

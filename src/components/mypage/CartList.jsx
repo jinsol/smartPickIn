@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ImageWrap from "../product/ImageWrap";
 import TitleWrap from "../product/TitleWrap";
@@ -6,6 +6,8 @@ import PriceWrap from "../product/PriceWrap";
 import CartQtyWrap from "../product/CartQtyWrap";
 import BtnWrap from "../product/BtnWrap";
 import { cartDB } from "@/assets/firebase";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 
 const CartListBlock = styled.div`
   padding: 20px 0;
@@ -34,31 +36,82 @@ const CartListBlock = styled.div`
     }
   }
   .BtnDelete {
-    background-color: var(--white);
-    color: #ff1a1a;
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background-color: var(--gray06);
+    color: var(--gray02);
+    border-radius: 10px;
     font-weight: 800;
-    font-size: 1.1em;
+    font-size: 1em;
     padding: 10px 20px;
-    border: 1px solid var(--gray03);
+    border: 1px solid var(--gray02);
+    transition: all 0.3s;
+    &.mobile {
+      background-color: unset;
+      margin: unset;
+      padding: unset;
+      border: unset;
+      &:hover {
+        color: red;
+        border: unset;
+        background-color: unset;
+      }
+    }
+    &:hover {
+      background-color: #fff3f3;
+      color: red;
+      border: 1px solid red;
+    }
+  }
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    > div {
+      &:nth-child(1) {
+        flex-basis: 30%;
+      }
+      &:nth-child(2) {
+        flex-basis: auto;
+      }
+      &:nth-child(3) {
+        flex-basis: auto;
+        margin-left: auto;
+      }
+    }
+    .TotalWrap {
+      > *:not(:last-child) {
+        display: none;
+      }
+    }
   }
 `;
 
 const CartList = ({ item }) => {
   const { thumbnail, title, price, qty, id } = item;
-  const TotalPrice = price * qty;
-  const [quantity, setQuantity] = useState(qty); // 수량 상태 추가
 
+  const [width, setWidth] = useState(window.innerWidth);
+
+  const TotalPrice = price * qty;
+  const [quantity, setQuantity] = useState(qty);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const decreaseQuantity = () => {
     if (!(quantity <= 1)) {
       setQuantity(quantity - 1);
-      updateQtyInDB(quantity - 1); // DB에서 수량 감소
+      updateQtyInDB(quantity - 1);
     }
   };
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
-    updateQtyInDB(quantity + 1); // DB에서 수량 증가
+    updateQtyInDB(quantity + 1);
   };
+
   const userId = JSON.parse(localStorage.getItem("loging")).userId;
   const updateQtyInDB = (newQty) => {
     cartDB
@@ -67,10 +120,8 @@ const CartList = ({ item }) => {
       .then((snapshot) => {
         const cartData = snapshot.val();
         if (cartData && cartData[id]) {
-          // 이미 해당 상품이 장바구니에 있는 경우, 수량을 업데이트
           const existingProduct = cartData[id];
-          const updatedQty = existingProduct.qty + (newQty - qty); // 새로운 수량에서 기존 수량을 뺀 값을 사용
-          // 장바구니에 있는 상품의 수량만 업데이트
+          const updatedQty = existingProduct.qty + (newQty - qty);
           return cartDB
             .child(userId)
             .child(id)
@@ -108,7 +159,6 @@ const CartList = ({ item }) => {
       <div>
         <p>
           <TitleWrap title={title} />
-          {price}
           <PriceWrap price={price}></PriceWrap>
           <CartQtyWrap
             qty={quantity}
@@ -117,11 +167,22 @@ const CartList = ({ item }) => {
           ></CartQtyWrap>
         </p>
       </div>
-      <div>
-        Total
+      <div className="TotalWrap">
+        <span>Total</span>
         <PriceWrap price={TotalPrice} />
-        <button type="button" className="BtnDelete" onClick={onClickDelete}>
-          삭제하기
+        <button
+          type="button"
+          className={width <= 768 ? "mobile BtnDelete" : "BtnDelete"}
+          onClick={onClickDelete}
+        >
+          {width > 768 ? (
+            <>
+              <FaRegTrashAlt />
+              삭제하기
+            </>
+          ) : (
+            <MdClose />
+          )}
         </button>
       </div>
     </CartListBlock>

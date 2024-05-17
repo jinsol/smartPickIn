@@ -68,21 +68,24 @@ const BtnWrap = ({ product }) => {
         .then((snapshot) => {
           const cartData = snapshot.val();
           if (cartData && cartData[id]) {
-            // 이미 해당 상품이 장바구니에 있는 경우, 수량을 업데이트
             const existingProduct = cartData[id];
             const updatedQty = existingProduct.qty + qty;
-            // 장바구니에 있는 상품의 수량만 업데이트
-            return cartDB.child(userId).child(id).update({ qty: updatedQty });
+            return cartDB
+              .child(userId)
+              .child(id)
+              .update({ qty: updatedQty });
           } else {
-            // 해당 상품이 장바구니에 없는 경우, 새로 추가
-            return cartDB.child(userId).child(id).set(product);
+            return cartDB
+              .child(userId)
+              .child(id)
+              .set(product);
           }
         })
         .then(() => {
-          console.log("Product added to cart successfully");
+          console.log("상품 담기 성공");
         })
         .catch((error) => {
-          console.error("Error adding product to cart: ", error);
+          console.error(error);
         });
       document.querySelector(".Modal").classList.add("active");
       setMessage({
@@ -118,21 +121,24 @@ const BtnWrap = ({ product }) => {
         .then((snapshot) => {
           const cartData = snapshot.val();
           if (cartData && cartData[id]) {
-            // 이미 해당 상품이 장바구니에 있는 경우, 수량을 업데이트
             const existingProduct = cartData[id];
             const updatedQty = existingProduct.qty + qty;
-            // 장바구니에 있는 상품의 수량만 업데이트
-            return cartDB.child(userId).child(id).update({ qty: updatedQty });
+            return cartDB
+              .child(userId)
+              .child(id)
+              .update({ qty: updatedQty });
           } else {
-            // 해당 상품이 장바구니에 없는 경우, 새로 추가
-            return cartDB.child(userId).child(id).set(product);
+            return cartDB
+              .child(userId)
+              .child(id)
+              .set(product);
           }
         })
         .then(() => {
-          console.log("Product added to cart successfully");
+          console.log("상품 담기 성공");
         })
         .catch((error) => {
-          console.error("Error adding product to cart: ", error);
+          console.error(error);
         });
       navigate("/cart");
     } else {
