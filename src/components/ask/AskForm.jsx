@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { IoMdAlert, IoMdCheckmark } from "react-icons/io";
 import { Navigate, useNavigate } from "react-router-dom";
+import { FaCheck } from "react-icons/fa";
 
 const ArticleBlock = styled.article`
   h3 {
@@ -84,6 +85,10 @@ const InputSelect = styled.select`
     color: var(--gray01);
     line-height: 180%;
   }
+  &.path {
+    display: block;
+    width: 100%;
+  }
 `;
 
 const Yellow = styled.span`
@@ -148,9 +153,11 @@ const BtnSubmit = styled.button`
 `;
 
 const FormCheckAgree = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   input {
-    all: unset;
-    content: "안녕";
+    content: "";
     color: red;
     background-color: var(--light-blue);
     width: 20px;
@@ -342,7 +349,7 @@ const AskForm = ({
           </FormLabel>
           <div className="form-conts">
             <InputSelect
-              className="inputStyle"
+              className="inputStyle path"
               name="inFlow"
               id="inFlow"
               onChange={onChangeStep2}
@@ -461,7 +468,7 @@ const AskForm = ({
             ></textarea>
           </FormTextarea>
         </div>
-        <FormCheckAgree className="form-group">
+        <FormCheckAgree className="form-group privacy">
           <input type="checkbox" id="agree_check" />
           <label htmlFor="agree_check">
             개인정보 수집 · 이용하는데 동의합니다.
