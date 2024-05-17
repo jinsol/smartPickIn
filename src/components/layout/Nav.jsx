@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
 import cn from 'classnames'
-import { NavLink,Link } from 'react-router-dom'
+import { NavLink,useNavigate } from 'react-router-dom'
 import { IoMdArrowDropdown,IoMdArrowDropright,IoMdArrowDropup   } from "react-icons/io";
+import { initServiceMenu } from "@/store/service";
+import { initNewsMenu } from "@/store/news";
+import { useDispatch } from 'react-redux';
 
 
 
@@ -75,6 +78,8 @@ justify-content: center;
           font-size:20px;
           color:gray;
           padding:5px 0;
+          cursor: pointer;
+
           @media (max-width:768px){
               font-size: 15px;
             
@@ -94,6 +99,8 @@ justify-content: center;
           margin-top: 15px;
           color:gray;
           padding:5px 0;
+          cursor: pointer;
+
           @media (max-width:768px){
               font-size: 15px;
             
@@ -112,6 +119,7 @@ justify-content: center;
           margin-top: 15px;
           color:gray;
           padding:5px 0;
+          cursor: pointer;
           @media (max-width:768px){
               font-size: 15px;
             
@@ -132,6 +140,26 @@ const Nav = ({isOpen, toggleMenu,loging,user}) => {
   const [click, setClick] = useState(false)
   const [click1, setClick1] = useState(false)
   const [click2, setClick2] = useState(false)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+
+  const handleMenuClick = (value) => {
+    navigate(`/service/#${value}`);
+    dispatch(initServiceMenu(value));
+  };
+  const newsMenuClick = (value) => {
+    navigate(`/news/#${value}`);
+    dispatch(initNewsMenu(value));
+  };
+  const myPageClick = () => {
+    navigate('/usermodify');
+  };
+  const myPageClick1 = () => {
+    navigate('/cart');
+  };
+
+  
 
   const depthClick = ()=>{
     setClick(!click)
@@ -142,6 +170,7 @@ const Nav = ({isOpen, toggleMenu,loging,user}) => {
   const depthClick2 =()=>{
     setClick2(!click2)
   }
+ 
     
     return (
         <NavBlock className={isOpen && 'on'}>
@@ -163,12 +192,18 @@ const Nav = ({isOpen, toggleMenu,loging,user}) => {
                         }
                       </a>
                         <ul className={cn("hidden1", click && "on")}>
-                        <li onClick={toggleMenu}> <Link to="/news#소식">소식</Link></li>
-                        <li onClick={toggleMenu}> <Link to="/news#기업소식">기업소식</Link></li>
+                        <li onClick={()=>{
+                          toggleMenu();
+                          newsMenuClick('소식')
+                        }}> 소식</li>
+                        <li onClick={()=>{
+                          toggleMenu();
+                          newsMenuClick('기업소식')
+                        }}>기업소식</li>
                         </ul>
                     </li>
                     <li onClick={depthClick1}>
-                        <a className={click1 && 'on'}><span className='strong'>04</span> 고객센터
+                        <a className={click1 && 'on'} ><span className='strong'>04</span> 고객센터
                         {
                             !click1 ?
                           <IoMdArrowDropdown  className='arrow' />
@@ -177,9 +212,9 @@ const Nav = ({isOpen, toggleMenu,loging,user}) => {
                         }  
                         </a>
                         <ul className={cn("hidden2", click1 && "open")} >
-                        <li onClick={toggleMenu}> <Link to="/service#공지사항">공지사항</Link></li>
-                        <li onClick={toggleMenu}> <Link to="/service#자주묻는질문">자주묻는질문</Link></li>
-                        <li onClick={toggleMenu}> <Link to="/service##취소·환불규정">취소/환불규정</Link></li>
+                        <li onClick={()=>{toggleMenu(); handleMenuClick('공지사항')}}>공지사항</li>
+                        <li onClick={()=>{toggleMenu(); handleMenuClick('자주묻는질문')}}> 자주묻는질문</li>
+                        <li onClick={()=>{toggleMenu(); handleMenuClick('취소·환불규정')}}> 취소·환불규정</li>
                         </ul>
                     </li>
                     <li onClick={toggleMenu}>
@@ -194,8 +229,14 @@ const Nav = ({isOpen, toggleMenu,loging,user}) => {
                   {!click2 ? <IoMdArrowDropdown className='arrow' /> : <IoMdArrowDropup className='arrow' />}
                 </a>
                 <ul className={cn("hidden3", click2 && "open")}>
-                  <li onClick={toggleMenu}> <Link to="/usermodify">정보수정</Link></li>
-                  <li onClick={toggleMenu}> <Link to="/cart">장바구니</Link></li>
+                  <li onClick={()=>{
+                    myPageClick('정보수정')
+                    toggleMenu();
+                  }}>정보수정</li>
+                  <li  onClick={()=>{
+                   myPageClick1('장바구니')
+                    toggleMenu();
+                  }}>장바구니</li>
                 </ul>
               </li>
             </ul>

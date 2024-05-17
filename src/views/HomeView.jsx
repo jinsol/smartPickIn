@@ -9,7 +9,7 @@ const Home = styled.div`
   section {
     width: 100%;
     min-height: 100vh;
-
+   
     .homeRow {
       width: 1450px;
       transition: all 0.3s;

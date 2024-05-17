@@ -169,7 +169,7 @@ const JoinSection = () => {
         const specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
         const numFilter = /[1234567890]+/
         if (!userInfo.userId) {
-            alert("이메일을 입력하세요.")
+            alert("아이디를 입력하세요.")
             userIdRef.current.focus()
             return
         }
@@ -201,11 +201,19 @@ const JoinSection = () => {
             alert("이름을 2글자 이상 입력하세요.")
             userNameRef.current.focus()
             return false;
+        } else  if(specialCharacters.test(userInfo.userName)){
+            alert("특수문자 사용이 불가합니다.")
+            userNameRef.current.focus();
+            return
         }
         if(userInfo.userCompany.length === 1){
             alert("업체명을 2글자 이상 입력하세요.")
             userCompanyRef.current.focus()
             return false;
+        } else  if(specialCharacters.test(userInfo.userCompany)){
+            alert("특수문자 사용이 불가합니다.")
+            userCompanyRef.current.focus();
+            return
         }
        if(!numFilter.test(userInfo.userTel)){
             alert("숫자만 입력 가능합니다.")

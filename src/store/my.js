@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const mySlice = createSlice({
   name: "my",
   initialState: {
-    serviceMenu: "정보수정",
+    myMenu: "정보수정",
   },
   reducers: {
     initMyMenu(state, action) {
-      state.serviceMenu = action.payload;
+      state.myMenu = action.payload;
     },
   },
 });

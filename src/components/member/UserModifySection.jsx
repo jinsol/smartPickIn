@@ -11,6 +11,10 @@ const UserModifySectionBlock = styled.div`
      padding: 150px 30px;
     max-width: 1100px;
     margin: 0 auto;
+
+    input{
+        letter-spacing: 0;
+    }
     
     form{
         margin: 0 auto;
@@ -148,6 +152,24 @@ const UserModifySection = () => {
         if (userInfo.userPw!=userInfo.userPwOk){
             alert("비밀번호가 일치하지 않습니다.")
             userPwRef.current.focus()
+            return
+        }
+        if(userInfo.userName.length === 1){
+            alert("이름을 2글자 이상 입력하세요.")
+            userNameRef.current.focus()
+            return false;
+        } else  if(specialCharacters.test(userInfo.userName)){
+            alert("특수문자 사용이 불가합니다.")
+            userNameRef.current.focus();
+            return
+        }
+        if(userInfo.userCompany.length === 1){
+            alert("업체명을 2글자 이상 입력하세요.")
+            userCompanyRef.current.focus()
+            return false;
+        } else  if(specialCharacters.test(userInfo.userCompany)){
+            alert("특수문자 사용이 불가합니다.")
+            userCompanyRef.current.focus();
             return
         }
         if(!numFilter.test(userInfo.userTel)){

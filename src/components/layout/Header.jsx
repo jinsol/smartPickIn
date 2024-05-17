@@ -270,7 +270,14 @@ const Header = () => {
   };
   const myPageClick = (value) => {
     navigate(`/my/#${value}`);
-    dispatch(initMyMenu(value))
+    // URL 변경 후에 Redux 스토어의 상태를 업데이트
+    dispatch(initMyMenu(value));
+  };
+  const myPageClick1 = () => {
+    navigate('/usermodify');
+  };
+  const myPageClick2 = () => {
+    navigate('/cart');
   };
 
   /* ================== 24.05.03 고객센터 - depth2 구현을 위해 삽입 (진솔) ================== */
@@ -332,14 +339,14 @@ const Header = () => {
               className={location.pathname.includes("/my") && "active"}>마이페이지</a>
         <ul className="depthMypage2">
           <li>
-            <Link to='/usermodify'>
-              정보수정
-            </Link>
+                <a onClick={() => myPageClick1("정보수정")}>
+                  정보수정
+              </a>
           </li>
           <li>
-          <Link to='/cart'>
-              장바구니
-            </Link>
+          <a onClick={() => myPageClick2("장바구니")}>
+                  장바구니
+              </a>
           </li>
         </ul>
       </li>
@@ -372,7 +379,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      <Nav isOpen={isOpen} toggleMenu={toggleMenu} loging={loging} user={user} />
+      <Nav isOpen={isOpen} toggleMenu={toggleMenu} loging={loging} user={user}  handleMenuClick={handleMenuClick}/>
     </HeaderBlock>
   );
 };
